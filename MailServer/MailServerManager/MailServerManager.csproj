@@ -93,7 +93,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.6.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942" />
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -208,6 +211,7 @@
     </Compile>
     <Compile Include="ConvertEx.cs" />
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Tmp\wfrm_EditText.cs">
       <SubType>Form</SubType>
     </None>
