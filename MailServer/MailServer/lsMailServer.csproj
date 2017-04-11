@@ -92,10 +92,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LumiSoft.Net">
-      <Name>LumiSoft.Net</Name>
-      <HintPath>..\Application\Debug\LumiSoft.Net.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -194,6 +190,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\LumiSoft\Net\Net\Net.csproj">
+      <Project>{7ab36ccf-5ffd-4780-a54e-a102eca028b5}</Project>
+      <Name>Net</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServerAPI\API\ServerAPI.csproj">
       <Project>{38efe161-9ab9-4ad8-a83f-6b0628d5cded}</Project>
       <Name>ServerAPI</Name>
