@@ -3,7 +3,7 @@ PLEASE contact AT ivar@lumisoft.ee if you found a bug !!!
 Forum:
 http://www.lumisoft.ee/Forum
 
-version: 0.xx (xx.xx.2014)
+version: 0.xx (xx.xx.2017)
 	// TODO: Rewrite Logging. Move to sql lite ? This gives faster searching possibilities.
         // TODO: Deprecrate XML API - Use sqllite instead.
 	// TODO: Create "recycle bin" per user, store deleted messages for user hidden folder "__RecycleBin" 
@@ -15,11 +15,17 @@ version: 0.xx (xx.xx.2014)
 
 //----------------------------------------
 // Devel Version: http://www.lumisoft.ee/lswww/download/downloads/MailServer/Devel/
-version: 0.99 (xx.x.2014)
-
-
-	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	!!! NOTE: SQL Users don't upgrade, SQL versions of API not supported by this version.
+version: 0.99 (xx.x.2017)
+	*) New: All project converted to .NET 4.5 and VS2013. (07.01.2015)
+	*) New: Remove ICSharpCode.SharpZipLib.dll and now using .NET 4.5 System.Compression. (07.01.2015)
+	*) New: IMAP FETCH BODYSTRUCTURE now returns single part MIME entity extentions 
+	        fields(Content-Disposition parameters,..). (09.01.2015)
+	*) Fix: IMAP STATUS for unexistent folder caused untagged "* NO" response instead of final NO.
+		Some Email clients waited long time for final response and working very slow. (20.01.2015) 
+	*) Fix: IMAP SUBSCRIBE subscribed duplicate names when subscribe called multiple (02.11.2015)
+                times for same folder.
+        *) Fix: IMAP commands other than SEARCH and APPEND dind't allow literal-string strings. (11.11.2016)
+        *) Fix: IMAP block empty folder names in SUBSCRIBE command. (Fixes Outlook 2016 hanging) (11.01.2017)
 
                 
 

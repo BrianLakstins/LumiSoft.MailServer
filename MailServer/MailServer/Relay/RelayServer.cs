@@ -185,9 +185,10 @@ namespace LumiSoft.MailServer.Relay
                                     FileStream messageStream = File.Open(message,FileMode.Open,FileAccess.ReadWrite,FileShare.Read | FileShare.Delete);
                                     if(File.Exists(API_Utlis.PathFix(path + "\\" + messageID + ".info"))){
                                         RelayMessageInfo messageInfo = RelayMessageInfo.Parse(File.ReadAllBytes(API_Utlis.PathFix(path + "\\" + messageID + ".info")));
-
+                                        
                                         // Queue message for relay.
                                         this.Queues[0].QueueMessage(
+                                            messageInfo.HostEndPoint == null ? null : new Relay_SmartHost(messageInfo.HostEndPoint.Host,messageInfo.HostEndPoint.Port),
                                             messageInfo.Sender,
                                             messageInfo.EnvelopeID,
                                             messageInfo.DSN_Ret,

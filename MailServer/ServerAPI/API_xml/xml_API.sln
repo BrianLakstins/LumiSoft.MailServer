@@ -1,5 +1,7 @@
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xml_API", "xml_API.csproj", "{757A5AB6-83F2-4EE9-9C59-7818EBD567A8}"
 EndProject
 Global

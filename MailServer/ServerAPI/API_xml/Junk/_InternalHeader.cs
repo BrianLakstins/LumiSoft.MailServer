@@ -9,6 +9,8 @@ using LumiSoft.Net.Mime;
 
 namespace LumiSoft.MailServer
 {
+    #pragma warning disable 
+
     /// <summary>
     /// Internal .eml file header. Obsolete, get rid of in new versions.
     /// </summary>
@@ -93,4 +95,6 @@ namespace LumiSoft.MailServer
         #endregion
 
     }
+
+    #pragma warning enable 
 }

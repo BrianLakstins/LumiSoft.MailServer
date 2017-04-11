@@ -39,7 +39,14 @@ namespace LumiSoft.MailServer
                 }
             }
             catch(Exception x){
-                System.Windows.Forms.MessageBox.Show("Error: " + x.ToString(),"Error:",System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error);
+                if(x.InnerException is System.Security.SecurityException){
+                    System.Windows.Forms.MessageBox.Show("You need administrator rights to run this application, run this application 'Run as Administrator'.","Error:",System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error);
+                }
+                else{
+                    System.Windows.Forms.MessageBox.Show("Error: " + x.ToString(),"Error:",System.Windows.Forms.MessageBoxButtons.OK,System.Windows.Forms.MessageBoxIcon.Error);
+                }
+
+                Environment.Exit(1);
             }
 		}
 

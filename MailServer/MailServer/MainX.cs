@@ -62,11 +62,11 @@ namespace LumiSoft.MailServer
 
                         // x64
                         if(IntPtr.Size == 8){
-                            File.Copy(System.Windows.Forms.Application.StartupPath + "\\System.Data.SQLite.x64.dll",System.Windows.Forms.Application.StartupPath + "\\System.Data.SQLite.DLL");
+                            File.Copy(System.Windows.Forms.Application.StartupPath + "\\System.Data.SQLite.x64.dll",System.Windows.Forms.Application.StartupPath + "\\System.Data.SQLite.dll");
                         }
                         // x32
                         else{
-                            File.Copy(System.Windows.Forms.Application.StartupPath + "\\System.Data.SQLite.x32.dll",System.Windows.Forms.Application.StartupPath + "\\System.Data.SQLite.DLL");
+                            File.Copy(System.Windows.Forms.Application.StartupPath + "\\System.Data.SQLite.x86.dll",System.Windows.Forms.Application.StartupPath + "\\System.Data.SQLite.dll");
                         }
                     }
                     catch{

@@ -1,13 +1,12 @@
 using System;
 using System.IO;
+using System.IO.Compression;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Threading;
 using System.Data;
-
-using ICSharpCode.SharpZipLib.Zip;
 
 using LumiSoft.Net;
 using LumiSoft.Net.IMAP;
@@ -906,7 +905,7 @@ namespace LumiSoft.MailServer.UI
 
             // ZIP
             else if(m_SourceType == 2){
-                m_pSourceObject = new ZipFile(m_pSource_TypeZIP_File.Text);
+                m_pSourceObject = ZipFile.OpenRead(m_pSource_TypeZIP_File.Text);
             }
 
             #endregion
@@ -932,8 +931,8 @@ namespace LumiSoft.MailServer.UI
             if(m_pSourceObject is IMAP_Client){
                 ((IMAP_Client)m_pSourceObject).Dispose();
             }
-            else if(m_pSourceObject is ZipFile){
-                ((ZipFile)m_pSourceObject).Close();
+            else if(m_pSourceObject is ZipArchive){
+                ((ZipArchive)m_pSourceObject).Dispose();
             }
 
             m_pSourceObject = null;
@@ -973,9 +972,7 @@ namespace LumiSoft.MailServer.UI
 
             // ZIP
             else if(m_DestinationType == 2){
-                ZipOutputStream zipFile = new ZipOutputStream(File.Create(m_pDestination_TypeZIP_File.Text));
-                zipFile.SetLevel(9);
-                m_pDestinationObject = zipFile;
+                m_pDestinationObject = ZipFile.Open(m_pDestination_TypeZIP_File.Text,ZipArchiveMode.Create);
             }
 
             #endregion
@@ -1001,9 +998,8 @@ namespace LumiSoft.MailServer.UI
             if(m_pDestinationObject is IMAP_Client){
                 ((IMAP_Client)m_pDestinationObject).Dispose();
             }
-            else if(m_pDestinationObject is ZipOutputStream){
-                ((ZipOutputStream)m_pDestinationObject).Finish();
-                ((ZipOutputStream)m_pDestinationObject).Close();
+            else if(m_pDestinationObject is ZipArchive){
+                ((ZipArchive)m_pDestinationObject).Dispose();
             }
 
             m_pDestinationObject = null;
@@ -1113,12 +1109,12 @@ namespace LumiSoft.MailServer.UI
             #region ZIP
 
             // ZIP
-            else if(m_pSourceObject is ZipFile){
-                ZipFile zipFile = (ZipFile)m_pSourceObject;
-
+            else if(m_pSourceObject is ZipArchive){
+                ZipArchive zipFile = (ZipArchive)m_pSourceObject;
+        
                 List<string> folders = new List<string>();
-                foreach(ZipEntry entry in zipFile){                       
-                    string folder = Path.GetDirectoryName(entry.Name);
+                foreach(ZipArchiveEntry entry in zipFile.Entries){
+                    string folder = Path.GetDirectoryName(entry.FullName);
                     if(folder.Length > 0 && !folders.Contains(folder)){
                         folders.Add(folder);
                     }
@@ -1213,12 +1209,12 @@ namespace LumiSoft.MailServer.UI
             #region ZIP
 
             // ZIP
-            else if(m_pSourceObject is ZipFile){
-                ZipFile zipFile = (ZipFile)m_pSourceObject;
+            else if(m_pSourceObject is ZipArchive){
+                ZipArchive zipFile = (ZipArchive)m_pSourceObject;
                 List<string> retVal = new List<string>();
-                foreach(ZipEntry entry in zipFile){
-                    if(Path.GetDirectoryName(entry.Name).Replace("\\","/").ToLower() == folder.Replace("\\","/").ToLower() && entry.Name.EndsWith(".eml")){
-                        retVal.Add(entry.Name);
+                foreach(ZipArchiveEntry entry in zipFile.Entries){
+                    if(Path.GetDirectoryName(entry.FullName).Replace("\\","/").ToLower() == folder.Replace("\\","/").ToLower() && entry.FullName.EndsWith(".eml")){
+                        retVal.Add(entry.FullName);
                     }
                 }
                 return retVal.ToArray();
@@ -1303,11 +1299,14 @@ namespace LumiSoft.MailServer.UI
             #region ZIP
 
             // ZIP
-            else if(m_pSourceObject is ZipFile){
-                ZipFile zipFile = (ZipFile)m_pSourceObject;
-                foreach(ZipEntry entry in zipFile){
-                    if(entry.Name == messageID){
-                        SCore.StreamCopy(zipFile.GetInputStream(entry),storeStream);
+            else if(m_pSourceObject is ZipArchive){
+                ZipArchive zipFile = (ZipArchive)m_pSourceObject;
+                foreach(ZipArchiveEntry entry in zipFile.Entries){
+                    if(entry.FullName == messageID){
+                        using(Stream zipStream = entry.Open()){
+                            SCore.StreamCopy(zipStream,storeStream);
+                        }
+
                         return;
                     }
                 }
@@ -1377,13 +1376,14 @@ namespace LumiSoft.MailServer.UI
             #region ZIP
 
             // ZIP
-            else if(m_pDestinationObject is ZipOutputStream){
-                ZipOutputStream zipFile = (ZipOutputStream)m_pDestinationObject;
-                
-                ZipEntry entry = new ZipEntry(folder.Replace("/","\\") + "\\" + Guid.NewGuid().ToString() + ".eml");
-                zipFile.PutNextEntry(entry);
+            else if(m_pDestinationObject is ZipArchive){
+                ZipArchive zipFile = (ZipArchive)m_pDestinationObject;
 
-                SCore.StreamCopy(messageStream,zipFile);
+                ZipArchiveEntry entry = zipFile.CreateEntry(folder.Replace("/","\\") + "\\" + Guid.NewGuid().ToString() + ".eml",CompressionLevel.Optimal);
+
+                using(Stream zipStream = entry.Open()){
+                    SCore.StreamCopy(messageStream,zipStream);
+                }
             }
 
             #endregion

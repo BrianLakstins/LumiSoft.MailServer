@@ -1,12 +1,11 @@
 using System;
 using System.IO;
+using System.IO.Compression;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Data;
-
-using ICSharpCode.SharpZipLib.Zip;
 
 using LumiSoft.MailServer.API.UserAPI;
 using LumiSoft.MailServer.UI.Resources;
@@ -450,8 +449,7 @@ namespace LumiSoft.MailServer.UI
                                         
                 try{
                     // Create ZIP file
-                    ZipOutputStream zipFile = new ZipOutputStream(File.Create(m_Folder + "/" + user.UserName + ".zip"));
-                    zipFile.SetLevel(9);
+                    ZipArchive zipFile = ZipFile.Open(m_Folder + "/" + user.UserName + ".zip",ZipArchiveMode.Create);
 
                     // Loop user folders
                     foreach(UserFolder folder in folders){
@@ -468,10 +466,11 @@ namespace LumiSoft.MailServer.UI
                             foreach(DataRow dr in dsMessages.Tables["MessagesInfo"].Rows){
                                 try{
                                     // Add new file to zip
-                                    ZipEntry entry = new ZipEntry(folder.FolderFullPath.Replace("/","\\") + "\\" + Guid.NewGuid().ToString() + ".eml");
-                                    zipFile.PutNextEntry(entry);
-                                        
-                                    folder.GetMessage(dr["ID"].ToString(),zipFile);
+                                    ZipArchiveEntry entry = zipFile.CreateEntry(folder.FolderFullPath.Replace("/","\\") + "\\" + Guid.NewGuid().ToString() + ".eml",CompressionLevel.Optimal);
+                               
+                                    using(Stream zipStream = entry.Open()){
+                                        folder.GetMessage(dr["ID"].ToString(),zipStream);
+                                    }
                                 }
                                 catch(Exception x){
                                     this.Invoke(new AddErrorDelegate(this.AddError),new object[]{x});
@@ -485,8 +484,7 @@ namespace LumiSoft.MailServer.UI
                         }
                     }
 
-                    zipFile.Finish();
-                    zipFile.Close();
+                    zipFile.Dispose();
                 }
                 catch(Exception x){
                     this.Invoke(new AddErrorDelegate(this.AddError),new object[]{x});

@@ -2,15 +2,11 @@
 <NewDataSet>
   <General>
     <CheckHelo>False</CheckHelo>
+    <LogRejections>False</LogRejections>
   </General>
   <BlackListSettings>
     <ErrorText>Your IP is in server black list !</ErrorText>
   </BlackListSettings>
-  <Servers>
-    <Cost>632883909898125000</Cost>
-    <Server>sbl-xbl.spamhaus.org</Server>
-    <DefaultRejectionText />
-  </Servers>
   <Servers>
     <Cost>632883909898125000</Cost>
     <Server>zen.spamhaus.org</Server>

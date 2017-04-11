@@ -108,32 +108,6 @@
             Gets or sets recycle bin path.
             </summary>
         </member>
-        <member name="T:LumiSoft.MailServer._InternalHeader">
-            <summary>
-            Internal .eml file header. Obsolete, get rid of in new versions.
-            </summary>
-        </member>
-        <member name="M:LumiSoft.MailServer._InternalHeader.#ctor(System.IO.FileStream)">
-            <summary>
-            Default constructor.
-            </summary>
-            <param name="fs">Message file stream.</param>
-        </member>
-        <member name="P:LumiSoft.MailServer._InternalHeader.MessageFlags">
-            <summary>
-            Gets message flags.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.MailServer._InternalHeader.Envelope">
-            <summary>
-            Gets messgae IMAP ENVELOPE.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.MailServer._InternalHeader.Body">
-            <summary>
-            Gets message IMAP BODY.
-            </summary>
-        </member>
         <member name="T:LumiSoft.MailServer.UpdateSync">
             <summary>
             Updates synchronizer.
@@ -1413,6 +1387,32 @@
         <member name="P:LumiSoft.MailServer.xml_API.SharedFolderMapInfo.IsSharedFolder">
             <summary>
             Gets if OriginalFolder is shared folder.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer._InternalHeader">
+            <summary>
+            Internal .eml file header. Obsolete, get rid of in new versions.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer._InternalHeader.#ctor(System.IO.FileStream)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="fs">Message file stream.</param>
+        </member>
+        <member name="P:LumiSoft.MailServer._InternalHeader.MessageFlags">
+            <summary>
+            Gets message flags.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer._InternalHeader.Envelope">
+            <summary>
+            Gets messgae IMAP ENVELOPE.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer._InternalHeader.Body">
+            <summary>
+            Gets message IMAP BODY.
             </summary>
         </member>
     </members>

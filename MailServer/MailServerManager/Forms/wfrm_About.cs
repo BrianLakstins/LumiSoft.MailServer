@@ -39,7 +39,7 @@ namespace LumiSoft.MailServer.UI
             mt_Name.Size = new Size(250,60);
             mt_Name.Location = new Point(40,40);
             mt_Name.Font = new Font(mt_Name.Font.FontFamily,10);
-            mt_Name.Text = "LumiSoft Mail Server Manager 0.97";
+            mt_Name.Text = "LumiSoft Mail Server Manager 0.99";
 
             m_pOk = new Button();
             m_pOk.Size = new Size(70,20);

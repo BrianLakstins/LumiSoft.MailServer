@@ -4,62 +4,377 @@
         <name>LumiSoft.MailServerAPI</name>
     </assembly>
     <members>
-        <member name="T:LumiSoft.MailServer.EmailMessageItems">
+        <member name="T:LumiSoft.MailServer.API_Utlis">
             <summary>
-            Provides data to IMailServerApi.GetMessageItems method.
+            Provides API implementation helper methods.
             </summary>
         </member>
-        <member name="M:LumiSoft.MailServer.EmailMessageItems.#ctor(System.String,LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum)">
+        <member name="M:LumiSoft.MailServer.API_Utlis.NormalizeFolder(System.String)">
             <summary>
-            Default constructor.
+            Normalizes folder value. Replaces \ to /, removes duplicate //, removes / from folder start and end.
             </summary>
-            <param name="messageID">Message ID what message items to get.</param>
-            <param name="messageItems">Specifies message items what must be filled.</param>
+            <param name="folder">Folder to normalize.</param>
+            <returns></returns>
         </member>
-        <member name="M:LumiSoft.MailServer.EmailMessageItems.CopyTo(LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems)">
+        <member name="M:LumiSoft.MailServer.API_Utlis.PathFix(System.String)">
             <summary>
-            Copies EmailMessageItems info to the specified IMAP_eArgs_MessageItems object.
+            Fixes path separator, replaces / \ with platform separator char.
             </summary>
-            <param name="e"></param>
+            <param name="path">Path to fix.</param>
+            <returns></returns>
         </member>
-        <member name="P:LumiSoft.MailServer.EmailMessageItems.MessageID">
+        <member name="M:LumiSoft.MailServer.API_Utlis.DirectoryExists(System.String)">
             <summary>
-            Gets message ID what message items to get.
+            Checks if directory exists. If linux, checks with case-insenstively (linux is case-sensitive). 
+            Returns actual dir (In linux it may differ from requested directory, because of case-sensitivity.)
+            or null if directory doesn't exist.
+            </summary>
+            <param name="dirName">Directory to check.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.API_Utlis.EnsureFolder(System.String)">
+            <summary>
+            Ensures that specified folder exists, if not it will be created.
+            Returns actual dir (In linux it may differ from requested directory, because of case-sensitivity.).
+            </summary>
+            <param name="folder">Folder name with path.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.API_Utlis.FileExists(System.String)">
+            <summary>
+            Checks if file exists. If linux, checks with case-insenstively (linux is case-sensitive). 
+            Returns actual file (In linux it may differ from requested file, because of case-sensitivity.)
+            or null if file doesn't exist.
+            </summary>
+            <param name="fileName">File to check.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.API_Utlis.StreamCopy(System.IO.Stream,System.IO.Stream)">
+            <summary>
+            Copies all data from source stream to destination stream.
+            Copy starts from source stream current position and will be copied to the end of source stream.
+            </summary>
+            <param name="source">Source stream.</param>
+            <param name="destination">Destination stream.</param>
+            <returns>Returns number of bytes copied.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.API_Utlis.CreateSettingsSchema(System.Data.DataSet)">
+            <summary>
+            Creates system settings schema.
+            </summary>
+            <param name="ds">DataSet where to create schema.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.API_Utlis.GenerateBadMessage(System.IO.Stream)">
+            <summary>
+            Generates message parsing failed message.
+            </summary>
+            <param name="message">Message stream.</param>
+            <returns>Returns message parsing failed message.</returns>
+            <exception cref="T:System.ArgumentNullException">Is raised when <b>message</b> is null reference.</exception>
+        </member>
+        <member name="T:LumiSoft.MailServer.ArgsValidator">
+            <summary>
+            Provides mehtods for validating values.
             </summary>
         </member>
-        <member name="P:LumiSoft.MailServer.EmailMessageItems.MessageItems">
+        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateFolder(System.String)">
             <summary>
-            Gets what message items must be filled.
+            Validates folder. Folder may contains only printable chars and not:
+            : * ? " &lt; &gt; | % . Throws Exception if folder isn't valid.
+            </summary>
+            <param name="folder">Folder to validate.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateSharedFolderRoot(System.String)">
+            <summary>
+            Validates shared root folder name value.
+            </summary>
+            <param name="folder"></param>
+        </member>
+        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateUserName(System.String)">
+            <summary>
+            Validates user name value, check that doesn't contain invalid chars. User name may contains only 
+            printable chars and not: : * ? " &lt; &gt; | % . Throws Exception if user name isn't valid.
+            </summary>
+            <param name="userName">User name value to validate.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateNotNull(System.Object)">
+            <summary>
+            Requires value to be not null. Throws Exception if value is null.
+            </summary>
+            <param name="val">Value to check.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateDomainName(System.String)">
+            <summary>
+            Validates domain name.
+            </summary>
+            <param name="domainName"></param>
+        </member>
+        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateEmail(System.String)">
+            <summary>
+            Validates email address, check that won't contain illegal chars. 
+            Throws Exception if email isn't valid.
+            </summary>
+            <param name="email">Email to check.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.ArgsValidator.ContainsChars(System.String,System.Char[])">
+            <summary>
+            Gets if specified text contains any of the specified chars.
+            </summary>
+            <param name="text">Text to check.</param>
+            <param name="chars">Chars to check.</param>
+            <returns>Returns true if specified text contains any of the chars.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.ArgsValidator.IsPrintableCharsOnly(System.String)">
+            <summary>
+            Gets if all chars in text are printable chars (Not CR,LF,SP,TAB,...). 
+            Chars 0 - 31 are ASCII controls characters and not allowed.
+            </summary>
+            <param name="text">Text to check.</param>
+            <returns>Returns true is all chars are printable chars.</returns>
+        </member>
+        <member name="T:LumiSoft.MailServer.CompareSource">
+            <summary>
+            
             </summary>
         </member>
-        <member name="P:LumiSoft.MailServer.EmailMessageItems.MessageStream">
+        <member name="F:LumiSoft.MailServer.CompareSource.HeaderField">
             <summary>
-            Gets or sets message stream. When setting this property Stream position must be where message begins.
-            Fill this property only if IMAP_MessageItems_enum.Message flag is specified.
-            Note: Stream must be closed by caller !
+            
             </summary>
         </member>
-        <member name="P:LumiSoft.MailServer.EmailMessageItems.Header">
+        <member name="F:LumiSoft.MailServer.CompareSource.BodyText">
             <summary>
-            Gets or sets message main header.
-            Fill this property only if IMAP_MessageItems_enum.Header flag is specified.
+            
             </summary>
         </member>
-        <member name="P:LumiSoft.MailServer.EmailMessageItems.Envelope">
+        <member name="F:LumiSoft.MailServer.CompareSource.BodyHtml">
             <summary>
-            Gets or sets IMAP ENVELOPE string.
-            Fill this property only if IMAP_MessageItems_enum.Envelope flag is specified.
+            
             </summary>
         </member>
-        <member name="P:LumiSoft.MailServer.EmailMessageItems.BodyStructure">
+        <member name="F:LumiSoft.MailServer.CompareSource.MimeEntry">
             <summary>
-            Gets or sets IMAP BODYSTRUCTURE string.
-            Fill this property only if IMAP_MessageItems_enum.BodyStructure flag is specified.
+            
             </summary>
         </member>
-        <member name="P:LumiSoft.MailServer.EmailMessageItems.MessageExists">
+        <member name="T:LumiSoft.MailServer.CompareType">
             <summary>
-            Gets or sets if message exists. Set this false, if message actually doesn't exist any more.
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.CompareType.AstericPattern">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.CompareType.Equal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.CompareType.NotEqual">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.CompareType.Regex">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.CompareType.Md5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.MatchAction">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.MatchAction.AutoResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.MatchAction.Forward">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.MatchAction.StoreToFolder">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.Filters.ISettingsUI">
+            <summary>
+            TODO: help !!! don't know how to commant it.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.Filters.ISettingsUI.GetUI">
+            <summary>
+            Gets settings UI window.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:LumiSoft.MailServer.FilterResult">
+            <summary>
+            Specifies filtering result.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.FilterResult.Store">
+            <summary>
+            Store messge and reply Ok to client.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.FilterResult.DontStore">
+            <summary>
+            Don't store messge, but reply Ok to client.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.FilterResult.Error">
+            <summary>
+            Send filtering error to client.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.ISmtpMessageFilter">
+            <summary>
+            SMTP server mail message filter.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.ISmtpMessageFilter.Filter(System.IO.Stream,System.IO.Stream@,System.String,System.String[],LumiSoft.MailServer.IMailServerApi,LumiSoft.Net.SMTP.Server.SMTP_Session,System.String@)">
+            <summary>
+            Filters message.
+            </summary>
+            <param name="messageStream">Message stream which to filter.</param>
+            <param name="filteredStream">Filtered stream.</param>
+            <param name="sender">Senders email address.</param>
+            <param name="recipients">Recipients email addresses.</param>
+            <param name="api">Access to server API.</param>
+            <param name="session">Reference to SMTP session.</param>
+            <param name="errorText">Filtering error text what is returned to client. ASCII text, 500 chars maximum.</param>
+        </member>
+        <member name="T:LumiSoft.MailServer.ISmtpSenderFilter">
+            <summary>
+            SMTP server sender filter.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.ISmtpSenderFilter.Filter(System.String,LumiSoft.MailServer.IMailServerApi,LumiSoft.Net.SMTP.Server.SMTP_Session,System.String@)">
+            <summary>
+            Filters sender.
+            </summary>
+            <param name="from">Sender.</param>
+            <param name="api">Reference to server API.</param>
+            <param name="session">Reference to SMTP session.</param>
+            <param name="errorText">Filtering error text what is returned to client. ASCII text, 100 chars maximum.</param>
+            <returns>Returns true if sender is ok or false if rejected.</returns>
+        </member>
+        <member name="T:LumiSoft.MailServer.ISmtpUserMessageFilter">
+            <summary>
+            SMTP server user mail message filter.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.ISmtpUserMessageFilter.Filter(System.IO.MemoryStream,System.IO.MemoryStream@,System.String,System.String,LumiSoft.MailServer.IMailServerApi,LumiSoft.Net.SMTP.Server.SMTP_Session,System.String@,System.String@)">
+            <summary>
+            Filters user message.
+            </summary>
+            <param name="messageStream">Message stream which to filter.</param>
+            <param name="filteredStream">Filtered stream.</param>
+            <param name="userName">User name.</param>
+            <param name="to">User's to address.</param>
+            <param name="api">Reference to server API.</param>
+            <param name="session">Reference to SMTP session.</param>
+            <param name="storeFolder">Folder to store message.</param>
+            <param name="errorText">Filtering error text. ASCII text, 100 chars maximum.</param>
+        </member>
+        <member name="T:LumiSoft.MailServer.GlobalMessageRuleAction_enum">
+            <summary>
+            Specifies match action done when global message rule is matched.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.AutoResponse">
+            <summary>
+            AutoResponse is sent to specified recipient.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.DeleteMessage">
+            <summary>
+            Deletes message.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.ForwardToEmail">
+            <summary>
+            Message is forwarded to specified email.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.ForwardToHost">
+            <summary>
+            Message is forwarded to specified host.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.StoreToDiskFolder">
+            <summary>
+            Message is stored to specified disk folder.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.ExecuteProgram">
+            <summary>
+            Specified program is executed.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.StoreToIMAPFolder">
+            <summary>
+            Stores message to specified message folder(for example: Junk). This will take effect only for local recipients only !
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.AddHeaderField">
+            <summary>
+            Appends specified header field to message.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.RemoveHeaderField">
+            <summary>
+            Removes specified header field or fields if there are multiple of them.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.SendErrorToClient">
+            <summary>
+            Sends error to currently connected client. NOTE: Error text may contain ASCII printable chars only and maximum length is 500.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.StoreToFTPFolder">
+            <summary>
+            Stores message to specified FTP server folder.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.PostToNNTPNewsGroup">
+            <summary>
+            Posts message to specified NNTP newsgroup.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.PostToHTTP">
+            <summary>
+            Posts message to specified page via HTTP.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum">
+            <summary>
+            Specified when next rule is checked.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum.Always">
+            <summary>
+            Next rules is always checked.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum.IfMatches">
+            <summary>
+            Next rule is checked if last rule matches.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum.IfNotMatches">
+            <summary>
+            Next rule is checked is last rule don't match.
             </summary>
         </member>
         <member name="T:LumiSoft.MailServer.IMailServerApi">
@@ -1016,6 +1331,90 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:LumiSoft.MailServer.InsufficientPermissionsException">
+            <summary>
+            This exception is thrown when not enough permissions to complete operation.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.InsufficientPermissionsException.#ctor(System.String)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="errorText">Error text.</param>
+        </member>
+        <member name="T:LumiSoft.MailServer.EmailMessageItems">
+            <summary>
+            Provides data to IMailServerApi.GetMessageItems method.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.EmailMessageItems.#ctor(System.String,LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="messageID">Message ID what message items to get.</param>
+            <param name="messageItems">Specifies message items what must be filled.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.EmailMessageItems.CopyTo(LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems)">
+            <summary>
+            Copies EmailMessageItems info to the specified IMAP_eArgs_MessageItems object.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="P:LumiSoft.MailServer.EmailMessageItems.MessageID">
+            <summary>
+            Gets message ID what message items to get.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.EmailMessageItems.MessageItems">
+            <summary>
+            Gets what message items must be filled.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.EmailMessageItems.MessageStream">
+            <summary>
+            Gets or sets message stream. When setting this property Stream position must be where message begins.
+            Fill this property only if IMAP_MessageItems_enum.Message flag is specified.
+            Note: Stream must be closed by caller !
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.EmailMessageItems.Header">
+            <summary>
+            Gets or sets message main header.
+            Fill this property only if IMAP_MessageItems_enum.Header flag is specified.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.EmailMessageItems.Envelope">
+            <summary>
+            Gets or sets IMAP ENVELOPE string.
+            Fill this property only if IMAP_MessageItems_enum.Envelope flag is specified.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.EmailMessageItems.BodyStructure">
+            <summary>
+            Gets or sets IMAP BODYSTRUCTURE string.
+            Fill this property only if IMAP_MessageItems_enum.BodyStructure flag is specified.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.EmailMessageItems.MessageExists">
+            <summary>
+            Gets or sets if message exists. Set this false, if message actually doesn't exist any more.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.IPSecurityAction_enum">
+            <summary>
+            Specifiess IP security action.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.IPSecurityAction_enum.Allow">
+            <summary>
+            Allow access.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.IPSecurityAction_enum.Deny">
+            <summary>
+            Deny access.
+            </summary>
+        </member>
         <member name="T:LumiSoft.MailServer.RouteAction_enum">
             <summary>
             Route actions.
@@ -1036,110 +1435,97 @@
             Routes message to destination host.
             </summary>
         </member>
-        <member name="T:LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum">
+        <member name="T:LumiSoft.MailServer.Service_enum">
             <summary>
-            Specified when next rule is checked.
+            Specifies service
             </summary>
         </member>
-        <member name="F:LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum.Always">
+        <member name="F:LumiSoft.MailServer.Service_enum.SMTP">
             <summary>
-            Next rules is always checked.
+            SMTP.
             </summary>
         </member>
-        <member name="F:LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum.IfMatches">
+        <member name="F:LumiSoft.MailServer.Service_enum.POP3">
             <summary>
-            Next rule is checked if last rule matches.
+            POP3.
             </summary>
         </member>
-        <member name="F:LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum.IfNotMatches">
+        <member name="F:LumiSoft.MailServer.Service_enum.IMAP">
             <summary>
-            Next rule is checked is last rule don't match.
+            IMAP.
             </summary>
         </member>
-        <member name="T:LumiSoft.MailServer.ISmtpSenderFilter">
+        <member name="F:LumiSoft.MailServer.Service_enum.Relay">
             <summary>
-            SMTP server sender filter.
+            SMTP Relay.
             </summary>
         </member>
-        <member name="M:LumiSoft.MailServer.ISmtpSenderFilter.Filter(System.String,LumiSoft.MailServer.IMailServerApi,LumiSoft.Net.SMTP.Server.SMTP_Session,System.String@)">
+        <member name="T:LumiSoft.MailServer.SharedFolderRoot">
             <summary>
-            Filters sender.
-            </summary>
-            <param name="from">Sender.</param>
-            <param name="api">Reference to server API.</param>
-            <param name="session">Reference to SMTP session.</param>
-            <param name="errorText">Filtering error text what is returned to client. ASCII text, 100 chars maximum.</param>
-            <returns>Returns true if sender is ok or false if rejected.</returns>
-        </member>
-        <member name="T:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection">
-            <summary>
-            IMAP messages info collection.
+            Shared Folders root folder.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.#ctor">
+        <member name="M:LumiSoft.MailServer.SharedFolderRoot.#ctor(System.String,System.Boolean,System.String,System.String,LumiSoft.MailServer.SharedFolderRootType_enum,System.String,System.String)">
             <summary>
             Default constructor.
             </summary>
+            <param name="rootID">Root Folder ID.</param>
+            <param name="enabled">Specifies if root folder is enabled.</param>
+            <param name="folderName">Root folder visible name.</param>
+            <param name="description">Description text.</param>
+            <param name="rootType">Specifies what type root folder is.</param>
+            <param name="boundedUser">User which to bound root folder.</param>
+            <param name="boundedFolder">BoundingUser folder name which to bound root folder.</param>
         </member>
-        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.Add(System.String,System.Int64,System.DateTime,System.Int64,LumiSoft.Net.IMAP.IMAP_MessageFlags)">
+        <member name="P:LumiSoft.MailServer.SharedFolderRoot.RootID">
             <summary>
-            Adds new message info to the collection.
-            </summary>
-            <param name="id">Message ID.</param>
-            <param name="uid">Message IMAP UID value.</param>
-            <param name="internalDate">Message store date.</param>
-            <param name="size">Message size in bytes.</param>
-            <param name="flags">Message flags.</param>
-            <returns>Returns added IMAp message info.</returns>
-        </member>
-        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.Remove(LumiSoft.Net.IMAP.Server.IMAP_Message)">
-            <summary>
-            Removes specified IMAP message from the collection.
-            </summary>
-            <param name="message">IMAP message to remove.</param>
-        </member>
-        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.ContainsUID(System.Int64)">
-            <summary>
-            Gets collection contains specified message with specified UID.
-            </summary>
-            <param name="uid">Message UID.</param>
-            <returns></returns>
-        </member>
-        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.IndexOf(LumiSoft.Net.IMAP.Server.IMAP_Message)">
-            <summary>
-            Gets index of specified message in the collection.
-            </summary>
-            <param name="message">Message indesx to get.</param>
-            <returns>Returns index of specified message in the collection or -1 if message doesn't belong to this collection.</returns>
-        </member>
-        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.Clear">
-            <summary>
-            Removes all messages from the collection.
+            Gets Root Folder ID.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.GetWithFlags(LumiSoft.Net.IMAP.IMAP_MessageFlags)">
+        <member name="P:LumiSoft.MailServer.SharedFolderRoot.Enabled">
             <summary>
-            Gets messages which has specified flags set.
-            </summary>
-            <param name="flags">Flags to match.</param>
-            <returns></returns>
-        </member>
-        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.GetEnumerator">
-            <summary>
-            Gets enumerator.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.Count">
-            <summary>
-            Gets number of messages in the collection.
+            Gets if root folder is enabled.
             </summary>
         </member>
-        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.Item(System.Int32)">
+        <member name="P:LumiSoft.MailServer.SharedFolderRoot.FolderName">
             <summary>
-            Gets a IMAP_Message object in the collection by index number.
+            Gets root folder name. For example "Public Folders".
             </summary>
-            <param name="index">An Int32 value that specifies the position of the IMAP_Message object in the IMAP_MessageCollection collection.</param>
+        </member>
+        <member name="P:LumiSoft.MailServer.SharedFolderRoot.Description">
+            <summary>
+            Gets root folder description.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.SharedFolderRoot.RootType">
+            <summary>
+            Gets what type root folder it.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.SharedFolderRoot.BoundedUser">
+            <summary>
+            Gets user name which to bound root folder.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.SharedFolderRoot.BoundedFolder">
+            <summary>
+            Gets BoundedUser folder name which to bound root folder.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.SharedFolderRootType_enum">
+            <summary>
+            Specifies shared folder root folder type.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.SharedFolderRootType_enum.BoundedRootFolder">
+            <summary>
+            Root folder is bounded to some user account.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.SharedFolderRootType_enum.UsersSharedFolder">
+            <summary>
+            Users shared folders will be added into this root folder.
+            </summary>
         </member>
         <member name="T:LumiSoft.MailServer.wfrm_BuildInitString_base">
             <summary>
@@ -1173,117 +1559,149 @@
             Restuns built initstring or null if canceled.
             </summary>
         </member>
-        <member name="T:LumiSoft.Net.IMAP.Server.IMAP_Message">
+        <member name="T:LumiSoft.MailServer.UserPermissions_enum">
             <summary>
-            IMAP message info.
+            User permission flags.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_Message.#ctor(LumiSoft.Net.IMAP.Server.IMAP_MessageCollection,System.String,System.Int64,System.DateTime,System.Int64,LumiSoft.Net.IMAP.IMAP_MessageFlags)">
+        <member name="F:LumiSoft.MailServer.UserPermissions_enum.None">
+            <summary>
+            None of the permissions.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.UserPermissions_enum.All">
+            <summary>
+            All permissions.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.UserPermissions_enum.POP3">
+            <summary>
+            POP3 access.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.UserPermissions_enum.IMAP">
+            <summary>
+            IMAP access.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.UserPermissions_enum.Relay">
+            <summary>
+            Can relay. This permission is used only if connected user IP doesn't have relay permission.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.UserPermissions_enum.SIP">
+            <summary>
+            SIP access.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.Net.IMAP.IMAP_BODY">
+            <summary>
+            IMAP BODYSTRUCTURE. Defined in RFC 3501 7.4.2.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY.#ctor">
             <summary>
             Default constructor.
             </summary>
-            <param name="onwer">Owner collection.</param>
-            <param name="id">Message ID.</param>
-            <param name="uid">Message IMAP UID value.</param>
-            <param name="internalDate">Message store date.</param>
-            <param name="size">Message size in bytes.</param>
-            <param name="flags">Message flags.</param>
         </member>
-        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_Message.SetFlags(LumiSoft.Net.IMAP.IMAP_MessageFlags)">
+        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY.ConstructBodyStructure(LumiSoft.Net.Mail.Mail_Message,System.Boolean)">
             <summary>
-            Sets message flags.
+            Constructs FETCH BODY and BODYSTRUCTURE response.
             </summary>
-            <param name="flags">Message flags.</param>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.SequenceNo">
-            <summary>
-            Gets message 1 based sequence number in the collection. This property is slow, use with care, never use in big for loops !
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.ID">
-            <summary>
-            Gets message ID.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.UID">
-            <summary>
-            Gets message IMAP UID value.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.InternalDate">
-            <summary>
-            Gets message store date.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.Size">
-            <summary>
-            Gets message size in bytes.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.Flags">
-            <summary>
-            Gets message flags.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.FlagsString">
-            <summary>
-            Gets message flags string. For example: "\DELETES \SEEN".
-            </summary>
-        </member>
-        <member name="T:LumiSoft.MailServer.IPSecurityAction_enum">
-            <summary>
-            Specifiess IP security action.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.IPSecurityAction_enum.Allow">
-            <summary>
-            Allow access.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.IPSecurityAction_enum.Deny">
-            <summary>
-            Deny access.
-            </summary>
-        </member>
-        <member name="T:LumiSoft.MailServer.Filters.ISettingsUI">
-            <summary>
-            TODO: help !!! don't know how to commant it.
-            </summary>
-        </member>
-        <member name="M:LumiSoft.MailServer.Filters.ISettingsUI.GetUI">
-            <summary>
-            Gets settings UI window.
-            </summary>
+            <param name="message">Mail message.</param>
+            <param name="bodystructure">Specifies if to construct BODY or BODYSTRUCTURE.</param>
             <returns></returns>
         </member>
-        <member name="T:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum">
+        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY.ConstructParts(LumiSoft.Net.MIME.MIME_Entity,System.Boolean)">
             <summary>
-            Specifies message itmes.
+            Constructs specified entity and it's childentities bodystructure string.
+            </summary>
+            <param name="entity">Mime entity.</param>
+            <param name="bodystructure">Specifies if to construct BODY or BODYSTRUCTURE.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY.Parse(System.String)">
+            <summary>
+            Parses IMAP BODYSTRUCTURE from body structure string.
+            </summary>
+            <param name="bodyStructureString">Body structure string</param>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY.GetEntities(LumiSoft.Net.IMAP.IMAP_BODY_Entity[],System.Collections.Generic.List{LumiSoft.Net.IMAP.IMAP_BODY_Entity})">
+            <summary>
+            Gets mime entities, including nested entries. 
+            </summary>
+            <param name="entities"></param>
+            <param name="allEntries"></param>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY.MainEntity">
+            <summary>
+            Gets main entity.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum.None">
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY.Entities">
             <summary>
-            None.
+            Gets all entities contained in BODYSTRUCTURE, including child entities.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum.Header">
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY.Attachmnets">
             <summary>
-            Message main header.
+            Gets attachment entities. Entity is considered as attachmnet if:<p/>
+                *) Content-Type: name = "" is specified  (old RFC 822 message)<p/>
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum.Envelope">
+        <member name="T:LumiSoft.Net.IMAP.IMAP_BODY_Entity">
             <summary>
-            IMAP ENVELOPE structure.
+            IMAP BODY mime entity info.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum.BodyStructure">
+        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY_Entity.#ctor">
             <summary>
-            IMAP BODYSTRUCTURE structure.
+            Default constructor.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum.Message">
+        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY_Entity.Parse(System.String)">
             <summary>
-            Full message.
+            Parses entity and it's child entities.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ParentEntity">
+            <summary>
+            Gets parent entity of this entity. If this entity is top level, then this property returns null.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ChildEntities">
+            <summary>
+            Gets child entities. This property is available only if ContentType = multipart/... .
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentType">
+            <summary>
+            Gets header field "<b>Content-Type:</b>" value.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentID">
+            <summary>
+            Gets header field "<b>Content-ID:</b>" value. Returns null if value isn't set.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentDescription">
+            <summary>
+            Gets header field "<b>Content-Description:</b>" value. Returns null if value isn't set.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentTransferEncoding">
+            <summary>
+            Gets header field "<b>Content-Transfer-Encoding:</b>" value.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentSize">
+            <summary>
+            Gets content encoded data size. NOTE: This property is available only for non-multipart contentype !
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentLines">
+            <summary>
+            Gets content encoded data lines. NOTE: This property is available only for text/xxx content type !
             </summary>
         </member>
         <member name="T:LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems">
@@ -1369,580 +1787,162 @@
             Gets or sets if message exists. Set this false, if message actually doesn't exist any more.
             </summary>
         </member>
-        <member name="T:LumiSoft.Net.IMAP.IMAP_BODY_Entity">
+        <member name="T:LumiSoft.Net.IMAP.Server.IMAP_Message">
             <summary>
-            IMAP BODY mime entity info.
+            IMAP message info.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY_Entity.#ctor">
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_Message.#ctor(LumiSoft.Net.IMAP.Server.IMAP_MessageCollection,System.String,System.Int64,System.DateTime,System.Int64,LumiSoft.Net.IMAP.IMAP_MessageFlags)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="onwer">Owner collection.</param>
+            <param name="id">Message ID.</param>
+            <param name="uid">Message IMAP UID value.</param>
+            <param name="internalDate">Message store date.</param>
+            <param name="size">Message size in bytes.</param>
+            <param name="flags">Message flags.</param>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_Message.SetFlags(LumiSoft.Net.IMAP.IMAP_MessageFlags)">
+            <summary>
+            Sets message flags.
+            </summary>
+            <param name="flags">Message flags.</param>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.SequenceNo">
+            <summary>
+            Gets message 1 based sequence number in the collection. This property is slow, use with care, never use in big for loops !
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.ID">
+            <summary>
+            Gets message ID.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.UID">
+            <summary>
+            Gets message IMAP UID value.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.InternalDate">
+            <summary>
+            Gets message store date.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.Size">
+            <summary>
+            Gets message size in bytes.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.Flags">
+            <summary>
+            Gets message flags.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.FlagsString">
+            <summary>
+            Gets message flags string. For example: "\DELETES \SEEN".
+            </summary>
+        </member>
+        <member name="T:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection">
+            <summary>
+            IMAP messages info collection.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.#ctor">
             <summary>
             Default constructor.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY_Entity.Parse(System.String)">
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.Add(System.String,System.Int64,System.DateTime,System.Int64,LumiSoft.Net.IMAP.IMAP_MessageFlags)">
             <summary>
-            Parses entity and it's child entities.
+            Adds new message info to the collection.
             </summary>
+            <param name="id">Message ID.</param>
+            <param name="uid">Message IMAP UID value.</param>
+            <param name="internalDate">Message store date.</param>
+            <param name="size">Message size in bytes.</param>
+            <param name="flags">Message flags.</param>
+            <returns>Returns added IMAp message info.</returns>
         </member>
-        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ParentEntity">
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.Remove(LumiSoft.Net.IMAP.Server.IMAP_Message)">
             <summary>
-            Gets parent entity of this entity. If this entity is top level, then this property returns null.
+            Removes specified IMAP message from the collection.
             </summary>
+            <param name="message">IMAP message to remove.</param>
         </member>
-        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ChildEntities">
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.ContainsUID(System.Int64)">
             <summary>
-            Gets child entities. This property is available only if ContentType = multipart/... .
+            Gets collection contains specified message with specified UID.
             </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentType">
-            <summary>
-            Gets header field "<b>Content-Type:</b>" value.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentID">
-            <summary>
-            Gets header field "<b>Content-ID:</b>" value. Returns null if value isn't set.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentDescription">
-            <summary>
-            Gets header field "<b>Content-Description:</b>" value. Returns null if value isn't set.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentTransferEncoding">
-            <summary>
-            Gets header field "<b>Content-Transfer-Encoding:</b>" value.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentSize">
-            <summary>
-            Gets content encoded data size. NOTE: This property is available only for non-multipart contentype !
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentLines">
-            <summary>
-            Gets content encoded data lines. NOTE: This property is available only for text/xxx content type !
-            </summary>
-        </member>
-        <member name="T:LumiSoft.MailServer.API_Utlis">
-            <summary>
-            Provides API implementation helper methods.
-            </summary>
-        </member>
-        <member name="M:LumiSoft.MailServer.API_Utlis.NormalizeFolder(System.String)">
-            <summary>
-            Normalizes folder value. Replaces \ to /, removes duplicate //, removes / from folder start and end.
-            </summary>
-            <param name="folder">Folder to normalize.</param>
+            <param name="uid">Message UID.</param>
             <returns></returns>
         </member>
-        <member name="M:LumiSoft.MailServer.API_Utlis.PathFix(System.String)">
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.IndexOf(LumiSoft.Net.IMAP.Server.IMAP_Message)">
             <summary>
-            Fixes path separator, replaces / \ with platform separator char.
+            Gets index of specified message in the collection.
             </summary>
-            <param name="path">Path to fix.</param>
+            <param name="message">Message indesx to get.</param>
+            <returns>Returns index of specified message in the collection or -1 if message doesn't belong to this collection.</returns>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.Clear">
+            <summary>
+            Removes all messages from the collection.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.GetWithFlags(LumiSoft.Net.IMAP.IMAP_MessageFlags)">
+            <summary>
+            Gets messages which has specified flags set.
+            </summary>
+            <param name="flags">Flags to match.</param>
             <returns></returns>
         </member>
-        <member name="M:LumiSoft.MailServer.API_Utlis.DirectoryExists(System.String)">
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.GetEnumerator">
             <summary>
-            Checks if directory exists. If linux, checks with case-insenstively (linux is case-sensitive). 
-            Returns actual dir (In linux it may differ from requested directory, because of case-sensitivity.)
-            or null if directory doesn't exist.
+            Gets enumerator.
             </summary>
-            <param name="dirName">Directory to check.</param>
             <returns></returns>
         </member>
-        <member name="M:LumiSoft.MailServer.API_Utlis.EnsureFolder(System.String)">
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.Count">
             <summary>
-            Ensures that specified folder exists, if not it will be created.
-            Returns actual dir (In linux it may differ from requested directory, because of case-sensitivity.).
+            Gets number of messages in the collection.
             </summary>
-            <param name="folder">Folder name with path.</param>
         </member>
-        <member name="M:LumiSoft.MailServer.API_Utlis.FileExists(System.String)">
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.Item(System.Int32)">
             <summary>
-            Checks if file exists. If linux, checks with case-insenstively (linux is case-sensitive). 
-            Returns actual file (In linux it may differ from requested file, because of case-sensitivity.)
-            or null if file doesn't exist.
+            Gets a IMAP_Message object in the collection by index number.
             </summary>
-            <param name="fileName">File to check.</param>
-            <returns></returns>
+            <param name="index">An Int32 value that specifies the position of the IMAP_Message object in the IMAP_MessageCollection collection.</param>
         </member>
-        <member name="M:LumiSoft.MailServer.API_Utlis.StreamCopy(System.IO.Stream,System.IO.Stream)">
+        <member name="T:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum">
             <summary>
-            Copies all data from source stream to destination stream.
-            Copy starts from source stream current position and will be copied to the end of source stream.
+            Specifies message itmes.
             </summary>
-            <param name="source">Source stream.</param>
-            <param name="destination">Destination stream.</param>
-            <returns>Returns number of bytes copied.</returns>
         </member>
-        <member name="M:LumiSoft.MailServer.API_Utlis.CreateSettingsSchema(System.Data.DataSet)">
+        <member name="F:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum.None">
             <summary>
-            Creates system settings schema.
+            None.
             </summary>
-            <param name="ds">DataSet where to create schema.</param>
         </member>
-        <member name="M:LumiSoft.MailServer.API_Utlis.GenerateBadMessage(System.IO.Stream)">
+        <member name="F:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum.Header">
             <summary>
-            Generates message parsing failed message.
+            Message main header.
             </summary>
-            <param name="message">Message stream.</param>
-            <returns>Returns message parsing failed message.</returns>
-            <exception cref="T:System.ArgumentNullException">Is raised when <b>message</b> is null reference.</exception>
         </member>
-        <member name="T:LumiSoft.Net.IMAP.IMAP_BODY">
+        <member name="F:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum.Envelope">
             <summary>
-            IMAP BODYSTRUCTURE. Defined in RFC 3501 7.4.2.
+            IMAP ENVELOPE structure.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY.#ctor">
+        <member name="F:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum.BodyStructure">
             <summary>
-            Default constructor.
+            IMAP BODYSTRUCTURE structure.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY.ConstructBodyStructure(LumiSoft.Net.Mail.Mail_Message,System.Boolean)">
+        <member name="F:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum.Message">
             <summary>
-            Constructs FETCH BODY and BODYSTRUCTURE response.
+            Full message.
             </summary>
-            <param name="message">Mail message.</param>
-            <param name="bodystructure">Specifies if to construct BODY or BODYSTRUCTURE.</param>
-            <returns></returns>
-        </member>
-        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY.ConstructParts(LumiSoft.Net.MIME.MIME_Entity,System.Boolean)">
-            <summary>
-            Constructs specified entity and it's childentities bodystructure string.
-            </summary>
-            <param name="entity">Mime entity.</param>
-            <param name="bodystructure">Specifies if to construct BODY or BODYSTRUCTURE.</param>
-            <returns></returns>
-        </member>
-        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY.Parse(System.String)">
-            <summary>
-            Parses IMAP BODYSTRUCTURE from body structure string.
-            </summary>
-            <param name="bodyStructureString">Body structure string</param>
-        </member>
-        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY.GetEntities(LumiSoft.Net.IMAP.IMAP_BODY_Entity[],System.Collections.Generic.List{LumiSoft.Net.IMAP.IMAP_BODY_Entity})">
-            <summary>
-            Gets mime entities, including nested entries. 
-            </summary>
-            <param name="entities"></param>
-            <param name="allEntries"></param>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY.MainEntity">
-            <summary>
-            Gets main entity.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY.Entities">
-            <summary>
-            Gets all entities contained in BODYSTRUCTURE, including child entities.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY.Attachmnets">
-            <summary>
-            Gets attachment entities. Entity is considered as attachmnet if:<p/>
-                *) Content-Type: name = "" is specified  (old RFC 822 message)<p/>
-            </summary>
-        </member>
-        <member name="T:LumiSoft.MailServer.ArgsValidator">
-            <summary>
-            Provides mehtods for validating values.
-            </summary>
-        </member>
-        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateFolder(System.String)">
-            <summary>
-            Validates folder. Folder may contains only printable chars and not:
-            : * ? " &lt; &gt; | % . Throws Exception if folder isn't valid.
-            </summary>
-            <param name="folder">Folder to validate.</param>
-        </member>
-        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateSharedFolderRoot(System.String)">
-            <summary>
-            Validates shared root folder name value.
-            </summary>
-            <param name="folder"></param>
-        </member>
-        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateUserName(System.String)">
-            <summary>
-            Validates user name value, check that doesn't contain invalid chars. User name may contains only 
-            printable chars and not: : * ? " &lt; &gt; | % . Throws Exception if user name isn't valid.
-            </summary>
-            <param name="userName">User name value to validate.</param>
-        </member>
-        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateNotNull(System.Object)">
-            <summary>
-            Requires value to be not null. Throws Exception if value is null.
-            </summary>
-            <param name="val">Value to check.</param>
-        </member>
-        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateDomainName(System.String)">
-            <summary>
-            Validates domain name.
-            </summary>
-            <param name="domainName"></param>
-        </member>
-        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateEmail(System.String)">
-            <summary>
-            Validates email address, check that won't contain illegal chars. 
-            Throws Exception if email isn't valid.
-            </summary>
-            <param name="email">Email to check.</param>
-        </member>
-        <member name="M:LumiSoft.MailServer.ArgsValidator.ContainsChars(System.String,System.Char[])">
-            <summary>
-            Gets if specified text contains any of the specified chars.
-            </summary>
-            <param name="text">Text to check.</param>
-            <param name="chars">Chars to check.</param>
-            <returns>Returns true if specified text contains any of the chars.</returns>
-        </member>
-        <member name="M:LumiSoft.MailServer.ArgsValidator.IsPrintableCharsOnly(System.String)">
-            <summary>
-            Gets if all chars in text are printable chars (Not CR,LF,SP,TAB,...). 
-            Chars 0 - 31 are ASCII controls characters and not allowed.
-            </summary>
-            <param name="text">Text to check.</param>
-            <returns>Returns true is all chars are printable chars.</returns>
-        </member>
-        <member name="T:LumiSoft.MailServer.InsufficientPermissionsException">
-            <summary>
-            This exception is thrown when not enough permissions to complete operation.
-            </summary>
-        </member>
-        <member name="M:LumiSoft.MailServer.InsufficientPermissionsException.#ctor(System.String)">
-            <summary>
-            Default constructor.
-            </summary>
-            <param name="errorText">Error text.</param>
-        </member>
-        <member name="T:LumiSoft.MailServer.SharedFolderRootType_enum">
-            <summary>
-            Specifies shared folder root folder type.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.SharedFolderRootType_enum.BoundedRootFolder">
-            <summary>
-            Root folder is bounded to some user account.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.SharedFolderRootType_enum.UsersSharedFolder">
-            <summary>
-            Users shared folders will be added into this root folder.
-            </summary>
-        </member>
-        <member name="T:LumiSoft.MailServer.UserPermissions_enum">
-            <summary>
-            User permission flags.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.UserPermissions_enum.None">
-            <summary>
-            None of the permissions.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.UserPermissions_enum.All">
-            <summary>
-            All permissions.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.UserPermissions_enum.POP3">
-            <summary>
-            POP3 access.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.UserPermissions_enum.IMAP">
-            <summary>
-            IMAP access.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.UserPermissions_enum.Relay">
-            <summary>
-            Can relay. This permission is used only if connected user IP doesn't have relay permission.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.UserPermissions_enum.SIP">
-            <summary>
-            SIP access.
-            </summary>
-        </member>
-        <member name="T:LumiSoft.MailServer.SharedFolderRoot">
-            <summary>
-            Shared Folders root folder.
-            </summary>
-        </member>
-        <member name="M:LumiSoft.MailServer.SharedFolderRoot.#ctor(System.String,System.Boolean,System.String,System.String,LumiSoft.MailServer.SharedFolderRootType_enum,System.String,System.String)">
-            <summary>
-            Default constructor.
-            </summary>
-            <param name="rootID">Root Folder ID.</param>
-            <param name="enabled">Specifies if root folder is enabled.</param>
-            <param name="folderName">Root folder visible name.</param>
-            <param name="description">Description text.</param>
-            <param name="rootType">Specifies what type root folder is.</param>
-            <param name="boundedUser">User which to bound root folder.</param>
-            <param name="boundedFolder">BoundingUser folder name which to bound root folder.</param>
-        </member>
-        <member name="P:LumiSoft.MailServer.SharedFolderRoot.RootID">
-            <summary>
-            Gets Root Folder ID.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.MailServer.SharedFolderRoot.Enabled">
-            <summary>
-            Gets if root folder is enabled.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.MailServer.SharedFolderRoot.FolderName">
-            <summary>
-            Gets root folder name. For example "Public Folders".
-            </summary>
-        </member>
-        <member name="P:LumiSoft.MailServer.SharedFolderRoot.Description">
-            <summary>
-            Gets root folder description.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.MailServer.SharedFolderRoot.RootType">
-            <summary>
-            Gets what type root folder it.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.MailServer.SharedFolderRoot.BoundedUser">
-            <summary>
-            Gets user name which to bound root folder.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.MailServer.SharedFolderRoot.BoundedFolder">
-            <summary>
-            Gets BoundedUser folder name which to bound root folder.
-            </summary>
-        </member>
-        <member name="T:LumiSoft.MailServer.ISmtpUserMessageFilter">
-            <summary>
-            SMTP server user mail message filter.
-            </summary>
-        </member>
-        <member name="M:LumiSoft.MailServer.ISmtpUserMessageFilter.Filter(System.IO.MemoryStream,System.IO.MemoryStream@,System.String,System.String,LumiSoft.MailServer.IMailServerApi,LumiSoft.Net.SMTP.Server.SMTP_Session,System.String@,System.String@)">
-            <summary>
-            Filters user message.
-            </summary>
-            <param name="messageStream">Message stream which to filter.</param>
-            <param name="filteredStream">Filtered stream.</param>
-            <param name="userName">User name.</param>
-            <param name="to">User's to address.</param>
-            <param name="api">Reference to server API.</param>
-            <param name="session">Reference to SMTP session.</param>
-            <param name="storeFolder">Folder to store message.</param>
-            <param name="errorText">Filtering error text. ASCII text, 100 chars maximum.</param>
-        </member>
-        <member name="T:LumiSoft.MailServer.CompareSource">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.CompareSource.HeaderField">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.CompareSource.BodyText">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.CompareSource.BodyHtml">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.CompareSource.MimeEntry">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:LumiSoft.MailServer.CompareType">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.CompareType.AstericPattern">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.CompareType.Equal">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.CompareType.NotEqual">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.CompareType.Regex">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.CompareType.Md5">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:LumiSoft.MailServer.MatchAction">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.MatchAction.AutoResponse">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.MatchAction.Forward">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.MatchAction.StoreToFolder">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:LumiSoft.MailServer.GlobalMessageRuleAction_enum">
-            <summary>
-            Specifies match action done when global message rule is matched.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.AutoResponse">
-            <summary>
-            AutoResponse is sent to specified recipient.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.DeleteMessage">
-            <summary>
-            Deletes message.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.ForwardToEmail">
-            <summary>
-            Message is forwarded to specified email.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.ForwardToHost">
-            <summary>
-            Message is forwarded to specified host.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.StoreToDiskFolder">
-            <summary>
-            Message is stored to specified disk folder.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.ExecuteProgram">
-            <summary>
-            Specified program is executed.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.StoreToIMAPFolder">
-            <summary>
-            Stores message to specified message folder(for example: Junk). This will take effect only for local recipients only !
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.AddHeaderField">
-            <summary>
-            Appends specified header field to message.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.RemoveHeaderField">
-            <summary>
-            Removes specified header field or fields if there are multiple of them.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.SendErrorToClient">
-            <summary>
-            Sends error to currently connected client. NOTE: Error text may contain ASCII printable chars only and maximum length is 500.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.StoreToFTPFolder">
-            <summary>
-            Stores message to specified FTP server folder.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.PostToNNTPNewsGroup">
-            <summary>
-            Posts message to specified NNTP newsgroup.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.PostToHTTP">
-            <summary>
-            Posts message to specified page via HTTP.
-            </summary>
-        </member>
-        <member name="T:LumiSoft.MailServer.Service_enum">
-            <summary>
-            Specifies service
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.Service_enum.SMTP">
-            <summary>
-            SMTP.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.Service_enum.POP3">
-            <summary>
-            POP3.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.Service_enum.IMAP">
-            <summary>
-            IMAP.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.Service_enum.Relay">
-            <summary>
-            SMTP Relay.
-            </summary>
-        </member>
-        <member name="T:LumiSoft.MailServer.FilterResult">
-            <summary>
-            Specifies filtering result.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.FilterResult.Store">
-            <summary>
-            Store messge and reply Ok to client.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.FilterResult.DontStore">
-            <summary>
-            Don't store messge, but reply Ok to client.
-            </summary>
-        </member>
-        <member name="F:LumiSoft.MailServer.FilterResult.Error">
-            <summary>
-            Send filtering error to client.
-            </summary>
-        </member>
-        <member name="T:LumiSoft.MailServer.ISmtpMessageFilter">
-            <summary>
-            SMTP server mail message filter.
-            </summary>
-        </member>
-        <member name="M:LumiSoft.MailServer.ISmtpMessageFilter.Filter(System.IO.Stream,System.IO.Stream@,System.String,System.String[],LumiSoft.MailServer.IMailServerApi,LumiSoft.Net.SMTP.Server.SMTP_Session,System.String@)">
-            <summary>
-            Filters message.
-            </summary>
-            <param name="messageStream">Message stream which to filter.</param>
-            <param name="filteredStream">Filtered stream.</param>
-            <param name="sender">Senders email address.</param>
-            <param name="recipients">Recipients email addresses.</param>
-            <param name="api">Access to server API.</param>
-            <param name="session">Reference to SMTP session.</param>
-            <param name="errorText">Filtering error text what is returned to client. ASCII text, 500 chars maximum.</param>
         </member>
     </members>
 </doc>

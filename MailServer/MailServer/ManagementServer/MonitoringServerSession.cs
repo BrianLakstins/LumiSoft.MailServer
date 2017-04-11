@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Net.Sockets;
 using System.Collections;
@@ -8,8 +9,6 @@ using System.Data;
 using System.Reflection;
 using System.Text;
 using System.Security.Principal;
-
-using ICSharpCode.SharpZipLib.GZip;
 
 using LumiSoft.Net;
 using LumiSoft.Net.IO;
@@ -5788,26 +5787,11 @@ namespace LumiSoft.MailServer.Monitoring
         /// <returns>Returns gzipped dataset xml data.</returns>
         private byte[] CompressDataSet(DataSet ds)
         {
-            /* Mono won't support it
             MemoryStream ms = new MemoryStream();
             ds.WriteXml(ms);
             
             MemoryStream retVal = new MemoryStream();
             GZipStream gzip = new GZipStream(retVal,CompressionMode.Compress);
-
-            byte[] dsBytes = ms.ToArray();
-            gzip.Write(dsBytes,0,dsBytes.Length);
-            gzip.Flush();
-            gzip.Dispose();
-
-            return retVal.ToArray();
-            */
-
-            MemoryStream ms = new MemoryStream();
-            ds.WriteXml(ms);
-            
-            MemoryStream retVal = new MemoryStream();
-            GZipOutputStream gzip = new GZipOutputStream(retVal);
 
             byte[] dsBytes = ms.ToArray();
             gzip.Write(dsBytes,0,dsBytes.Length);

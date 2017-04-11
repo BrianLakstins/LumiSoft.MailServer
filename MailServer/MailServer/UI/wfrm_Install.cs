@@ -119,12 +119,14 @@ namespace LumiSoft.MailServer.UI
 
         private void m_pInstallAsService_Click(object sender,EventArgs e)
         {            
-            System.Diagnostics.Process.Start(Application.StartupPath + "/MailServerService.exe","-install"); 
-           
-            m_pInstallAsService.Enabled = false;
-            m_pUninstallService.Enabled = true;
-            m_pRunAsTryApp.Enabled = false;
-            m_pRunAsWindowsForm.Enabled = false;
+            System.Diagnostics.Process p = System.Diagnostics.Process.Start(Application.StartupPath + "/MailServerService.exe","-install");
+            p.WaitForExit();
+            if(p.ExitCode == 0){           
+                m_pInstallAsService.Enabled = false;
+                m_pUninstallService.Enabled = true;
+                m_pRunAsTryApp.Enabled = false;
+                m_pRunAsWindowsForm.Enabled = false;
+            }
         }
 
         #endregion
@@ -133,12 +135,14 @@ namespace LumiSoft.MailServer.UI
 
         private void m_pUninstallService_Click(object sender,EventArgs e)
         {
-            System.Diagnostics.Process.Start(Application.StartupPath + "/MailServerService.exe","-uninstall");
-
-            m_pInstallAsService.Enabled = true;
-            m_pUninstallService.Enabled = false;
-            m_pRunAsTryApp.Enabled = true;
-            m_pRunAsWindowsForm.Enabled = true;
+            System.Diagnostics.Process p = System.Diagnostics.Process.Start(Application.StartupPath + "/MailServerService.exe","-uninstall");
+            p.WaitForExit();
+            if(p.ExitCode == 0){  
+                m_pInstallAsService.Enabled = true;
+                m_pUninstallService.Enabled = false;
+                m_pRunAsTryApp.Enabled = true;
+                m_pRunAsWindowsForm.Enabled = true;
+            }
         }
 
         #endregion

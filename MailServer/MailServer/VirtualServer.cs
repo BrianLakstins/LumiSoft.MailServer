@@ -971,15 +971,15 @@ namespace LumiSoft.MailServer
         private void m_pImapServer_Session_LSub(object sender,IMAP_e_LSub e)
         {
             IMAP_Session ses = (IMAP_Session)sender;
-                        
+                    
 			string[] folders = m_pApi.GetSubscribedFolders(ses.AuthenticatedUserIdentity.Name);
 			foreach(string folder in folders){                
                 if(string.IsNullOrEmpty(e.FolderReferenceName) || folder.StartsWith(e.FolderReferenceName,StringComparison.InvariantCultureIgnoreCase)){
-                    if(FolderMatches(e.FolderFilter,folder)){
+                    if(!string.IsNullOrEmpty(folder) && FolderMatches(e.FolderFilter,folder)){
                         e.Folders.Add(new IMAP_r_u_LSub(folder,'/',null));
                     }
                 }
-			}
+	        }
         }
 
         #endregion

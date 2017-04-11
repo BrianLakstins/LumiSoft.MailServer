@@ -4667,9 +4667,11 @@ namespace LumiSoft.MailServer
 
 			ds.ReadXml(API_Utlis.PathFix(path + "\\imap.xml"));
 
-			ArrayList dirs = new ArrayList();
+			List<string> dirs = new List<string>();
 			foreach(DataRow dr in ds.Tables["Subscriptions"].Rows){
-				dirs.Add(dr["Name"].ToString());
+                if(!dirs.Contains(dr["Name"].ToString())){
+				    dirs.Add(dr["Name"].ToString());
+                }
 			}
 
 			string[] retVal = new string[dirs.Count];
@@ -4696,13 +4698,24 @@ namespace LumiSoft.MailServer
 			ds.Tables["Subscriptions"].Columns.Add("Name");
             if(File.Exists(API_Utlis.PathFix(path + "\\imap.xml"))){
 			    ds.ReadXml(API_Utlis.PathFix(path + "\\imap.xml"));
+            }			
+            
+            Dictionary<string,string> folders = new Dictionary<string,string>(StringComparer.InvariantCultureIgnoreCase);            
+            foreach(DataRow drx in ds.Tables["Subscriptions"].Rows){
+                if(!folders.ContainsKey(drx["Name"].ToString())){
+                    folders.Add(drx["Name"].ToString(),drx["Name"].ToString());
+                }
+            }
+            if(!folders.ContainsKey(folder)){
+                folders.Add(folder,folder);
             }
 
-			// ToDo: check if already exists, raise error or just skip ??
-
-			DataRow dr = ds.Tables["Subscriptions"].NewRow();
-			dr["Name"] = folder;
-			ds.Tables["Subscriptions"].Rows.Add(dr);
+            ds.Tables["Subscriptions"].Clear();
+            foreach(string f in folders.Values){
+                DataRow dr = ds.Tables["Subscriptions"].NewRow();
+			    dr["Name"] = f;
+			    ds.Tables["Subscriptions"].Rows.Add(dr);
+            }
 
 			ds.WriteXml(API_Utlis.PathFix(path + "\\imap.xml"));
 		}
