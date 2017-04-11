@@ -1,0 +1,5 @@
+Debug/
+*.user
+*.suo
+.vs/
+*/obj/
