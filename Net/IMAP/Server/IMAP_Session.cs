@@ -5758,10 +5758,10 @@ namespace LumiSoft.Net.IMAP.Server
                     retVal.Append(" \"" + entity.ContentType.SubType + "\"");
                 }
                 else{
-                    retVal.Append(" NIL");
+                    retVal.Append(" \"plain\"");  //BAL 4/11/2017: NIL works for Thunderbird client, but other mail clients don't seem to like it.
                 }
 
-				retVal.Append(")");
+                retVal.Append(")");
 			}
 			// Single part message
 			else{
@@ -5774,19 +5774,19 @@ namespace LumiSoft.Net.IMAP.Server
 					retVal.Append("\"" + entity.ContentType.Type + "\"");
 				}
 				else{
-					retVal.Append("NIL");
-				}
+                    retVal.Append(" \"text\"");  //BAL 4/11/2017: NIL works for Thunderbird client, but other mail clients don't seem to like it.
+                }
 
                 // Add contentTypeSubMediaType
-                if(entity.ContentType != null && entity.ContentType.SubType != null){
+                if (entity.ContentType != null && entity.ContentType.SubType != null){
                     retVal.Append(" \"" + entity.ContentType.SubType + "\"");
                 }
                 else{
-                    retVal.Append(" NIL");
+                    retVal.Append(" \"plain\"");  //BAL 4/11/2017: NIL works for Thunderbird client, but other mail clients don't seem to like it.
                 }
 
-				// conentTypeParameters - Syntax: {("name" SP "value" *(SP "name" SP "value"))}
-				if(entity.ContentType != null){
+                // conentTypeParameters - Syntax: {("name" SP "value" *(SP "name" SP "value"))}
+                if (entity.ContentType != null){
                     if(entity.ContentType.Parameters.Count > 0){
                         retVal.Append(" (");
                         bool first = true;
