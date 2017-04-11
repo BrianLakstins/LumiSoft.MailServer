@@ -1,5 +1,8 @@
-Debug/
 *.user
 *.suo
 .vs/
 Net/.svn/
+MailServer/Application/Debug/
+MailServer/*/*/bin/Debug/
+MailServer/*/*/*/bin/Debug/
+obj/
