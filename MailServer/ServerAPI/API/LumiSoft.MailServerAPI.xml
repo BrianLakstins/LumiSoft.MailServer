@@ -452,18 +452,18 @@
             <summary>
             Deletes user.
             </summary>
-            <param name="userID">User ID of the user which to delete. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">&gt;GetUsers()</see> to get valid values.</param>
+            <param name="userID">User ID of the user which to delete. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">>GetUsers()</see> to get valid values.</param>
         </member>
         <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateUser(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Boolean,LumiSoft.MailServer.UserPermissions_enum)">
             <summary>
             Updates new user to specified domain.
             </summary>
-            <param name="userID">User id of the user which to update. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">&gt;GetUsers()</see> to get valid values.</param>
+            <param name="userID">User id of the user which to update. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">>GetUsers()</see> to get valid values.</param>
             <param name="userName">User login name.</param>
             <param name="fullName">User full name.</param>
             <param name="password">User login password.</param>
             <param name="description">User description.</param>
-            <param name="domainName">Domain where to add user. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetDomains">&gt;GetDomains()</see> to get valid values.</param>
+            <param name="domainName">Domain where to add user. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetDomains">>GetDomains()</see> to get valid values.</param>
             <param name="mailboxSize">Maximum mailbox size.</param>
             <param name="enabled">Sepcifies if user is enabled.</param>
             <param name="permissions">Specifies user permissions.</param>
@@ -472,7 +472,7 @@
             <summary>
             Add new email address to user.
             </summary>
-            <param name="userName">User name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">&gt;GetUsers()</see> to get valid values.</param>
+            <param name="userName">User name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">>GetUsers()</see> to get valid values.</param>
             <param name="emailAddress">Email address to add.</param>
             <remarks>Throws exception if specified user email address exists.</remarks>
         </member>
@@ -762,7 +762,7 @@
             <param name="mailingListID">Mailing list ID.</param>
             <param name="mailingListName">Mailing list name name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetMailingLists(System.String)">GetMailingLists()</see> to get valid values.</param>
             <param name="description">Mailing list description.</param>
-            <param name="domainName">Domain name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetDomains">&gt;GetUsers()</see> to get valid values.</param>
+            <param name="domainName">Domain name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetDomains">>GetUsers()</see> to get valid values.</param>
             <param name="enabled">Specifies if mailing list is enabled.</param>
         </member>
         <member name="M:LumiSoft.MailServer.IMailServerApi.AddMailingListAddress(System.String,System.String,System.String)">

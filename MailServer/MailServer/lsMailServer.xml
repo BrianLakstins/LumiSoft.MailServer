@@ -9,39 +9,40 @@
             Bad login manager.
             </summary>
         </member>
-        <member name="M:LumiSoft.MailServer.BadLoginManager.#ctor">
-            <summary>
-            Default constructor.
-            </summary>
-        </member>
-        <member name="M:LumiSoft.MailServer.BadLoginManager.Dispose">
-            <summary>
-            Cleans up any resources being used.
-            </summary>
-        </member>
-        <member name="M:LumiSoft.MailServer.BadLoginManager.Put(System.String,System.String)">
-            <summary>
-            Increases specified IP bad login count for specified user name.
-            </summary>
-            <param name="ip">IP address.</param>
-            <param name="userName">User name.</param>
-        </member>
-        <member name="M:LumiSoft.MailServer.BadLoginManager.IsExceeded(System.String,System.String)">
-            <summary>
-            Gets if maximum allowed bad logins for specified IP and user name has exceeded.
-            </summary>
-            <param name="ip">IP address.</param>
-            <param name="userName">User name.</param>
-            <returns></returns>
-        </member>
-        <member name="P:LumiSoft.MailServer.BadLoginManager.MaximumBadLogins">
-            <summary>
-            Gets or sets how many bad logins may be from 1 IP for specified user in specified period.
-            </summary>
-        </member>
         <member name="T:LumiSoft.MailServer.BadLoginManager.BadLoginEntry">
             <summary>
             This class holds bad login entry info.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.BadLoginManager.BadLoginEntry.UserEntry">
+            <summary>
+            This class holds user bad login info.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.BadLoginManager.BadLoginEntry.UserEntry.#ctor(System.String)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="userName">User name.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.BadLoginManager.BadLoginEntry.UserEntry.IncreaseBadLoginCount">
+            <summary>
+            Increases this entry user bad logins count.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.BadLoginManager.BadLoginEntry.UserEntry.UserName">
+            <summary>
+            Gets thios entry related user name.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.BadLoginManager.BadLoginEntry.UserEntry.CreationTime">
+            <summary>
+            Gets time when this entry was created.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.BadLoginManager.BadLoginEntry.UserEntry.BadLoginCount">
+            <summary>
+            Gets how many bad logins specified entry user has done. 
             </summary>
         </member>
         <member name="M:LumiSoft.MailServer.BadLoginManager.BadLoginEntry.#ctor(System.String)">
@@ -84,35 +85,34 @@
             Gets time when this entry was created.
             </summary>
         </member>
-        <member name="T:LumiSoft.MailServer.BadLoginManager.BadLoginEntry.UserEntry">
-            <summary>
-            This class holds user bad login info.
-            </summary>
-        </member>
-        <member name="M:LumiSoft.MailServer.BadLoginManager.BadLoginEntry.UserEntry.#ctor(System.String)">
+        <member name="M:LumiSoft.MailServer.BadLoginManager.#ctor">
             <summary>
             Default constructor.
             </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.BadLoginManager.Dispose">
+            <summary>
+            Cleans up any resources being used.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.BadLoginManager.Put(System.String,System.String)">
+            <summary>
+            Increases specified IP bad login count for specified user name.
+            </summary>
+            <param name="ip">IP address.</param>
             <param name="userName">User name.</param>
         </member>
-        <member name="M:LumiSoft.MailServer.BadLoginManager.BadLoginEntry.UserEntry.IncreaseBadLoginCount">
+        <member name="M:LumiSoft.MailServer.BadLoginManager.IsExceeded(System.String,System.String)">
             <summary>
-            Increases this entry user bad logins count.
+            Gets if maximum allowed bad logins for specified IP and user name has exceeded.
             </summary>
+            <param name="ip">IP address.</param>
+            <param name="userName">User name.</param>
+            <returns></returns>
         </member>
-        <member name="P:LumiSoft.MailServer.BadLoginManager.BadLoginEntry.UserEntry.UserName">
+        <member name="P:LumiSoft.MailServer.BadLoginManager.MaximumBadLogins">
             <summary>
-            Gets thios entry related user name.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.MailServer.BadLoginManager.BadLoginEntry.UserEntry.CreationTime">
-            <summary>
-            Gets time when this entry was created.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.MailServer.BadLoginManager.BadLoginEntry.UserEntry.BadLoginCount">
-            <summary>
-            Gets how many bad logins specified entry user has done. 
+            Gets or sets how many bad logins may be from 1 IP for specified user in specified period.
             </summary>
         </member>
         <member name="T:LumiSoft.MailServer.DeliveryStatusNotification">
@@ -575,6 +575,18 @@
             </summary>
             <param name="stream">Stream data to send.</param>
         </member>
+        <member name="P:LumiSoft.MailServer.Monitoring.MonitoringServerSession.Server">
+            <summary>
+            Gets session owner management server.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+        </member>
+        <member name="P:LumiSoft.MailServer.Monitoring.MonitoringServerSession.AuthenticatedUserIdentity">
+            <summary>
+            Gets authenticated user identity or null if user has not authenticated.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+        </member>
         <member name="M:LumiSoft.MailServer.Monitoring.MonitoringServerSession.CompressDataSet(System.Data.DataSet)">
             <summary>
             Compresses specified dataset with GZIP.
@@ -588,18 +600,6 @@
             </summary>
             <param name="dv"></param>
             <returns></returns>
-        </member>
-        <member name="P:LumiSoft.MailServer.Monitoring.MonitoringServerSession.Server">
-            <summary>
-            Gets session owner management server.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
-        </member>
-        <member name="P:LumiSoft.MailServer.Monitoring.MonitoringServerSession.AuthenticatedUserIdentity">
-            <summary>
-            Gets authenticated user identity or null if user has not authenticated.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
         </member>
         <member name="T:LumiSoft.MailServer.RecycleBinManager">
             <summary>

@@ -94,10 +94,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LumiSoft.MailServerAPI, Version=1.1.2402.29381, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\Application\Debug\LumiSoft.MailServerAPI.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="LumiSoft.Net">
       <Name>LumiSoft.Net</Name>
       <HintPath>..\..\Application\Debug\LumiSoft.Net.dll</HintPath>
@@ -146,6 +142,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\API\ServerAPI.csproj">
+      <Project>{38efe161-9ab9-4ad8-a83f-6b0628d5cded}</Project>
+      <Name>ServerAPI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
