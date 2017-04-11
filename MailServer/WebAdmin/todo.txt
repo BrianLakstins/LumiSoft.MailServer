@@ -1,0 +1,38 @@
+
+
+
+Administrators
+        Administrator - permanent, can't be deleted. Has full rights.
+        ...           - Administrator created users may have full rights or selected vitrual server rigths.
+
+                        *) Only Administrator User with full rights can create users
+                        *) Must be possibility to specifiy logon IP's for users.
+                           For 'Administrator', there must be allways localhost access. (localhost can't be deleted) 
+
+Monitoring - Can monitor all virtual servers
+
+Virtual Servers
+        Virtual Server 1
+                Info          - Show summary info about server. (Listening IP,port, running time, users count,domains count, ...)
+                System
+                        SMTP
+                        POP3
+                        IMAP
+                        Delivery
+                        Logging
+                Domains
+                Users
+                Mailing Lists
+                Routing
+                Security
+                Filters
+                Monitoring     - Specified virtual server monitoring
+
+        Virtual Server 2
+                ...
+
+
+Administrator types
+        Administrator                - full rights
+        Virutal Server Administrator - can change all, except System tab. And sees all tabs in specified virtual server.
+        Domain Administrator         - can add/modify/delete specified domain users,mailing lists. Don't see other domains and their data. 

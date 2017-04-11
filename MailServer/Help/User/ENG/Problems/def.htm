@@ -1,0 +1,58 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1257">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Known Problems</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<p><b><font size="3">Known Problems.</font></b></p>
+<hr>
+<p>&nbsp;</p>
+<p>Some general known problems users have asked.</p>
+<p>&nbsp;</p>
+<p><i><u>Problem:</u></i> Can't relay from client computers.</p>
+<p><i><u>Solution:</u></i> This is because relay is enabled for client computer 
+IP.</p>
+<ul>
+  <li>Allow relay for IP or IP range (in manager).</li>
+  <li>Setup SMTP authentication in SMTP Client. User names and passwords are 
+  same as in POP3 account.</li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><i><u>Problem:</u></i> Can't relay in server computer using localhost.</p>
+<p><i><u>Solution:</u></i> This is because relay is enabled for localhost.</p>
+<ul>
+  <li>Allow relay for IP 127.0.0.1 (localhost).</li>
+  <li>Setup SMTP authentication in SMTP Client. User names and passwords are 
+  same as in POP3 account.</li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><i><u>Problem:</u></i> Can't access SMTP/POP3 from LAN or WAN.</p>
+<p><i><u>Solution:</u></i> Check if in server security SMTP/POP3 access is 
+enabled for your connecting IP.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><u><i>Problem:</i></u> Can't receive messages, but can telnet to public IP 
+and MAIL FORM:&lt;xxx&gt;, RCPT TO:&lt;your_adress@domain.xx&gt; shows &quot;OK&quot;.</p>
+<p><i><u>Solution:</u></i> Check that you have MX record associated with your 
+domain.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><i><u>Problem:</u></i> Can't receive messages and get 550 reply, but user and 
+domain exists.</p>
+<p><i><u>Solution:</u></i> After register.bat you must get mailServiceError.log with 
+line &quot;System:Only one usage of each socket address (protocol/network 
+address/port) is normally permitted&quot;. Check that you are not running another SMTP Server 
+software like IIS SMTP.</p>
+<p>&nbsp;</p>
+
+</body>
+
+</html>

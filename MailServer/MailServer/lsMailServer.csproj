@@ -1,0 +1,174 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3875CF02-6D99-41FF-B4D1-59941254C0C4}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>lsMailServer</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>LumiSoft.MailServer</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>LumiSoft.MailServer.MainX</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\Application\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>lsMailServer.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\Application\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>lsMailServer.xml</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.0.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL" />
+    <Reference Include="LumiSoft.MailServerAPI">
+      <Name>LumiSoft.MailServerAPI</Name>
+      <HintPath>..\Application\Debug\LumiSoft.MailServerAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="LumiSoft.Net">
+      <Name>LumiSoft.Net</Name>
+      <HintPath>..\Application\Debug\LumiSoft.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.DirectoryServices.Protocols" />
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Management">
+      <Name>System.Management</Name>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BadLoginManager.cs" />
+    <Compile Include="DeliveryStatusNotification.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="MailServerAuthType_enum.cs" />
+    <Compile Include="ConvertEx.cs" />
+    <Compile Include="Error.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Fetch\FetchPop3.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GlobalMessageRules\_MessageRuleAction_FTP_AsyncSend.cs" />
+    <Compile Include="GlobalMessageRules\GlobalMessageRuleActionResult.cs" />
+    <Compile Include="GlobalMessageRules\GlobalMessageRuleProcessor.cs" />
+    <Compile Include="GlobalMessageRules\_MessageRuleAction_HTTP_Async.cs" />
+    <Compile Include="GlobalMessageRules\_MessageRuleAction_NNTP_Async.cs" />
+    <Compile Include="MainX.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ManagementServer\MonitoringServer.cs">
+    </Compile>
+    <Compile Include="ManagementServer\MonitoringServerSession.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RecycleBinManager.cs" />
+    <Compile Include="Relay\RelayMessageInfo.cs" />
+    <Compile Include="Relay\RelayServer.cs" />
+    <Compile Include="Relay\RelayVariablesManager.cs" />
+    <Compile Include="Resources\ResManager.cs" />
+    <Compile Include="SCore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Server.cs" />
+    <Compile Include="ServerReturnMessage.cs" />
+    <Compile Include="TextDb.cs" />
+    <Compile Include="UI\wfrm_Install.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\wfrm_Tray.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\wfrm_WinForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VirtualServer.cs" />
+    <Compile Include="WinLogon.cs" />
+    <Compile Include="XmlTable.cs" />
+    <Content Include="licenses.licx" />
+    <EmbeddedResource Include="Resources\trayicon.ico" />
+    <EmbeddedResource Include="Resources\exit.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

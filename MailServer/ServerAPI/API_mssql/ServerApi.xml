@@ -1,0 +1,1070 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>mssql_API</name>
+    </assembly>
+    <members>
+        <member name="T:LumiSoft.MailServer.WSqlCommand">
+            <summary>
+            Summary description for WSqlCommand.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.WSqlCommand.#ctor(System.String,System.String)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="connectionString">Connection string.</param>
+            <param name="commandText">Command text.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.WSqlCommand.AddParameter(System.String,System.Data.SqlDbType,System.Object)">
+            <summary>
+            Adds parameter to Sql Command.
+            </summary>
+            <param name="name">Parameter name.</param>
+            <param name="dbType">Parameter datatype.</param>
+            <param name="value">Parameter value.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.WSqlCommand.Execute">
+            <summary>
+            Executes command.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:LumiSoft.MailServer.WSqlCommand.CommandTimeout">
+            <summary>
+            Gets or sets command timeout time.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.WSqlCommand.CommandType">
+            <summary>
+            Gets or sets command type.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.mssql_API">
+            <summary>
+            Lumisoft Mail Server MSSQL API.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.#ctor(System.String)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="intitString"></param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetDomains">
+            <summary>
+            Gets domain list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddDomain(System.String,System.String,System.String)">
+            <summary>
+            Adds new domain.
+            </summary>
+            <param name="domainID">Domain ID. Suggested value is Guid.NewGuid() .</param>
+            <param name="domainName">Domain name. Eg. yourDomain.com .</param>
+            <param name="description">Domain description.</param>
+            <remarks>Throws exception if specified domain already exists.</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteDomain(System.String)">
+            <summary>
+            Deletes specified domain.
+            </summary>
+            <param name="domainID">Domain ID. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetDomains">GetDomains()</see> to get valid values.</param>
+            <remarks>Deletes specified domain and all domain related data (users,mailing lists,routes).</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UpdateDomain(System.String,System.String,System.String)">
+            <summary>
+            Updates specified domain data.
+            </summary>
+            <param name="domainID">Domain ID which to update.</param>
+            <param name="domainName">Domain name.</param>
+            <param name="description">Domain description.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DomainExists(System.String)">
+            <summary>
+            Checks if specified domain exists.
+            </summary>
+            <param name="source">Domain name or email address.</param>
+            <returns>Returns true if domain exists.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetUsers(System.String)">
+            <summary>
+            Gets user list in specified domain.
+            </summary>
+            <param name="domainName">Domain which user list to retrieve.To get all use value 'ALL'.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetUserID(System.String)">
+            <summary>
+            Gets user ID from user name. Returns null if user doesn't exist.
+            </summary>
+            <param name="userName">User name.</param>
+            <returns>Returns user ID or null if user doesn't exist.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddUser(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Boolean,LumiSoft.MailServer.UserPermissions_enum)">
+            <summary>
+            Adds new user to specified domain.
+            </summary>
+            <param name="userID">User ID. Suggested value is Guid.NewGuid() .</param>
+            <param name="userName">User login name.</param>
+            <param name="fullName">User full name.</param> 
+            <param name="password">User login password.</param>
+            <param name="description">User description.</param>
+            <param name="domainName">Domain where to add user. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetDomains">GetDomains()</see> to get valid values.</param>
+            <param name="mailboxSize">Maximum mailbox size.</param>
+            <param name="enabled">Sepcifies if user is enabled.</param>
+            <param name="permissions">Specifies user permissions.</param>
+            <remarks>Throws exception if specified user already exists.</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteUser(System.String)">
+            <summary>
+            Deletes user.
+            </summary>
+            <param name="userID">User id of the user which to delete. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">&gt;GetUsers()</see> to get valid values.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UpdateUser(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Boolean,LumiSoft.MailServer.UserPermissions_enum)">
+            <summary>
+            Updates new user to specified domain.
+            </summary>
+            <param name="userID">User id of the user which to update. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">&gt;GetUsers()</see> to get valid values.</param>
+            <param name="userName">User login name.</param>
+            <param name="fullName">User full name.</param>
+            <param name="password">User login password.</param>
+            <param name="description">User description.</param>
+            <param name="domainName">Domain where to add user. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetDomains">&gt;GetDomains()</see> to get valid values.</param>
+            <param name="mailboxSize">Maximum mailbox size.</param>
+            <param name="enabled">Sepcifies if user is enabled.</param>
+            <param name="permissions">Specifies user permissions.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddUserAddress(System.String,System.String)">
+            <summary>
+            Add new email address to user.
+            </summary>
+            <param name="userName">User name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">&gt;GetUsers()</see> to get valid values.</param>
+            <param name="emailAddress">Email address to add.</param>
+            <remarks>Throws exception if specified user email address exists.</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteUserAddress(System.String)">
+            <summary>
+            Deletes specified email address from user. 
+            </summary>
+            <param name="emailAddress">Email address to add.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetUserAddresses(System.String)">
+            <summary>
+            Gets user email addresses.
+            </summary>
+            <param name="userName"> Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">GetUsers()</see> to get valid values.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UserExists(System.String)">
+            <summary>
+            Checks if user exists.
+            </summary>
+            <param name="userName">User name.</param>
+            <returns>Returns true if user exists.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.MapUser(System.String)">
+            <summary>
+            Maps email address to mailbox.
+            </summary>
+            <param name="emailAddress"></param>
+            <returns>Returns mailbox or null if such email address won't exist.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.ValidateMailboxSize(System.String)">
+            <summary>
+            Checks if specified mailbox size is exceeded.
+            </summary>
+            <param name="userName">User name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">GetUsers()</see> to get valid values.</param>
+            <returns>Returns true if exceeded.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetUserPermissions(System.String)">
+            <summary>
+            Gets specified user permissions.
+            </summary>
+            <param name="userName">User name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetUserLastLoginTime(System.String)">
+            <summary>
+            Gets user last login time.
+            </summary>
+            <param name="userName">User name who's last login time to get.</param>
+            <returns>User last login time.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UpdateUserLastLoginTime(System.String)">
+            <summary>
+            Updates user last login time.
+            </summary>
+            <param name="userName">User name who's last login time to update.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetUserRemoteServers(System.String)">
+            <summary>
+            Gets user pop3 remote accounts.
+            </summary>
+            <param name="userName">User name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">GetUsers()</see> to get valid values.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddUserRemoteServer(System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            AAdds new remote pop3 server to user.
+            </summary>
+            <param name="serverID">Server ID. Suggested value is Guid.NewGuid() .</param>
+            <param name="userName">User name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">GetUsers()</see> to get valid values.</param>
+            <param name="description">Remote server description.</param>
+            <param name="remoteServer">Remote server name.</param>
+            <param name="remotePort">Remote server port.</param>
+            <param name="remoteUser">Remote server user name.</param>
+            <param name="remotePassword">Remote server password.</param>
+            <param name="useSSL">Specifies if SSL must be used to connect to remote server.</param>
+            <param name="enabled">Specifies if remote server is enabled.</param>
+            <remarks>Throws exception if specified user remote server already exists.</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteUserRemoteServer(System.String)">
+            <summary>
+            Deletes specified pop3 remote account from user.
+            </summary>
+            <param name="serverID">Remote server ID. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUserRemoteServers(System.String)">GetUserRemoteServers()</see> to get valid values.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UpdateUserRemoteServer(System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Updates user remote pop3 server.
+            </summary>
+            <param name="serverID">Server ID. Suggested value is Guid.NewGuid() .</param>
+            <param name="userName">User name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">GetUsers()</see> to get valid values.</param>
+            <param name="description">Remote server description.</param>
+            <param name="remoteServer">Remote server name.</param>
+            <param name="remotePort">Remote server port.</param>
+            <param name="remoteUser">Remote server user name.</param>
+            <param name="remotePassword">Remote server password.</param>
+            <param name="useSSL">Specifies if SSL must be used to connect to remote server.</param>
+            <param name="enabled">Specifies if remote server is enabled.</param>
+            <remarks>Throws exception if specified user remote server already exists.</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetUserMessageRules(System.String)">
+            <summary>
+            Gets user message  rules.
+            </summary>
+            <param name="userName">User name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddUserMessageRule(System.String,System.String,System.Int64,System.Boolean,LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum,System.String,System.String)">
+            <summary>
+            Adds new user message rule.
+            </summary>
+            <param name="userID">User who owns specified rule.</param>
+            <param name="ruleID">Rule ID. Guid.NewID().ToString() is suggested.</param>
+            <param name="cost">Cost specifies in what order rules are processed. Costs with lower values are processed first.</param>
+            <param name="enabled">Specifies if rule is enabled.</param>
+            <param name="checkNextRule">Specifies when next rule is checked.</param>
+            <param name="description">Rule description.</param>
+            <param name="matchExpression">Rule match expression.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteUserMessageRule(System.String,System.String)">
+            <summary>
+            Deletes specified user message rule.
+            </summary>
+            <param name="userID">User who owns specified rule.</param>
+            <param name="ruleID">Rule ID.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UpdateUserMessageRule(System.String,System.String,System.Int64,System.Boolean,LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum,System.String,System.String)">
+            <summary>
+            Updates specified user message rule.
+            </summary>
+            <param name="userID">User who owns specified rule.</param>
+            <param name="ruleID">Rule ID.</param>
+            <param name="cost">Cost specifies in what order rules are processed. Costs with lower values are processed first.</param>
+            <param name="enabled">Specifies if rule is enabled.</param>
+            <param name="checkNextRule">Specifies when next rule is checked.</param>
+            <param name="description">Rule description.</param>
+            <param name="matchExpression">Rule match expression.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetUserMessageRuleActions(System.String,System.String)">
+            <summary>
+            Gets specified user message rule actions.
+            </summary>
+            <param name="userID">User who owns specified rule.</param>
+            <param name="ruleID">Rule ID of rule which actions to get.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddUserMessageRuleAction(System.String,System.String,System.String,System.String,LumiSoft.MailServer.GlobalMessageRuleAction_enum,System.Byte[])">
+            <summary>
+            Adds action to specified user message rule.
+            </summary>
+            <param name="userID">User who owns specified rule.</param>
+            <param name="ruleID">Rule ID to which to add this action.</param>
+            <param name="actionID">Action ID. Guid.NewID().ToString() is suggested.</param>
+            <param name="description">Action description.</param>
+            <param name="actionType">Action type.</param>
+            <param name="actionData">Action data. Data structure depends on action type.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteUserMessageRuleAction(System.String,System.String,System.String)">
+            <summary>
+            Deletes specified action from specified user message rule.
+            </summary>
+            <param name="userID">User who owns specified rule.</param>
+            <param name="ruleID">Rule ID which action to delete.</param>
+            <param name="actionID">Action ID of action which to delete.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UpdateUserMessageRuleAction(System.String,System.String,System.String,System.String,LumiSoft.MailServer.GlobalMessageRuleAction_enum,System.Byte[])">
+            <summary>
+            Updates specified rule action.
+            </summary>
+            <param name="userID">User who owns specified rule.</param>
+            <param name="ruleID">Rule ID which action to update.</param>
+            <param name="actionID">Action ID of action which to update.</param>
+            <param name="description">Action description.</param>
+            <param name="actionType">Action type.</param>
+            <param name="actionData">Action data. Data structure depends on action type.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AuthUser(System.String,System.String,System.String,LumiSoft.Net.AuthType)">
+            <summary>
+            Authenticates user.
+            </summary>
+            <param name="userName">User name.</param>
+            <param name="passwData">Password data.</param>
+            <param name="authData">Authentication specific data(as tag).</param>
+            <param name="authType">Authentication type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GroupExists(System.String)">
+            <summary>
+            Gets if specified user group exists.
+            </summary>
+            <param name="groupName">Group name.</param>
+            <returns>Returns true, if user group exists.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetGroups">
+            <summary>
+            Gets user groups.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddGroup(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Adds new user group.
+            </summary>
+            <param name="groupID">Group ID. Guid.NewGuid().ToString() is suggested.</param>
+            <param name="groupName">Group name.</param>
+            <param name="description">Group description.</param>
+            <param name="enabled">Specifies if group is enabled.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteGroup(System.String)">
+            <summary>
+            Deletes specified user group.
+            </summary>
+            <param name="groupID">Group ID.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UpdateGroup(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Updates user group info.
+            </summary>
+            <param name="groupID">Group ID.</param>
+            <param name="groupName">Group name.</param>
+            <param name="description">Group description.</param>
+            <param name="enabled">Specifies if group is enabled.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GroupMemberExists(System.String,System.String)">
+            <summary>
+            Gets if specified group member exists in specified user group members list.
+            </summary>
+            <param name="groupName">Group name</param>
+            <param name="userOrGroup">User or group.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetGroupMembers(System.String)">
+            <summary>
+            Gets useer group members who belong to specified group.
+            </summary>
+            <param name="groupName">Group name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddGroupMember(System.String,System.String)">
+            <summary>
+            Add specified user or group to specified goup members list.
+            </summary>
+            <param name="groupName">Group name.</param>
+            <param name="userOrGroup">User or group.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteGroupMember(System.String,System.String)">
+            <summary>
+            Deletes specified user or group from specified group members list.
+            </summary>
+            <param name="groupName">Group name.</param>
+            <param name="userOrGroup">User or group.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetGroupUsers(System.String)">
+            <summary>
+            Gets specified group users. All nested group members are replaced by actual users.
+            </summary>
+            <param name="groupName">Group name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetMailingLists(System.String)">
+            <summary>
+            Gets mailing lists.
+            </summary>
+            <param name="domainName">Domain name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetDomains">GetDomains()</see> to get valid values.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddMailingList(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Adds new mailing list.
+            </summary>
+            <param name="mailingListID">Mailing list ID. Suggested value is Guid.NewGuid() .</param>
+            <param name="mailingListName">Mailing list name name. Eg. all@lumisoft.ee .</param>
+            <param name="description">Mailing list description.</param>
+            <param name="domainName">Domain name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetDomains">GetDomains()</see> to get valid values.</param>
+            <param name="enabled">Specifies if mailing list is enabled.</param>
+            <remarks>Throws exception if specified mailing list already exists.</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteMailingList(System.String)">
+            <summary>
+            Deletes specified mailing list.
+            </summary>
+            <param name="mailingListID"> Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetMailingLists(System.String)">GetMailingLists()</see> to get valid values.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UpdateMailingList(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Updates specified mailing list.
+            </summary>
+            <param name="mailingListID">Mailing list ID.</param>
+            <param name="mailingListName">Mailing list name name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetMailingLists(System.String)">GetMailingLists()</see> to get valid values.</param>
+            <param name="description">Mailing list description.</param>
+            <param name="domainName">Domain name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetDomains">&gt;GetUsers()</see> to get valid values.</param>
+            <param name="enabled">Specifies if mailing list is enabled.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddMailingListAddress(System.String,System.String,System.String)">
+            <summary>
+            Add new email address to specified mailing list.
+            </summary>
+            <param name="addressID">Address ID. Suggested value is Guid.NewGuid() .</param>
+            <param name="mailingListName">Mailing list name name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetMailingLists(System.String)">GetMailingLists()</see> to get valid values.</param>
+            <param name="address">Mailing list member address.</param>
+            <remarks>Throws exception if specified mailing list member already exists.</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteMailingListAddress(System.String)">
+            <summary>
+            Deletes specified email address from mailing list. 
+            </summary>
+            <param name="addressID">Mailing list member address ID. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetMailingListAddresses(System.String)">GetMailingListMembers()</see> to get valid values.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetMailingListAddresses(System.String)">
+            <summary>
+            Gets mailing list members.
+            </summary>
+            <param name="mailingListName">Mailing list name name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetMailingLists(System.String)">GetMailingLists()</see> to get valid values.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetMailingListACL(System.String)">
+            <summary>
+            Gets mailing list ACL list.
+            </summary>
+            <param name="mailingListName">Mailing list name.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddMailingListACL(System.String,System.String)">
+            <summary>
+            Adds specified user or group to mailing list ACL list (specified user can send messages to the specified mailing list).
+            </summary>
+            <param name="mailingListName">Mailing list name.</param>
+            <param name="userOrGroup">User or group name.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteMailingListACL(System.String,System.String)">
+            <summary>
+            Deletes specified user or group from mailing list ACL list.
+            </summary>
+            <param name="mailingListName">Mailing list name.</param>
+            <param name="userOrGroup">User or group name.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.CanAccessMailingList(System.String,System.String)">
+            <summary>
+            Checks if specified user can access specified mailing list.
+            There is one built-in user anyone, that represent all users (including anonymous).
+            </summary>
+            <param name="mailingListName">Mailing list name.</param>
+            <param name="user">User name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.MailingListExists(System.String)">
+            <summary>
+            Checks if user exists.
+            </summary>
+            <param name="mailingListName">Mailing list name.</param>
+            <returns>Returns true if mailing list exists.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetGlobalMessageRules">
+            <summary>
+            Gets global message rules.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddGlobalMessageRule(System.String,System.Int64,System.Boolean,LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum,System.String,System.String)">
+            <summary>
+            Adds new global message rule.
+            </summary>
+            <param name="ruleID">Rule ID. Guid.NewID().ToString() is suggested.</param>
+            <param name="cost">Cost specifies in what order rules are processed. Costs with lower values are processed first.</param>
+            <param name="enabled">Specifies if rule is enabled.</param>
+            <param name="checkNextRule">Specifies when next rule is checked.</param>
+            <param name="description">Rule description.</param>
+            <param name="matchExpression">Rule match expression.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteGlobalMessageRule(System.String)">
+            <summary>
+            Deletes specified global message rule.
+            </summary>
+            <param name="ruleID">Rule ID of rule which to delete.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UpdateGlobalMessageRule(System.String,System.Int64,System.Boolean,LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum,System.String,System.String)">
+            <summary>
+            Updates specified global message rule.
+            </summary>
+            <param name="ruleID">Rule ID.</param>
+            <param name="cost">Cost specifies in what order rules are processed. Costs with lower values are processed first.</param>
+            <param name="enabled">Specifies if rule is enabled.</param>
+            <param name="checkNextRule">Specifies when next rule is checked.</param>
+            <param name="description">Rule description.</param>
+            <param name="matchExpression">Rule match expression.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetGlobalMessageRuleActions(System.String)">
+            <summary>
+            Gets specified global message rule actions.
+            </summary>
+            <param name="ruleID">Rule ID of rule which actions to get.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddGlobalMessageRuleAction(System.String,System.String,System.String,LumiSoft.MailServer.GlobalMessageRuleAction_enum,System.Byte[])">
+            <summary>
+            Adds action to specified global message rule.
+            </summary>
+            <param name="ruleID">Rule ID to which to add this action.</param>
+            <param name="actionID">Action ID. Guid.NewID().ToString() is suggested.</param>
+            <param name="description">Action description.</param>
+            <param name="actionType">Action type.</param>
+            <param name="actionData">Action data. Data structure depends on action type.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteGlobalMessageRuleAction(System.String,System.String)">
+            <summary>
+            Deletes specified action from specified global message rule.
+            </summary>
+            <param name="ruleID">Rule ID which action to delete.</param>
+            <param name="actionID">Action ID of action which to delete.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UpdateGlobalMessageRuleAction(System.String,System.String,System.String,LumiSoft.MailServer.GlobalMessageRuleAction_enum,System.Byte[])">
+            <summary>
+            Updates specified rule action.
+            </summary>
+            <param name="ruleID">Rule ID which action to update.</param>
+            <param name="actionID">Action ID of action which to update.</param>
+            <param name="description">Action description.</param>
+            <param name="actionType">Action type.</param>
+            <param name="actionData">Action data. Data structure depends on action type.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetRoutes">
+            <summary>
+            Gets email address routes.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddRoute(System.String,System.Int64,System.Boolean,System.String,System.String,LumiSoft.MailServer.RouteAction_enum,System.Byte[])">
+            <summary>
+            Adds new route.
+            </summary>
+            <param name="routeID">Route ID.</param>
+            <param name="cost">Cost specifies in what order roues are processed. Costs with lower values are processed first.</param>
+            <param name="enabled">Specifies if route is enabled.</param>
+            <param name="description">Route description text.</param>
+            <param name="pattern">Match pattern. For example: *,*@domain.com,*sales@domain.com.</param>
+            <param name="action">Specifies route action.</param>
+            <param name="actionData">Route action data.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteRoute(System.String)">
+            <summary>
+            Deletes route.
+            </summary>
+            <param name="routeID">Route ID.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UpdateRoute(System.String,System.Int64,System.Boolean,System.String,System.String,LumiSoft.MailServer.RouteAction_enum,System.Byte[])">
+            <summary>
+            Updates route.
+            </summary>
+            <param name="routeID">Route ID.</param>
+            <param name="cost">Cost specifies in what order roues are processed. Costs with lower values are processed first.</param>
+            <param name="enabled">Specifies if route is enabled.</param>
+            <param name="description">Route description text.</param>
+            <param name="pattern">Match pattern. For example: *,*@domain.com,*sales@domain.com.</param>
+            <param name="action">Specifies route action.</param>
+            <param name="actionData">Route action data.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetMessagesInfo(System.String,System.String,System.String,LumiSoft.Net.IMAP.Server.IMAP_MessageCollection)">
+            <summary>
+            Gets specified IMAP folder messages info. 
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what messages info to get. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="messages">IMAP_Messages collection where to store folder messages info.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.StoreMessage(System.String,System.String,System.String,System.IO.Stream,System.DateTime,LumiSoft.Net.IMAP.IMAP_MessageFlags)">
+            <summary>
+            Stores message to specified folder.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder where to store message. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="msgStream">Stream where message has stored. Stream position must be at the beginning of the message.</param>
+            <param name="date">Recieve date.</param>
+            <param name="flags">Message flags.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.StoreMessageFlags(System.String,System.String,System.String,LumiSoft.Net.IMAP.Server.IMAP_Message,LumiSoft.Net.IMAP.IMAP_MessageFlags)">
+            <summary>
+            Stores IMAP message flags (\seen,\draft, ...).
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder which message flags to store. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="message">Fix ME: ???</param>
+            <param name="msgFlags">Message flags to store.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteMessage(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Deletes message from mailbox.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what message to delete. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="messageID">Message ID.</param>
+            <param name="uid">Message UID value.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetMessageItems(System.String,System.String,System.String,LumiSoft.MailServer.EmailMessageItems)">
+            <summary>
+            Gets specified message specified items.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what message to delete. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="e">MessageItems info.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetMessageTopLines(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Gets message header + number of specified lines.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what message top lines to get. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="msgID">MessageID.</param>
+            <param name="nrLines">Number of lines to retrieve. NOTE: line counting starts at the end of header.</param>
+            <returns>Returns message header + number of specified lines.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.CopyMessage(System.String,System.String,System.String,System.String,System.String,LumiSoft.Net.IMAP.Server.IMAP_Message)">
+            <summary>
+            Creates copy of message to destination IMAP folder.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what contains message to copy. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="destFolderUser">Destination IMAP folder owner user name.</param>
+            <param name="destFolder">Destination IMAP folder name.</param>
+            <param name="message">IMAP message which to copy.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetFolders(System.String,System.Boolean)">
+            <summary>
+            Gets all available IMAP folders.
+            </summary>
+            <param name="userName">User name who's folders to get.</param>
+            <param name="includeSharedFolders">If true, shared folders are included.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetSubscribedFolders(System.String)">
+            <summary>
+            Gets subscribed IMAP folders.
+            </summary>
+            <param name="userName"></param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.SubscribeFolder(System.String,System.String)">
+            <summary>
+            Subscribes new IMAP folder.
+            </summary>
+            <param name="userName"></param>
+            <param name="folder"></param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UnSubscribeFolder(System.String,System.String)">
+            <summary>
+            UnSubscribes IMAP folder.
+            </summary>
+            <param name="userName"></param>
+            <param name="folder"></param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.CreateFolder(System.String,System.String,System.String)">
+            <summary>
+            Creates new IMAP folder.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what contains message to copy. For example: Inbox,Public Folders/Documnets .</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteFolder(System.String,System.String,System.String)">
+            <summary>
+            Deletes IMAP folder.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what to delete. For example: Inbox,Public Folders/Documnets .</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.RenameFolder(System.String,System.String,System.String,System.String)">
+            <summary>
+            Renames IMAP folder.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what to delete. For example: Trash,Public Folders/Documnets .</param>
+            <param name="newFolder">New folder name.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.FolderExists(System.String)">
+            <summary>
+            Gets if specified folder exists.
+            </summary>
+            <param name="folderName">Folder name which to check. Eg. UserName/Inbox,UserName/Inbox/subfolder.</param>
+            <returns>Returns true if folder exists, otherwise false.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.FolderCreationTime(System.String,System.String)">
+            <summary>
+            Gets time when specified folder was created.
+            </summary>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what creation time to get. For example: Inbox,Public Folders/Documnets .</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetSharedFolderRoots">
+            <summary>
+            Gets shared folder root folders.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddSharedFolderRoot(System.String,System.Boolean,System.String,System.String,LumiSoft.MailServer.SharedFolderRootType_enum,System.String,System.String)">
+            <summary>
+            Add shared folder root.
+            </summary>
+            <param name="rootID">Root folder ID. Guid.NewID().ToString() is suggested.</param>
+            <param name="enabled">Specifies if root folder is enabled.</param>
+            <param name="folder">Folder name which will be visible to public.</param>
+            <param name="description">Description text.</param>
+            <param name="rootType">Specifies what type root folder is.</param>
+            <param name="boundedUser">User which to bound root folder.</param>
+            <param name="boundedFolder">Folder which to bound to public folder.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteSharedFolderRoot(System.String)">
+            <summary>
+            Deletes shard folders root folder.
+            </summary>
+            <param name="rootID">Root folder ID which to delete.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UpdateSharedFolderRoot(System.String,System.Boolean,System.String,System.String,LumiSoft.MailServer.SharedFolderRootType_enum,System.String,System.String)">
+            <summary>
+            Updates shared folder root.
+            </summary>
+            <param name="rootID">Root Folder IF which to update.</param>
+            <param name="enabled">Specifies if root folder is enabled.</param>
+            <param name="folder">Folder name which will be visible to public.</param>
+            <param name="description">Description text.</param>
+            <param name="rootType">Specifies what type root folder is.</param>
+            <param name="boundedUser">User which to bound root folder.</param>
+            <param name="boundedFolder">Folder which to bound to public folder.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetFolderACL(System.String,System.String,System.String)">
+            <summary>
+            Gets specified folder ACL.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what ACL to get. For example: Inbox,Public Folders/Documnets .</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteFolderACL(System.String,System.String,System.String,System.String)">
+            <summary>
+            Deletes specified folder ACL for specified user.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what ACL to delete. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="userOrGroup">User or user group which ACL on specified folder to delete.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.SetFolderACL(System.String,System.String,System.String,System.String,LumiSoft.Net.IMAP.IMAP_Flags_SetType,LumiSoft.Net.IMAP.IMAP_ACL_Flags)">
+            <summary>
+            Sets specified folder ACL for specified user.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what ACL to set. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="userOrGroup">>User or user which group ACL set to specified folder.</param>
+            <param name="setType">Specifies how ACL flags must be stored (ADD,REMOVE,REPLACE).</param>
+            <param name="aclFlags">ACL flags.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetUserACL(System.String,System.String,System.String)">
+            <summary>
+            Gets what permissions specified user has to specified folder.
+            </summary>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder which ACL to get. For example Inbox,Public Folders.</param>
+            <param name="user">User name which ACL to get.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.CreateUserDefaultFolders(System.String)">
+            <summary>
+            Creates specified user default folders, if they don't exist already.
+            </summary>
+            <param name="userName">User name to who's default folders to create.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetUsersDefaultFolders">
+            <summary>
+            Gets users default folders.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddUsersDefaultFolder(System.String,System.Boolean)">
+            <summary>
+            Adds users default folder.
+            </summary>
+            <param name="folderName">Folder name.</param>
+            <param name="permanent">Spcifies if folder is permanent, user can't delete it.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteUsersDefaultFolder(System.String)">
+            <summary>
+            Deletes specified users default folder.
+            </summary>
+            <param name="folderName">Folder name.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetMailboxSize(System.String)">
+            <summary>
+            Gets specified user mailbox size.
+            </summary>
+            <param name="userName">User name.</param>
+            <returns>Returns mailbox size.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetRecycleBinSettings">
+            <summary>
+            Gets recycle bin settings.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UpdateRecycleBinSettings(System.Boolean,System.Int32)">
+            <summary>
+            Updates recycle bin settings.
+            </summary>
+            <param name="deleteToRecycleBin">Specifies if deleted messages are store to recycle bin.</param>
+            <param name="deleteMessagesAfter">Specifies how old messages will be deleted.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetRecycleBinMessagesInfo(System.String,System.DateTime,System.DateTime)">
+            <summary>
+            Gets recycle bin messages info. 
+            </summary>
+            <param name="user">User who's recyclebin messages to get or null if all users messages.</param>
+            <param name="startDate">Messages from specified date. Pass DateTime.MinValue if not used.</param>
+            <param name="endDate">Messages to specified date. Pass DateTime.MinValue if not used.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetRecycleBinMessage(System.String)">
+            <summary>
+            Gets recycle bin message stream. NOTE: This method caller must take care of closing stream. 
+            </summary>
+            <param name="messageID">Message ID if of message what to get.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteRecycleBinMessage(System.String)">
+            <summary>
+            Deletes specified recycle bin message.
+            </summary>
+            <param name="messageID">Message ID.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.RestoreRecycleBinMessage(System.String)">
+            <summary>
+            Restores specified recycle bin message.
+            </summary>
+            <param name="messageID">Message ID.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetSecurityList">
+            <summary>
+            Gets security entries list.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddSecurityEntry(System.String,System.Boolean,System.String,LumiSoft.MailServer.Service_enum,LumiSoft.MailServer.IPSecurityAction_enum,System.Net.IPAddress,System.Net.IPAddress)">
+            <summary>
+            Adds new IP security entry.
+            </summary>
+            <param name="id">IP security entry ID.</param>
+            <param name="enabled">Specifies if IP security entry is enabled.</param>
+            <param name="description">IP security entry description text.</param>
+            <param name="service">Specifies service for what security entry applies.</param>
+            <param name="action">Specifies what action done if IP matches to security entry range.</param>
+            <param name="startIP">Range start IP.</param>
+            <param name="endIP">Range end IP.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteSecurityEntry(System.String)">
+            <summary>
+            Deletes security entry.
+            </summary>
+            <param name="id">IP security entry ID.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UpdateSecurityEntry(System.String,System.Boolean,System.String,LumiSoft.MailServer.Service_enum,LumiSoft.MailServer.IPSecurityAction_enum,System.Net.IPAddress,System.Net.IPAddress)">
+            <summary>
+            Updates IP security entry.
+            </summary>
+            <param name="id">IP security entry ID.</param>
+            <param name="enabled">Specifies if IP security entry is enabled.</param>
+            <param name="description">IP security entry description text.</param>
+            <param name="service">Specifies service for what security entry applies.</param>
+            <param name="action">Specifies what action done if IP matches to security entry range.</param>
+            <param name="startIP">Range start IP.</param>
+            <param name="endIP">Range end IP.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetFilters">
+            <summary>
+            Gets filter list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.AddFilter(System.String,System.String,System.String,System.String,System.String,System.Int64,System.Boolean)">
+            <summary>
+            Adds new filter.
+            </summary>
+            <param name="filterID">Filter ID. Suggested value is Guid.NewGuid() .</param>
+            <param name="description">Filter description</param>
+            <param name="type">Filter type. Eg. ISmtpMessageFilter.</param>
+            <param name="assembly">Assembly with full location. Eg. C:\MailServer\Filters\filter.dll .</param>
+            <param name="className">Filter full class name, wih namespace. Eg. LumiSoft.MailServer.Fileters.Filter1 .</param>
+            <param name="cost">Filters are sorted by cost and proccessed with cost value. Smallest cost is proccessed first.</param>
+            <param name="enabled">Specifies if filter is enabled.</param>
+            <remarks>Throws exception if specified filter entry already exists.</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.DeleteFilter(System.String)">
+            <summary>
+            Deletes specified filter.
+            </summary>
+            <param name="filterID">FilterID of the filter which to delete.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UpdateFilter(System.String,System.String,System.String,System.String,System.String,System.Int64,System.Boolean)">
+            <summary>
+            Updates specified filter.
+            </summary>		
+            <param name="filterID">FilterID which to update.</param>
+            <param name="description">Filter description</param>
+            <param name="type">Filter type. Eg. ISmtpMessageFilter.</param>
+            <param name="assembly">Assembly with full location. Eg. C:\MailServer\Filters\filter.dll .</param>
+            <param name="className">Filter full class name, wih namespace. Eg. LumiSoft.MailServer.Fileters.Filter1 .</param>
+            <param name="cost">Filters are sorted by cost and proccessed with cost value. Smallest cost is proccessed first.</param>
+            <param name="enabled">Specifies if filter is enabled.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetSettings">
+            <summary>
+            Gets server settings.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.UpdateSettings(System.Data.DataRow)">
+            <summary>
+            Updates server settings.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetACL">
+            <summary>
+            Gets all folders IMAP acl entries.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.IsUserGroupMember(System.String,System.String)">
+            <summary>
+            Gets if specified user is specified user group member. Returns true if user is user group member.
+            </summary>
+            <param name="group">User group name.</param>
+            <param name="user">User name.</param>
+            <returns>Returns true if user is user group member.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.MapSharedFolder(System.String)">
+            <summary>
+            If folder is Shared Folder, then maps folder to actual account.
+            </summary>
+            <param name="folder">Folder to map.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.GetGroup(System.String)">
+            <summary>
+            Gets specified user group. If group doesn't exist, returns null;
+            </summary>
+            <param name="group">User group name.</param>
+            <returns></returns>
+        </member>
+        <member name="T:LumiSoft.MailServer.mssql_API.SharedFolderMapInfo">
+            <summary>
+            This call holds shaared folder mapping info.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.mssql_API.SharedFolderMapInfo.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="originalFolder"></param>
+            <param name="folderOwner"></param>
+            <param name="folder"></param>
+            <param name="sharedRootName"></param>
+        </member>
+        <member name="P:LumiSoft.MailServer.mssql_API.SharedFolderMapInfo.OriginalFolder">
+            <summary>
+            Gets original folder.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.mssql_API.SharedFolderMapInfo.FolderOnwer">
+            <summary>
+            Shared folder owner. This is available only if OriginalFolder is shared folder.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.mssql_API.SharedFolderMapInfo.Folder">
+            <summary>
+            Gets shared folder owner folder. This is available only if OriginalFolder is shared folder.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.mssql_API.SharedFolderMapInfo.SharedRootName">
+            <summary>
+            Gets shared root folder name. This is available only if OriginalFolder is shared folder.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.mssql_API.SharedFolderMapInfo.IsSharedFolder">
+            <summary>
+            Gets if OriginalFolder is shared folder.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.ResManager">
+            <summary>
+            Resource manager.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.ResManager.GetText(System.String,System.Text.Encoding)">
+            <summary>
+            Gets stored resource as text.
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

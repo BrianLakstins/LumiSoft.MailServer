@@ -1,0 +1,8 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <Settings>
+    <Program>C:\Program Files\ClamWin\bin\clamscan.exe</Program>
+    <Arguments>--database="C:\Documents and Settings\All Users\.clamwin\db" "#FileName"</Arguments>
+    <VirusExitCode>1</VirusExitCode>
+  </Settings>
+</NewDataSet>

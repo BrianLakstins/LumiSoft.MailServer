@@ -1,0 +1,13 @@
+
+
+Folder email file nameing.
+
+yyyyMMddhhmmss-uid.eml        For example: 20051123161710-0000000001.eml
+
+yyyy - 4 symbol year
+MM   - 2 symbol month.        For example: 01,02,...,12
+dd   - 2 symbol day.          For example: 01,02,...,10,11
+HH   - 2 symbol hour.         For example: 01,02,...,23
+mm   - 2 symbol minute.       For example: 01,02,...,59
+ss   - 2 symbol second.       For example: 01,02,...,59
+uid  - 10 symbol Integer UID. For example: 0000000001,0000000002,...,0000000010, ... .

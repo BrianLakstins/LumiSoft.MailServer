@@ -1,0 +1,1948 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LumiSoft.MailServerAPI</name>
+    </assembly>
+    <members>
+        <member name="T:LumiSoft.MailServer.EmailMessageItems">
+            <summary>
+            Provides data to IMailServerApi.GetMessageItems method.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.EmailMessageItems.#ctor(System.String,LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="messageID">Message ID what message items to get.</param>
+            <param name="messageItems">Specifies message items what must be filled.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.EmailMessageItems.CopyTo(LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems)">
+            <summary>
+            Copies EmailMessageItems info to the specified IMAP_eArgs_MessageItems object.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="P:LumiSoft.MailServer.EmailMessageItems.MessageID">
+            <summary>
+            Gets message ID what message items to get.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.EmailMessageItems.MessageItems">
+            <summary>
+            Gets what message items must be filled.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.EmailMessageItems.MessageStream">
+            <summary>
+            Gets or sets message stream. When setting this property Stream position must be where message begins.
+            Fill this property only if IMAP_MessageItems_enum.Message flag is specified.
+            Note: Stream must be closed by caller !
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.EmailMessageItems.Header">
+            <summary>
+            Gets or sets message main header.
+            Fill this property only if IMAP_MessageItems_enum.Header flag is specified.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.EmailMessageItems.Envelope">
+            <summary>
+            Gets or sets IMAP ENVELOPE string.
+            Fill this property only if IMAP_MessageItems_enum.Envelope flag is specified.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.EmailMessageItems.BodyStructure">
+            <summary>
+            Gets or sets IMAP BODYSTRUCTURE string.
+            Fill this property only if IMAP_MessageItems_enum.BodyStructure flag is specified.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.EmailMessageItems.MessageExists">
+            <summary>
+            Gets or sets if message exists. Set this false, if message actually doesn't exist any more.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.IMailServerApi">
+            <summary>
+            Mailserver API interface.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetDomains">
+            <summary>
+            Gets domain list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddDomain(System.String,System.String,System.String)">
+            <summary>
+            Adds new domain.
+            </summary>
+            <param name="domainID">Domain ID. Suggested value is Guid.NewGuid() .</param>
+            <param name="domainName">Domain name. Eg. yourDomain.com .</param>
+            <param name="description">Domain description.</param>
+            <remarks>Throws exception if specified domain already exists.</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteDomain(System.String)">
+            <summary>
+            Deletes specified domain.
+            </summary>
+            <param name="domainID">Domain name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetDomains">GetDomains()</see> to get valid values.</param>
+            <remarks>Deletes specified domain and all domain related data (users,mailing lists,routes).</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateDomain(System.String,System.String,System.String)">
+            <summary>
+            Updates specified domain data.
+            </summary>
+            <param name="domainID">Domain ID which to update.</param>
+            <param name="domainName">Domain name.</param>
+            <param name="description">Domain description.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DomainExists(System.String)">
+            <summary>
+            Checks if specified domain exists.
+            </summary>
+            <param name="source">Domain name or email address.</param>
+            <returns>Returns true if domain exists.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">
+            <summary>
+            Gets user list in specified domain.
+            </summary>
+            <param name="domainName">Domain which user list to retrieve.To get all use value 'ALL'.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetUserID(System.String)">
+            <summary>
+            Gets user ID from user name. Returns null if user doesn't exist.
+            </summary>
+            <param name="userName">User name.</param>
+            <returns>Returns user ID or null if user doesn't exist.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddUser(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Boolean,LumiSoft.MailServer.UserPermissions_enum)">
+            <summary>
+            Adds new user to specified domain.
+            </summary>
+            <param name="userID">User ID. Suggested value is Guid.NewGuid() .</param>
+            <param name="userName">User login name.</param>
+            <param name="fullName">User full name.</param> 
+            <param name="password">User login password.</param>
+            <param name="description">User description.</param>
+            <param name="domainName">Domain where to add user. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetDomains">GetDomains()</see> to get valid values.</param>
+            <param name="mailboxSize">Maximum mailbox size.</param>
+            <param name="enabled">Sepcifies if user is enabled.</param>
+            <param name="permissions">Specifies user permissions.</param>
+            <remarks>Throws exception if specified user already exists.</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteUser(System.String)">
+            <summary>
+            Deletes user.
+            </summary>
+            <param name="userID">User ID of the user which to delete. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">&gt;GetUsers()</see> to get valid values.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateUser(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Boolean,LumiSoft.MailServer.UserPermissions_enum)">
+            <summary>
+            Updates new user to specified domain.
+            </summary>
+            <param name="userID">User id of the user which to update. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">&gt;GetUsers()</see> to get valid values.</param>
+            <param name="userName">User login name.</param>
+            <param name="fullName">User full name.</param>
+            <param name="password">User login password.</param>
+            <param name="description">User description.</param>
+            <param name="domainName">Domain where to add user. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetDomains">&gt;GetDomains()</see> to get valid values.</param>
+            <param name="mailboxSize">Maximum mailbox size.</param>
+            <param name="enabled">Sepcifies if user is enabled.</param>
+            <param name="permissions">Specifies user permissions.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddUserAddress(System.String,System.String)">
+            <summary>
+            Add new email address to user.
+            </summary>
+            <param name="userName">User name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">&gt;GetUsers()</see> to get valid values.</param>
+            <param name="emailAddress">Email address to add.</param>
+            <remarks>Throws exception if specified user email address exists.</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteUserAddress(System.String)">
+            <summary>
+            Deletes specified email address from user. 
+            </summary>
+            <param name="emailAddress">Email address to delete.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetUserAddresses(System.String)">
+            <summary>
+            Gets user email addresses.
+            </summary>
+            <param name="userName"> Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">GetUsers()</see> to get valid values.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UserExists(System.String)">
+            <summary>
+            Checks if user exists.
+            </summary>
+            <param name="userName">User name.</param>
+            <returns>Returns true if user exists.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.MapUser(System.String)">
+            <summary>
+            Maps email address to mailbox.
+            </summary>
+            <param name="emailAddress"></param>
+            <returns>Returns mailbox or null if such email address won't exist.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.ValidateMailboxSize(System.String)">
+            <summary>
+            Checks if specified mailbox size is exceeded.
+            </summary>
+            <param name="userName">User name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">GetUsers()</see> to get valid values.</param>
+            <returns>Returns true if exceeded.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetUserPermissions(System.String)">
+            <summary>
+            Gets specified user permissions.
+            </summary>
+            <param name="userName">User name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetUserLastLoginTime(System.String)">
+            <summary>
+            Gets user last login time.
+            </summary>
+            <param name="userName">User name who's last login time to get.</param>
+            <returns>User last login time.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateUserLastLoginTime(System.String)">
+            <summary>
+            Updates user last login time.
+            </summary>
+            <param name="userName">User name who's last login time to update.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetUserRemoteServers(System.String)">
+            <summary>
+            Gets user pop3 remote accounts.
+            </summary>
+            <param name="userName">User name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">GetUsers()</see> to get valid values.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddUserRemoteServer(System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Adds new remote pop3 server to user.
+            </summary>
+            <param name="serverID">Server ID. Suggested value is Guid.NewGuid() .</param>
+            <param name="userName">User name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">GetUsers()</see> to get valid values.</param>
+            <param name="description">Remote server description.</param>
+            <param name="remoteServer">Remote server name.</param>
+            <param name="remotePort">Remote server port.</param>
+            <param name="remoteUser">Remote server user name.</param>
+            <param name="remotePassword">Remote server password.</param>
+            <param name="useSSL">Specifies if SSL must be used to connect to remote server.</param>
+            <param name="enabled">Specifies if remote server is enabled.</param>
+            <remarks>Throws exception if specified user remote server already exists.</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteUserRemoteServer(System.String)">
+            <summary>
+            Deletes specified pop3 remote account from user.
+            </summary>
+            <param name="serverID">Remote server ID. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUserRemoteServers(System.String)">GetUserRemoteServers()</see> to get valid values.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateUserRemoteServer(System.String,System.String,System.String,System.String,System.Int32,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Updates user remote pop3 server.
+            </summary>
+            <param name="serverID">Server ID. Suggested value is Guid.NewGuid() .</param>
+            <param name="userName">User name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetUsers(System.String)">GetUsers()</see> to get valid values.</param>
+            <param name="description">Remote server description.</param>
+            <param name="remoteServer">Remote server name.</param>
+            <param name="remotePort">Remote server port.</param>
+            <param name="remoteUser">Remote server user name.</param>
+            <param name="remotePassword">Remote server password.</param>
+            <param name="useSSL">Specifies if SSL must be used to connect to remote server.</param>
+            <param name="enabled">Specifies if remote server is enabled.</param>
+            <remarks>Throws exception if specified user remote server already exists.</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetUserMessageRules(System.String)">
+            <summary>
+            Gets user message  rules.
+            </summary>
+            <param name="userName">User name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddUserMessageRule(System.String,System.String,System.Int64,System.Boolean,LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum,System.String,System.String)">
+            <summary>
+            Adds new user message rule.
+            </summary>
+            <param name="userID">User who owns specified rule.</param>
+            <param name="ruleID">Rule ID. Guid.NewID().ToString() is suggested.</param>
+            <param name="cost">Cost specifies in what order rules are processed. Costs with lower values are processed first.</param>
+            <param name="enabled">Specifies if rule is enabled.</param>
+            <param name="checkNextRule">Specifies when next rule is checked.</param>
+            <param name="description">Rule description.</param>
+            <param name="matchExpression">Rule match expression.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteUserMessageRule(System.String,System.String)">
+            <summary>
+            Deletes specified user message rule.
+            </summary>
+            <param name="userID">User who owns specified rule.</param>
+            <param name="ruleID">Rule ID.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateUserMessageRule(System.String,System.String,System.Int64,System.Boolean,LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum,System.String,System.String)">
+            <summary>
+            Updates specified user message rule.
+            </summary>
+            <param name="userID">User who owns specified rule.</param>
+            <param name="ruleID">Rule ID.</param>
+            <param name="cost">Cost specifies in what order rules are processed. Costs with lower values are processed first.</param>
+            <param name="enabled">Specifies if rule is enabled.</param>
+            <param name="checkNextRule">Specifies when next rule is checked.</param>
+            <param name="description">Rule description.</param>
+            <param name="matchExpression">Rule match expression.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetUserMessageRuleActions(System.String,System.String)">
+            <summary>
+            Gets specified user message rule actions.
+            </summary>
+            <param name="userID">User who owns specified rule.</param>
+            <param name="ruleID">Rule ID of rule which actions to get.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddUserMessageRuleAction(System.String,System.String,System.String,System.String,LumiSoft.MailServer.GlobalMessageRuleAction_enum,System.Byte[])">
+            <summary>
+            Adds action to specified user message rule.
+            </summary>
+            <param name="userID">User who owns specified rule.</param>
+            <param name="ruleID">Rule ID to which to add this action.</param>
+            <param name="actionID">Action ID. Guid.NewID().ToString() is suggested.</param>
+            <param name="description">Action description.</param>
+            <param name="actionType">Action type.</param>
+            <param name="actionData">Action data. Data structure depends on action type.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteUserMessageRuleAction(System.String,System.String,System.String)">
+            <summary>
+            Deletes specified action from specified user message rule.
+            </summary>
+            <param name="userID">User who owns specified rule.</param>
+            <param name="ruleID">Rule ID which action to delete.</param>
+            <param name="actionID">Action ID of action which to delete.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateUserMessageRuleAction(System.String,System.String,System.String,System.String,LumiSoft.MailServer.GlobalMessageRuleAction_enum,System.Byte[])">
+            <summary>
+            Updates specified rule action.
+            </summary>
+            <param name="userID">User who owns specified rule.</param>
+            <param name="ruleID">Rule ID which action to update.</param>
+            <param name="actionID">Action ID of action which to update.</param>
+            <param name="description">Action description.</param>
+            <param name="actionType">Action type.</param>
+            <param name="actionData">Action data. Data structure depends on action type.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AuthUser(System.String,System.String,System.String,LumiSoft.Net.AuthType)">
+            <summary>
+            Authenticates user.
+            </summary>
+            <param name="userName">User name.</param>
+            <param name="passwData">Password data.</param>
+            <param name="authData">Authentication specific data(as tag).</param>
+            <param name="authType">Authentication type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GroupExists(System.String)">
+            <summary>
+            Gets if specified user group exists.
+            </summary>
+            <param name="groupName">Group name.</param>
+            <returns>Returns true, if user group exists.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetGroups">
+            <summary>
+            Gets user groups.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddGroup(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Adds new user group.
+            </summary>
+            <param name="groupID">Group ID. Guid.NewGuid().ToString() is suggested.</param>
+            <param name="groupName">Group name.</param>
+            <param name="description">Group description.</param>
+            <param name="enabled">Specifies if group is enabled.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteGroup(System.String)">
+            <summary>
+            Deletes specified user group.
+            </summary>
+            <param name="groupID">Group ID.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateGroup(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Updates user group info.
+            </summary>
+            <param name="groupID">Group ID.</param>
+            <param name="groupName">Group name.</param>
+            <param name="description">Group description.</param>
+            <param name="enabled">Specifies if group is enabled.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GroupMemberExists(System.String,System.String)">
+            <summary>
+            Gets if specified group member exists in specified user group members list.
+            </summary>
+            <param name="groupName">Group name</param>
+            <param name="userOrGroup">User or group.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetGroupMembers(System.String)">
+            <summary>
+            Gets useer group members who belong to specified group.
+            </summary>
+            <param name="groupName">Group name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddGroupMember(System.String,System.String)">
+            <summary>
+            Add specified user or group to specified goup members list.
+            </summary>
+            <param name="groupName">Group name.</param>
+            <param name="userOrGroup">User or group.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteGroupMember(System.String,System.String)">
+            <summary>
+            Deletes specified user or group from specified group members list.
+            </summary>
+            <param name="groupName">Group name.</param>
+            <param name="userOrGroup">User or group.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetGroupUsers(System.String)">
+            <summary>
+            Gets specified group users. All nested group members are replaced by actual users.
+            </summary>
+            <param name="groupName">Group name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetMailingLists(System.String)">
+            <summary>
+            Gets mailing lists.
+            </summary>
+            <param name="domainName">Domain name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetDomains">GetDomains()</see> to get valid values.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddMailingList(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Adds new mailing list.
+            </summary>
+            <param name="mailingListID">Mailing list ID. Suggested value is Guid.NewGuid() .</param>
+            <param name="mailingListName">Mailing list name name. Eg. all@lumisoft.ee .</param>
+            <param name="description">Mailing list description.</param>
+            <param name="domainName">Domain name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetDomains">GetDomains()</see> to get valid values.</param>
+            <param name="enabled">Specifies if mailing list is enabled.</param>
+            <remarks>Throws exception if specified mailing list already exists.</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteMailingList(System.String)">
+            <summary>
+            Deletes specified mailing list.
+            </summary>
+            <param name="mailingListID"> Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetMailingLists(System.String)">GetMailingLists()</see> to get valid values.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateMailingList(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Updates specified mailing list.
+            </summary>
+            <param name="mailingListID">Mailing list ID.</param>
+            <param name="mailingListName">Mailing list name name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetMailingLists(System.String)">GetMailingLists()</see> to get valid values.</param>
+            <param name="description">Mailing list description.</param>
+            <param name="domainName">Domain name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetDomains">&gt;GetUsers()</see> to get valid values.</param>
+            <param name="enabled">Specifies if mailing list is enabled.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddMailingListAddress(System.String,System.String,System.String)">
+            <summary>
+            Add new email address to specified mailing list.
+            </summary>
+            <param name="addressID">Address ID. Suggested value is Guid.NewGuid() .</param>
+            <param name="mailingListName">Mailing list name name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetMailingLists(System.String)">GetMailingLists()</see> to get valid values.</param>
+            <param name="address">Mailing list member address.</param>
+            <remarks>Throws exception if specified mailing list member already exists.</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteMailingListAddress(System.String)">
+            <summary>
+            Deletes specified email address from mailing list. 
+            </summary>
+            <param name="addressID">Mailing list member address ID. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetMailingListAddresses(System.String)">GetMailingListMembers()</see> to get valid values.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetMailingListAddresses(System.String)">
+            <summary>
+            Gets mailing list members.
+            </summary>
+            <param name="mailingListName">Mailing list name name. Use <see cref="M:LumiSoft.MailServer.IMailServerApi.GetMailingLists(System.String)">GetMailingLists()</see> to get valid values.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetMailingListACL(System.String)">
+            <summary>
+            Gets mailing list ACL list.
+            </summary>
+            <param name="mailingListName">Mailing list name.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddMailingListACL(System.String,System.String)">
+            <summary>
+            Adds specified user or group to mailing list ACL list (specified user can send messages to the specified mailing list).
+            </summary>
+            <param name="mailingListName">Mailing list name.</param>
+            <param name="userOrGroup">User or group name.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteMailingListACL(System.String,System.String)">
+            <summary>
+            Deletes specified user or group from mailing list ACL list.
+            </summary>
+            <param name="mailingListName">Mailing list name.</param>
+            <param name="userOrGroup">User or group name.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.CanAccessMailingList(System.String,System.String)">
+            <summary>
+            Checks if specified user can access specified mailing list.
+            There is one built-in user anyone, that represent all users (including anonymous).
+            </summary>
+            <param name="mailingListName">Mailing list name.</param>
+            <param name="user">User name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.MailingListExists(System.String)">
+            <summary>
+            Checks if user exists.
+            </summary>
+            <param name="mailingListName">Mailing list name.</param>
+            <returns>Returns true if mailing list exists.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetGlobalMessageRules">
+            <summary>
+            Gets global message rules.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddGlobalMessageRule(System.String,System.Int64,System.Boolean,LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum,System.String,System.String)">
+            <summary>
+            Adds new global message rule.
+            </summary>
+            <param name="ruleID">Rule ID. Guid.NewID().ToString() is suggested.</param>
+            <param name="cost">Cost specifies in what order rules are processed. Costs with lower values are processed first.</param>
+            <param name="enabled">Specifies if rule is enabled.</param>
+            <param name="checkNextRule">Specifies when next rule is checked.</param>
+            <param name="description">Rule description.</param>
+            <param name="matchExpression">Rule match expression.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteGlobalMessageRule(System.String)">
+            <summary>
+            Deletes specified global message rule.
+            </summary>
+            <param name="ruleID">Rule ID of rule which to delete.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateGlobalMessageRule(System.String,System.Int64,System.Boolean,LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum,System.String,System.String)">
+            <summary>
+            Updates specified global message rule.
+            </summary>
+            <param name="ruleID">Rule ID.</param>
+            <param name="cost">Cost specifies in what order rules are processed. Costs with lower values are processed first.</param>
+            <param name="enabled">Specifies if rule is enabled.</param>
+            <param name="checkNextRule">Specifies when next rule is checked.</param>
+            <param name="description">Rule description.</param>
+            <param name="matchExpression">Rule match expression.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetGlobalMessageRuleActions(System.String)">
+            <summary>
+            Gets specified global message rule actions.
+            </summary>
+            <param name="ruleID">Rule ID of rule which actions to get.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddGlobalMessageRuleAction(System.String,System.String,System.String,LumiSoft.MailServer.GlobalMessageRuleAction_enum,System.Byte[])">
+            <summary>
+            Adds action to specified global message rule.
+            </summary>
+            <param name="ruleID">Rule ID to which to add this action.</param>
+            <param name="actionID">Action ID. Guid.NewID().ToString() is suggested.</param>
+            <param name="description">Action description.</param>
+            <param name="actionType">Action type.</param>
+            <param name="actionData">Action data. Data structure depends on action type.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteGlobalMessageRuleAction(System.String,System.String)">
+            <summary>
+            Deletes specified action from specified global message rule.
+            </summary>
+            <param name="ruleID">Rule ID which action to delete.</param>
+            <param name="actionID">Action ID of action which to delete.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateGlobalMessageRuleAction(System.String,System.String,System.String,LumiSoft.MailServer.GlobalMessageRuleAction_enum,System.Byte[])">
+            <summary>
+            Updates specified rule action.
+            </summary>
+            <param name="ruleID">Rule ID which action to update.</param>
+            <param name="actionID">Action ID of action which to update.</param>
+            <param name="description">Action description.</param>
+            <param name="actionType">Action type.</param>
+            <param name="actionData">Action data. Data structure depends on action type.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetRoutes">
+            <summary>
+            Gets email address routes.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddRoute(System.String,System.Int64,System.Boolean,System.String,System.String,LumiSoft.MailServer.RouteAction_enum,System.Byte[])">
+            <summary>
+            Adds new route.
+            </summary>
+            <param name="routeID">Route ID.</param>
+            <param name="cost">Cost specifies in what order roues are processed. Costs with lower values are processed first.</param>
+            <param name="enabled">Specifies if route is enabled.</param>
+            <param name="description">Route description text.</param>
+            <param name="pattern">Match pattern. For example: *,*@domain.com,*sales@domain.com.</param>
+            <param name="action">Specifies route action.</param>
+            <param name="actionData">Route action data.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteRoute(System.String)">
+            <summary>
+            Deletes route.
+            </summary>
+            <param name="routeID">Route ID.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateRoute(System.String,System.Int64,System.Boolean,System.String,System.String,LumiSoft.MailServer.RouteAction_enum,System.Byte[])">
+            <summary>
+            Updates route.
+            </summary>
+            <param name="routeID">Route ID.</param>
+            <param name="cost">Cost specifies in what order roues are processed. Costs with lower values are processed first.</param>
+            <param name="enabled">Specifies if route is enabled.</param>
+            <param name="description">Route description text.</param>
+            <param name="pattern">Match pattern. For example: *,*@domain.com,*sales@domain.com.</param>
+            <param name="action">Specifies route action.</param>
+            <param name="actionData">Route action data.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetMessagesInfo(System.String,System.String,System.String,System.Collections.Generic.List{LumiSoft.Net.IMAP.Server.IMAP_MessageInfo})">
+            <summary>
+            Gets specified IMAP folder messages info. 
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what messages info to get. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="messageInfos">List where to store folder messages info.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.StoreMessage(System.String,System.String,System.String,System.IO.Stream,System.DateTime,System.String[])">
+            <summary>
+            Stores message to specified folder.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder where to store message. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="msgStream">Stream where message has stored. Stream position must be at the beginning of the message.</param>
+            <param name="date">Recieve date.</param>
+            <param name="flags">Message flags.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.StoreMessageFlags(System.String,System.String,System.String,LumiSoft.Net.IMAP.Server.IMAP_MessageInfo,System.String[])">
+            <summary>
+            Stores IMAP message flags (\seen,\draft, ...).
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder which message flags to store. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="messageInfo">IMAP message info.</param>
+            <param name="flags">Message flags.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteMessage(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Deletes message from mailbox.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what message to delete. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="messageID">Message ID.</param>
+            <param name="uid">Message UID value.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetMessageItems(System.String,System.String,System.String,LumiSoft.MailServer.EmailMessageItems)">
+            <summary>
+            Gets specified message specified items.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what message to delete. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="e">MessageItems info.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetMessageTopLines(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Gets message header + number of specified lines.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what message top lines to get. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="msgID">MessageID.</param>
+            <param name="nrLines">Number of lines to retrieve. NOTE: line counting starts at the end of header.</param>
+            <returns>Returns message header + number of specified lines.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.CopyMessage(System.String,System.String,System.String,System.String,System.String,LumiSoft.Net.IMAP.Server.IMAP_MessageInfo)">
+            <summary>
+            Creates copy of message to destination IMAP folder.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what contains message to copy. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="destFolderUser">Destination IMAP folder owner user name.</param>
+            <param name="destFolder">Destination IMAP folder name.</param>
+            <param name="messageInfo">IMAP message info.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.Search(System.String,System.String,System.String,LumiSoft.Net.IMAP.Server.IMAP_e_Search)">
+            <summary>
+            Searhes specified folder messages which match to search criteria.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what messages info to get. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="e">IMAP search event data.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetFolders(System.String,System.Boolean)">
+            <summary>
+            Gets all available IMAP folders.
+            </summary>
+            <param name="userName">User name who's folders to get.</param>
+            <param name="includeSharedFolders">If true, shared folders are included.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetSubscribedFolders(System.String)">
+            <summary>
+            Gets subscribed IMAP folders.
+            </summary>
+            <param name="userName"></param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.SubscribeFolder(System.String,System.String)">
+            <summary>
+            Subscribes new IMAP folder.
+            </summary>
+            <param name="userName"></param>
+            <param name="folder"></param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UnSubscribeFolder(System.String,System.String)">
+            <summary>
+            UnSubscribes IMAP folder.
+            </summary>
+            <param name="userName"></param>
+            <param name="folder"></param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.CreateFolder(System.String,System.String,System.String)">
+            <summary>
+            Creates new IMAP folder.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what contains message to copy. For example: Inbox,Public Folders/Documnets .</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteFolder(System.String,System.String,System.String)">
+            <summary>
+            Deletes IMAP folder.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what to delete. For example: Inbox,Public Folders/Documnets .</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.RenameFolder(System.String,System.String,System.String,System.String)">
+            <summary>
+            Renames IMAP folder.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what to delete. For example: Trash,Public Folders/Documnets .</param>
+            <param name="newFolder">New folder name.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.FolderExists(System.String)">
+            <summary>
+            Gets if specified folder exists.
+            </summary>
+            <param name="folderName">Folder name which to check. Eg. UserName/Inbox,UserName/Inbox/subfolder</param>
+            <returns>Returns true if folder exists, otherwise false.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.FolderCreationTime(System.String,System.String)">
+            <summary>
+            Gets time when specified folder was created.
+            </summary>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what creation time to get. For example: Inbox,Public Folders/Documnets .</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetSharedFolderRoots">
+            <summary>
+            Gets shared folder root folders.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddSharedFolderRoot(System.String,System.Boolean,System.String,System.String,LumiSoft.MailServer.SharedFolderRootType_enum,System.String,System.String)">
+            <summary>
+            Add shared folder root.
+            </summary>
+            <param name="rootID">Root folder ID. Guid.NewID().ToString() is suggested.</param>
+            <param name="enabled">Specifies if root folder is enabled.</param>
+            <param name="folder">Folder name which will be visible to public.</param>
+            <param name="description">Description text.</param>
+            <param name="rootType">Specifies what type root folder is.</param>
+            <param name="boundedUser">User which to bound root folder.</param>
+            <param name="boundedFolder">Folder which to bound to public folder.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteSharedFolderRoot(System.String)">
+            <summary>
+            Deletes shard folders root folder.
+            </summary>
+            <param name="rootID">Root folder ID which to delete.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateSharedFolderRoot(System.String,System.Boolean,System.String,System.String,LumiSoft.MailServer.SharedFolderRootType_enum,System.String,System.String)">
+            <summary>
+            Updates shared folder root.
+            </summary>
+            <param name="rootID">Root Folder IF which to update.</param>
+            <param name="enabled">Specifies if root folder is enabled.</param>
+            <param name="folder">Folder name which will be visible to public.</param>
+            <param name="description">Description text.</param>
+            <param name="rootType">Specifies what type root folder is.</param>
+            <param name="boundedUser">User which to bound root folder.</param>
+            <param name="boundedFolder">Folder which to bound to public folder.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetFolderACL(System.String,System.String,System.String)">
+            <summary>
+            Gets specified folder ACL.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what ACL to get. For example: Inbox,Public Folders/Documnets .</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteFolderACL(System.String,System.String,System.String,System.String)">
+            <summary>
+            Deletes specified folder ACL for specified user.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what ACL to delete. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="userOrGroup">User or user group which ACL on specified folder to delete.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.SetFolderACL(System.String,System.String,System.String,System.String,LumiSoft.Net.IMAP.IMAP_Flags_SetType,LumiSoft.Net.IMAP.IMAP_ACL_Flags)">
+            <summary>
+            Sets specified folder ACL for specified user.
+            </summary>
+            <param name="accessingUser">User who accesses this method. 
+            User needs r permission to call this method or Exception is thrown. 
+            There is special user 'system' for which permission check is skipped.</param>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder what ACL to set. For example: Inbox,Public Folders/Documnets .</param>
+            <param name="userOrGroup">>User or user which group ACL set to specified folder.</param>
+            <param name="setType">Specifies how ACL flags must be stored (ADD,REMOVE,REPLACE).</param>
+            <param name="aclFlags">ACL flags.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetUserACL(System.String,System.String,System.String)">
+            <summary>
+            Gets what permissions specified user has to specified folder.
+            </summary>
+            <param name="folderOwnerUser">User who's folder it is.</param>
+            <param name="folder">Folder which ACL to get. For example Inbox,Public Folders.</param>
+            <param name="user">User name which ACL to get.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.CreateUserDefaultFolders(System.String)">
+            <summary>
+            Creates specified user default folders, if they don't exist already.
+            </summary>
+            <param name="userName">User name to who's default folders to create.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetUsersDefaultFolders">
+            <summary>
+            Gets users default folders.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddUsersDefaultFolder(System.String,System.Boolean)">
+            <summary>
+            Adds users default folder.
+            </summary>
+            <param name="folderName">Folder name.</param>
+            <param name="permanent">Spcifies if folder is permanent, user can't delete it.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteUsersDefaultFolder(System.String)">
+            <summary>
+            Deletes specified users default folder.
+            </summary>
+            <param name="folderName">Folder name.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetMailboxSize(System.String)">
+            <summary>
+            Gets specified user mailbox size.
+            </summary>
+            <param name="userName">User name.</param>
+            <returns>Returns mailbox size.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetRecycleBinSettings">
+            <summary>
+            Gets recycle bin settings.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateRecycleBinSettings(System.Boolean,System.Int32)">
+            <summary>
+            Updates recycle bin settings.
+            </summary>
+            <param name="deleteToRecycleBin">Specifies if deleted messages are store to recycle bin.</param>
+            <param name="deleteMessagesAfter">Specifies how old messages will be deleted.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetRecycleBinMessagesInfo(System.String,System.DateTime,System.DateTime)">
+            <summary>
+            Gets recycle bin messages info. 
+            </summary>
+            <param name="user">User who's recyclebin messages to get or null if all users messages.</param>
+            <param name="startDate">Messages from specified date. Pass DateTime.MinValue if not used.</param>
+            <param name="endDate">Messages to specified date. Pass DateTime.MinValue if not used.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetRecycleBinMessage(System.String)">
+            <summary>
+            Gets recycle bin message stream. NOTE: This method caller must take care of closing stream. 
+            </summary>
+            <param name="messageID">Message ID if of message what to get.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteRecycleBinMessage(System.String)">
+            <summary>
+            Deletes specified recycle bin message.
+            </summary>
+            <param name="messageID">Message ID.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.RestoreRecycleBinMessage(System.String)">
+            <summary>
+            Restores specified recycle bin message.
+            </summary>
+            <param name="messageID">Message ID.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetSecurityList">
+            <summary>
+            Gets security entries list.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddSecurityEntry(System.String,System.Boolean,System.String,LumiSoft.MailServer.Service_enum,LumiSoft.MailServer.IPSecurityAction_enum,System.Net.IPAddress,System.Net.IPAddress)">
+            <summary>
+            Adds new IP security entry.
+            </summary>
+            <param name="id">IP security entry ID.</param>
+            <param name="enabled">Specifies if IP security entry is enabled.</param>
+            <param name="description">IP security entry description text.</param>
+            <param name="service">Specifies service for what security entry applies.</param>
+            <param name="action">Specifies what action done if IP matches to security entry range.</param>
+            <param name="startIP">Range start IP.</param>
+            <param name="endIP">Range end IP.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteSecurityEntry(System.String)">
+            <summary>
+            Deletes security entry.
+            </summary>
+            <param name="id">IP security entry ID.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateSecurityEntry(System.String,System.Boolean,System.String,LumiSoft.MailServer.Service_enum,LumiSoft.MailServer.IPSecurityAction_enum,System.Net.IPAddress,System.Net.IPAddress)">
+            <summary>
+            Updates IP security entry.
+            </summary>
+            <param name="id">IP security entry ID.</param>
+            <param name="enabled">Specifies if IP security entry is enabled.</param>
+            <param name="description">IP security entry description text.</param>
+            <param name="service">Specifies service for what security entry applies.</param>
+            <param name="action">Specifies what action done if IP matches to security entry range.</param>
+            <param name="startIP">Range start IP.</param>
+            <param name="endIP">Range end IP.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetFilters">
+            <summary>
+            Gets filter list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.AddFilter(System.String,System.String,System.String,System.String,System.String,System.Int64,System.Boolean)">
+            <summary>
+            Adds new filter.
+            </summary>
+            <param name="filterID">Filter ID. Suggested value is Guid.NewGuid() .</param>
+            <param name="description">Filter description</param>
+            <param name="type">Filter type. Eg. ISmtpMessageFilter.</param>
+            <param name="assembly">Assembly with full location. Eg. C:\MailServer\Filters\filter.dll .</param>
+            <param name="className">Filter full class name, wih namespace. Eg. LumiSoft.MailServer.Fileters.Filter1 .</param>
+            <param name="cost">Filters are sorted by cost and proccessed with cost value. Smallest cost is proccessed first.</param>
+            <param name="enabled">Specifies if filter is enabled.</param>
+            <remarks>Throws exception if specified filter entry already exists.</remarks>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.DeleteFilter(System.String)">
+            <summary>
+            Deletes specified filter.
+            </summary>
+            <param name="filterID">FilterID of the filter which to delete.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateFilter(System.String,System.String,System.String,System.String,System.String,System.Int64,System.Boolean)">
+            <summary>
+            Updates specified filter.
+            </summary>		 
+            <param name="filterID">FilterID which to update.</param>
+            <param name="description">Filter description</param>
+            <param name="type">Filter type. Eg. ISmtpMessageFilter.</param>
+            <param name="assembly">Assembly with full location. Eg. C:\MailServer\Filters\filter.dll .</param>
+            <param name="className">Filter full class name, wih namespace. Eg. LumiSoft.MailServer.Fileters.Filter1 .</param>
+            <param name="cost">Filters are sorted by cost and proccessed with cost value. Smallest cost is proccessed first.</param>
+            <param name="enabled">Specifies if filter is enabled.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.GetSettings">
+            <summary>
+            Gets server settings.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.IMailServerApi.UpdateSettings(System.Data.DataRow)">
+            <summary>
+            Updates server settings.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:LumiSoft.MailServer.RouteAction_enum">
+            <summary>
+            Route actions.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.RouteAction_enum.RouteToMailbox">
+            <summary>
+            Routes message to local server user mailbox.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.RouteAction_enum.RouteToEmail">
+            <summary>
+            Routes message to email address.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.RouteAction_enum.RouteToHost">
+            <summary>
+            Routes message to destination host.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum">
+            <summary>
+            Specified when next rule is checked.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum.Always">
+            <summary>
+            Next rules is always checked.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum.IfMatches">
+            <summary>
+            Next rule is checked if last rule matches.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRule_CheckNextRule_enum.IfNotMatches">
+            <summary>
+            Next rule is checked is last rule don't match.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.ISmtpSenderFilter">
+            <summary>
+            SMTP server sender filter.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.ISmtpSenderFilter.Filter(System.String,LumiSoft.MailServer.IMailServerApi,LumiSoft.Net.SMTP.Server.SMTP_Session,System.String@)">
+            <summary>
+            Filters sender.
+            </summary>
+            <param name="from">Sender.</param>
+            <param name="api">Reference to server API.</param>
+            <param name="session">Reference to SMTP session.</param>
+            <param name="errorText">Filtering error text what is returned to client. ASCII text, 100 chars maximum.</param>
+            <returns>Returns true if sender is ok or false if rejected.</returns>
+        </member>
+        <member name="T:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection">
+            <summary>
+            IMAP messages info collection.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.Add(System.String,System.Int64,System.DateTime,System.Int64,LumiSoft.Net.IMAP.IMAP_MessageFlags)">
+            <summary>
+            Adds new message info to the collection.
+            </summary>
+            <param name="id">Message ID.</param>
+            <param name="uid">Message IMAP UID value.</param>
+            <param name="internalDate">Message store date.</param>
+            <param name="size">Message size in bytes.</param>
+            <param name="flags">Message flags.</param>
+            <returns>Returns added IMAp message info.</returns>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.Remove(LumiSoft.Net.IMAP.Server.IMAP_Message)">
+            <summary>
+            Removes specified IMAP message from the collection.
+            </summary>
+            <param name="message">IMAP message to remove.</param>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.ContainsUID(System.Int64)">
+            <summary>
+            Gets collection contains specified message with specified UID.
+            </summary>
+            <param name="uid">Message UID.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.IndexOf(LumiSoft.Net.IMAP.Server.IMAP_Message)">
+            <summary>
+            Gets index of specified message in the collection.
+            </summary>
+            <param name="message">Message indesx to get.</param>
+            <returns>Returns index of specified message in the collection or -1 if message doesn't belong to this collection.</returns>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.Clear">
+            <summary>
+            Removes all messages from the collection.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.GetWithFlags(LumiSoft.Net.IMAP.IMAP_MessageFlags)">
+            <summary>
+            Gets messages which has specified flags set.
+            </summary>
+            <param name="flags">Flags to match.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.GetEnumerator">
+            <summary>
+            Gets enumerator.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.Count">
+            <summary>
+            Gets number of messages in the collection.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_MessageCollection.Item(System.Int32)">
+            <summary>
+            Gets a IMAP_Message object in the collection by index number.
+            </summary>
+            <param name="index">An Int32 value that specifies the position of the IMAP_Message object in the IMAP_MessageCollection collection.</param>
+        </member>
+        <member name="T:LumiSoft.MailServer.wfrm_BuildInitString_base">
+            <summary>
+            Base class for API init sring builder froms.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.wfrm_BuildInitString_base.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.wfrm_BuildInitString_base.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.wfrm_BuildInitString_base.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.wfrm_BuildInitString_base.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.wfrm_BuildInitString_base.InitString">
+            <summary>
+            Gets or sets API init string.
+            Restuns built initstring or null if canceled.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.Net.IMAP.Server.IMAP_Message">
+            <summary>
+            IMAP message info.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_Message.#ctor(LumiSoft.Net.IMAP.Server.IMAP_MessageCollection,System.String,System.Int64,System.DateTime,System.Int64,LumiSoft.Net.IMAP.IMAP_MessageFlags)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="onwer">Owner collection.</param>
+            <param name="id">Message ID.</param>
+            <param name="uid">Message IMAP UID value.</param>
+            <param name="internalDate">Message store date.</param>
+            <param name="size">Message size in bytes.</param>
+            <param name="flags">Message flags.</param>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_Message.SetFlags(LumiSoft.Net.IMAP.IMAP_MessageFlags)">
+            <summary>
+            Sets message flags.
+            </summary>
+            <param name="flags">Message flags.</param>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.SequenceNo">
+            <summary>
+            Gets message 1 based sequence number in the collection. This property is slow, use with care, never use in big for loops !
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.ID">
+            <summary>
+            Gets message ID.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.UID">
+            <summary>
+            Gets message IMAP UID value.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.InternalDate">
+            <summary>
+            Gets message store date.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.Size">
+            <summary>
+            Gets message size in bytes.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.Flags">
+            <summary>
+            Gets message flags.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_Message.FlagsString">
+            <summary>
+            Gets message flags string. For example: "\DELETES \SEEN".
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.IPSecurityAction_enum">
+            <summary>
+            Specifiess IP security action.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.IPSecurityAction_enum.Allow">
+            <summary>
+            Allow access.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.IPSecurityAction_enum.Deny">
+            <summary>
+            Deny access.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.Filters.ISettingsUI">
+            <summary>
+            TODO: help !!! don't know how to commant it.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.Filters.ISettingsUI.GetUI">
+            <summary>
+            Gets settings UI window.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum">
+            <summary>
+            Specifies message itmes.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum.None">
+            <summary>
+            None.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum.Header">
+            <summary>
+            Message main header.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum.Envelope">
+            <summary>
+            IMAP ENVELOPE structure.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum.BodyStructure">
+            <summary>
+            IMAP BODYSTRUCTURE structure.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum.Message">
+            <summary>
+            Full message.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems">
+            <summary>
+            Provides data to event GetMessageItems.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems.#ctor(LumiSoft.Net.IMAP.Server.IMAP_Session,LumiSoft.Net.IMAP.Server.IMAP_Message,LumiSoft.Net.IMAP.Server.IMAP_MessageItems_enum)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="session">Reference to current IMAP session.</param>
+            <param name="messageInfo">Message info what message items to get.</param>
+            <param name="messageItems">Specifies message items what must be filled.</param>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems.Finalize">
+            <summary>
+            Default deconstructor.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems.Dispose">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems.Validate">
+            <summary>
+            Checks that all required data items are provided, if not throws exception.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems.Session">
+            <summary>
+            Gets reference to current IMAP session.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems.MessageInfo">
+            <summary>
+            Gets message info what message items to get.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems.MessageItems">
+            <summary>
+            Gets what message items must be filled.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems.CloseMessageStream">
+            <summary>
+            Gets or sets if message stream is closed automatically if all actions on it are completed.
+            Default value is true.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems.MessageStream">
+            <summary>
+            Gets or sets message stream. When setting this property Stream position must be where message begins.
+            Fill this property only if IMAP_MessageItems_enum.Message flag is specified.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems.MessageSize">
+            <summary>
+            Gets message size in bytes.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems.Header">
+            <summary>
+            Gets or sets message main header.
+            Fill this property only if IMAP_MessageItems_enum.Header flag is specified.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems.Envelope">
+            <summary>
+            Gets or sets IMAP ENVELOPE string.
+            Fill this property only if IMAP_MessageItems_enum.Envelope flag is specified.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems.BodyStructure">
+            <summary>
+            Gets or sets IMAP BODYSTRUCTURE string.
+            Fill this property only if IMAP_MessageItems_enum.BodyStructure flag is specified.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.Server.IMAP_eArgs_MessageItems.MessageExists">
+            <summary>
+            Gets or sets if message exists. Set this false, if message actually doesn't exist any more.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.Net.IMAP.IMAP_BODY_Entity">
+            <summary>
+            IMAP BODY mime entity info.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY_Entity.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY_Entity.Parse(System.String)">
+            <summary>
+            Parses entity and it's child entities.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ParentEntity">
+            <summary>
+            Gets parent entity of this entity. If this entity is top level, then this property returns null.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ChildEntities">
+            <summary>
+            Gets child entities. This property is available only if ContentType = multipart/... .
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentType">
+            <summary>
+            Gets header field "<b>Content-Type:</b>" value.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentID">
+            <summary>
+            Gets header field "<b>Content-ID:</b>" value. Returns null if value isn't set.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentDescription">
+            <summary>
+            Gets header field "<b>Content-Description:</b>" value. Returns null if value isn't set.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentTransferEncoding">
+            <summary>
+            Gets header field "<b>Content-Transfer-Encoding:</b>" value.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentSize">
+            <summary>
+            Gets content encoded data size. NOTE: This property is available only for non-multipart contentype !
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY_Entity.ContentLines">
+            <summary>
+            Gets content encoded data lines. NOTE: This property is available only for text/xxx content type !
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.API_Utlis">
+            <summary>
+            Provides API implementation helper methods.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.API_Utlis.NormalizeFolder(System.String)">
+            <summary>
+            Normalizes folder value. Replaces \ to /, removes duplicate //, removes / from folder start and end.
+            </summary>
+            <param name="folder">Folder to normalize.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.API_Utlis.PathFix(System.String)">
+            <summary>
+            Fixes path separator, replaces / \ with platform separator char.
+            </summary>
+            <param name="path">Path to fix.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.API_Utlis.DirectoryExists(System.String)">
+            <summary>
+            Checks if directory exists. If linux, checks with case-insenstively (linux is case-sensitive). 
+            Returns actual dir (In linux it may differ from requested directory, because of case-sensitivity.)
+            or null if directory doesn't exist.
+            </summary>
+            <param name="dirName">Directory to check.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.API_Utlis.EnsureFolder(System.String)">
+            <summary>
+            Ensures that specified folder exists, if not it will be created.
+            Returns actual dir (In linux it may differ from requested directory, because of case-sensitivity.).
+            </summary>
+            <param name="folder">Folder name with path.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.API_Utlis.FileExists(System.String)">
+            <summary>
+            Checks if file exists. If linux, checks with case-insenstively (linux is case-sensitive). 
+            Returns actual file (In linux it may differ from requested file, because of case-sensitivity.)
+            or null if file doesn't exist.
+            </summary>
+            <param name="fileName">File to check.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.API_Utlis.StreamCopy(System.IO.Stream,System.IO.Stream)">
+            <summary>
+            Copies all data from source stream to destination stream.
+            Copy starts from source stream current position and will be copied to the end of source stream.
+            </summary>
+            <param name="source">Source stream.</param>
+            <param name="destination">Destination stream.</param>
+            <returns>Returns number of bytes copied.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.API_Utlis.CreateSettingsSchema(System.Data.DataSet)">
+            <summary>
+            Creates system settings schema.
+            </summary>
+            <param name="ds">DataSet where to create schema.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.API_Utlis.GenerateBadMessage(System.IO.Stream)">
+            <summary>
+            Generates message parsing failed message.
+            </summary>
+            <param name="message">Message stream.</param>
+            <returns>Returns message parsing failed message.</returns>
+            <exception cref="T:System.ArgumentNullException">Is raised when <b>message</b> is null reference.</exception>
+        </member>
+        <member name="T:LumiSoft.Net.IMAP.IMAP_BODY">
+            <summary>
+            IMAP BODYSTRUCTURE. Defined in RFC 3501 7.4.2.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY.ConstructBodyStructure(LumiSoft.Net.Mail.Mail_Message,System.Boolean)">
+            <summary>
+            Constructs FETCH BODY and BODYSTRUCTURE response.
+            </summary>
+            <param name="message">Mail message.</param>
+            <param name="bodystructure">Specifies if to construct BODY or BODYSTRUCTURE.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY.ConstructParts(LumiSoft.Net.MIME.MIME_Entity,System.Boolean)">
+            <summary>
+            Constructs specified entity and it's childentities bodystructure string.
+            </summary>
+            <param name="entity">Mime entity.</param>
+            <param name="bodystructure">Specifies if to construct BODY or BODYSTRUCTURE.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY.Parse(System.String)">
+            <summary>
+            Parses IMAP BODYSTRUCTURE from body structure string.
+            </summary>
+            <param name="bodyStructureString">Body structure string</param>
+        </member>
+        <member name="M:LumiSoft.Net.IMAP.IMAP_BODY.GetEntities(LumiSoft.Net.IMAP.IMAP_BODY_Entity[],System.Collections.Generic.List{LumiSoft.Net.IMAP.IMAP_BODY_Entity})">
+            <summary>
+            Gets mime entities, including nested entries. 
+            </summary>
+            <param name="entities"></param>
+            <param name="allEntries"></param>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY.MainEntity">
+            <summary>
+            Gets main entity.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY.Entities">
+            <summary>
+            Gets all entities contained in BODYSTRUCTURE, including child entities.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IMAP.IMAP_BODY.Attachmnets">
+            <summary>
+            Gets attachment entities. Entity is considered as attachmnet if:<p/>
+                *) Content-Type: name = "" is specified  (old RFC 822 message)<p/>
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.ArgsValidator">
+            <summary>
+            Provides mehtods for validating values.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateFolder(System.String)">
+            <summary>
+            Validates folder. Folder may contains only printable chars and not:
+            : * ? " &lt; &gt; | % . Throws Exception if folder isn't valid.
+            </summary>
+            <param name="folder">Folder to validate.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateSharedFolderRoot(System.String)">
+            <summary>
+            Validates shared root folder name value.
+            </summary>
+            <param name="folder"></param>
+        </member>
+        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateUserName(System.String)">
+            <summary>
+            Validates user name value, check that doesn't contain invalid chars. User name may contains only 
+            printable chars and not: : * ? " &lt; &gt; | % . Throws Exception if user name isn't valid.
+            </summary>
+            <param name="userName">User name value to validate.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateNotNull(System.Object)">
+            <summary>
+            Requires value to be not null. Throws Exception if value is null.
+            </summary>
+            <param name="val">Value to check.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateDomainName(System.String)">
+            <summary>
+            Validates domain name.
+            </summary>
+            <param name="domainName"></param>
+        </member>
+        <member name="M:LumiSoft.MailServer.ArgsValidator.ValidateEmail(System.String)">
+            <summary>
+            Validates email address, check that won't contain illegal chars. 
+            Throws Exception if email isn't valid.
+            </summary>
+            <param name="email">Email to check.</param>
+        </member>
+        <member name="M:LumiSoft.MailServer.ArgsValidator.ContainsChars(System.String,System.Char[])">
+            <summary>
+            Gets if specified text contains any of the specified chars.
+            </summary>
+            <param name="text">Text to check.</param>
+            <param name="chars">Chars to check.</param>
+            <returns>Returns true if specified text contains any of the chars.</returns>
+        </member>
+        <member name="M:LumiSoft.MailServer.ArgsValidator.IsPrintableCharsOnly(System.String)">
+            <summary>
+            Gets if all chars in text are printable chars (Not CR,LF,SP,TAB,...). 
+            Chars 0 - 31 are ASCII controls characters and not allowed.
+            </summary>
+            <param name="text">Text to check.</param>
+            <returns>Returns true is all chars are printable chars.</returns>
+        </member>
+        <member name="T:LumiSoft.MailServer.InsufficientPermissionsException">
+            <summary>
+            This exception is thrown when not enough permissions to complete operation.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.InsufficientPermissionsException.#ctor(System.String)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="errorText">Error text.</param>
+        </member>
+        <member name="T:LumiSoft.MailServer.SharedFolderRootType_enum">
+            <summary>
+            Specifies shared folder root folder type.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.SharedFolderRootType_enum.BoundedRootFolder">
+            <summary>
+            Root folder is bounded to some user account.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.SharedFolderRootType_enum.UsersSharedFolder">
+            <summary>
+            Users shared folders will be added into this root folder.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.UserPermissions_enum">
+            <summary>
+            User permission flags.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.UserPermissions_enum.None">
+            <summary>
+            None of the permissions.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.UserPermissions_enum.All">
+            <summary>
+            All permissions.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.UserPermissions_enum.POP3">
+            <summary>
+            POP3 access.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.UserPermissions_enum.IMAP">
+            <summary>
+            IMAP access.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.UserPermissions_enum.Relay">
+            <summary>
+            Can relay. This permission is used only if connected user IP doesn't have relay permission.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.UserPermissions_enum.SIP">
+            <summary>
+            SIP access.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.SharedFolderRoot">
+            <summary>
+            Shared Folders root folder.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.SharedFolderRoot.#ctor(System.String,System.Boolean,System.String,System.String,LumiSoft.MailServer.SharedFolderRootType_enum,System.String,System.String)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="rootID">Root Folder ID.</param>
+            <param name="enabled">Specifies if root folder is enabled.</param>
+            <param name="folderName">Root folder visible name.</param>
+            <param name="description">Description text.</param>
+            <param name="rootType">Specifies what type root folder is.</param>
+            <param name="boundedUser">User which to bound root folder.</param>
+            <param name="boundedFolder">BoundingUser folder name which to bound root folder.</param>
+        </member>
+        <member name="P:LumiSoft.MailServer.SharedFolderRoot.RootID">
+            <summary>
+            Gets Root Folder ID.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.SharedFolderRoot.Enabled">
+            <summary>
+            Gets if root folder is enabled.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.SharedFolderRoot.FolderName">
+            <summary>
+            Gets root folder name. For example "Public Folders".
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.SharedFolderRoot.Description">
+            <summary>
+            Gets root folder description.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.SharedFolderRoot.RootType">
+            <summary>
+            Gets what type root folder it.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.SharedFolderRoot.BoundedUser">
+            <summary>
+            Gets user name which to bound root folder.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.MailServer.SharedFolderRoot.BoundedFolder">
+            <summary>
+            Gets BoundedUser folder name which to bound root folder.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.ISmtpUserMessageFilter">
+            <summary>
+            SMTP server user mail message filter.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.ISmtpUserMessageFilter.Filter(System.IO.MemoryStream,System.IO.MemoryStream@,System.String,System.String,LumiSoft.MailServer.IMailServerApi,LumiSoft.Net.SMTP.Server.SMTP_Session,System.String@,System.String@)">
+            <summary>
+            Filters user message.
+            </summary>
+            <param name="messageStream">Message stream which to filter.</param>
+            <param name="filteredStream">Filtered stream.</param>
+            <param name="userName">User name.</param>
+            <param name="to">User's to address.</param>
+            <param name="api">Reference to server API.</param>
+            <param name="session">Reference to SMTP session.</param>
+            <param name="storeFolder">Folder to store message.</param>
+            <param name="errorText">Filtering error text. ASCII text, 100 chars maximum.</param>
+        </member>
+        <member name="T:LumiSoft.MailServer.CompareSource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.CompareSource.HeaderField">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.CompareSource.BodyText">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.CompareSource.BodyHtml">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.CompareSource.MimeEntry">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.CompareType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.CompareType.AstericPattern">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.CompareType.Equal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.CompareType.NotEqual">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.CompareType.Regex">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.CompareType.Md5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.MatchAction">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.MatchAction.AutoResponse">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.MatchAction.Forward">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.MatchAction.StoreToFolder">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.GlobalMessageRuleAction_enum">
+            <summary>
+            Specifies match action done when global message rule is matched.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.AutoResponse">
+            <summary>
+            AutoResponse is sent to specified recipient.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.DeleteMessage">
+            <summary>
+            Deletes message.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.ForwardToEmail">
+            <summary>
+            Message is forwarded to specified email.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.ForwardToHost">
+            <summary>
+            Message is forwarded to specified host.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.StoreToDiskFolder">
+            <summary>
+            Message is stored to specified disk folder.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.ExecuteProgram">
+            <summary>
+            Specified program is executed.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.StoreToIMAPFolder">
+            <summary>
+            Stores message to specified message folder(for example: Junk). This will take effect only for local recipients only !
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.AddHeaderField">
+            <summary>
+            Appends specified header field to message.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.RemoveHeaderField">
+            <summary>
+            Removes specified header field or fields if there are multiple of them.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.SendErrorToClient">
+            <summary>
+            Sends error to currently connected client. NOTE: Error text may contain ASCII printable chars only and maximum length is 500.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.StoreToFTPFolder">
+            <summary>
+            Stores message to specified FTP server folder.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.PostToNNTPNewsGroup">
+            <summary>
+            Posts message to specified NNTP newsgroup.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.GlobalMessageRuleAction_enum.PostToHTTP">
+            <summary>
+            Posts message to specified page via HTTP.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.Service_enum">
+            <summary>
+            Specifies service
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.Service_enum.SMTP">
+            <summary>
+            SMTP.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.Service_enum.POP3">
+            <summary>
+            POP3.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.Service_enum.IMAP">
+            <summary>
+            IMAP.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.Service_enum.Relay">
+            <summary>
+            SMTP Relay.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.FilterResult">
+            <summary>
+            Specifies filtering result.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.FilterResult.Store">
+            <summary>
+            Store messge and reply Ok to client.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.FilterResult.DontStore">
+            <summary>
+            Don't store messge, but reply Ok to client.
+            </summary>
+        </member>
+        <member name="F:LumiSoft.MailServer.FilterResult.Error">
+            <summary>
+            Send filtering error to client.
+            </summary>
+        </member>
+        <member name="T:LumiSoft.MailServer.ISmtpMessageFilter">
+            <summary>
+            SMTP server mail message filter.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.MailServer.ISmtpMessageFilter.Filter(System.IO.Stream,System.IO.Stream@,System.String,System.String[],LumiSoft.MailServer.IMailServerApi,LumiSoft.Net.SMTP.Server.SMTP_Session,System.String@)">
+            <summary>
+            Filters message.
+            </summary>
+            <param name="messageStream">Message stream which to filter.</param>
+            <param name="filteredStream">Filtered stream.</param>
+            <param name="sender">Senders email address.</param>
+            <param name="recipients">Recipients email addresses.</param>
+            <param name="api">Access to server API.</param>
+            <param name="session">Reference to SMTP session.</param>
+            <param name="errorText">Filtering error text what is returned to client. ASCII text, 500 chars maximum.</param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <Users>
+    <UserID>bf3d52d1-ab1c-40ba-a008-14303e19a07b</UserID>
+    <FullName>Test</FullName>
+    <UserName>test</UserName>
+    <Password>test</Password>
+    <Description>a</Description>
+    <DomainName>test.lumisoft.ee</DomainName>
+    <Mailbox_Size>10</Mailbox_Size>
+    <Enabled>true</Enabled>
+    <AllowRelay>true</AllowRelay>
+  </Users>
+</NewDataSet>

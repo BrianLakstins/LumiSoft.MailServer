@@ -1,0 +1,20 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=MailServer_ENG.chm
+Contents file=Table of Contents.hhc
+Default Window=QQQ
+Default topic=Start.htm
+Display compile progress=No
+Full-text search=Yes
+Language=0x409 English (United States)
+Title=LumiSoft Mail Server Help
+
+[WINDOWS]
+QQQ="LumiSoft Mail Server Help","Table of Contents.hhc",,"Start.htm","Start.htm",,,,,0x2520,200,0xc,[0,0,800,600],,,,,,,0
+
+
+[FILES]
+Start.htm
+
+[INFOTYPES]
+

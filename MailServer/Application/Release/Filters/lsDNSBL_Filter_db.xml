@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <General>
+    <CheckHelo>False</CheckHelo>
+  </General>
+  <BlackListSettings>
+    <ErrorText>Your IP is in server black list !</ErrorText>
+  </BlackListSettings>
+  <Servers>
+    <Cost>632883909898125000</Cost>
+    <Server>sbl-xbl.spamhaus.org</Server>
+    <DefaultRejectionText />
+  </Servers>
+  <Servers>
+    <Cost>632883909898125000</Cost>
+    <Server>zen.spamhaus.org</Server>
+    <DefaultRejectionText />
+  </Servers>
+  <Servers>
+    <Cost>633004126833437500</Cost>
+    <Server>bl.spamcop.net</Server>
+    <DefaultRejectionText />
+  </Servers>
+  <Servers>
+    <Cost>633004783077500000</Cost>
+    <Server>dnsbl.sorbs.net</Server>
+    <DefaultRejectionText />
+  </Servers>
+</NewDataSet>

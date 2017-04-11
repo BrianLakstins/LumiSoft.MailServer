@@ -1,0 +1,39 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <IPSecurity>
+    <ID>72d55b4c-975d-48ab-ab10-22b9c4fed7b7</ID>
+    <Enabled>true</Enabled>
+    <Description>Allow IPv4 SMTP access to everyone</Description>
+    <Service>1</Service>
+    <Action>1</Action>
+    <StartIP>0.0.0.0</StartIP>
+    <EndIP>255.255.255.255</EndIP>
+  </IPSecurity>
+  <IPSecurity>
+    <ID>efdf42cd-6833-40fe-8cbe-938c9d03d3c8</ID>
+    <Enabled>true</Enabled>
+    <Description>Allow IPv4 POP3 access to everyone</Description>
+    <Service>2</Service>
+    <Action>1</Action>
+    <StartIP>0.0.0.0</StartIP>
+    <EndIP>255.255.255.255</EndIP>
+  </IPSecurity>
+  <IPSecurity>
+    <ID>ef6fba7b-6f13-40cb-b2fc-a49ea6a1c082</ID>
+    <Enabled>true</Enabled>
+    <Description>Allow IPv4 IMAP access to everyone</Description>
+    <Service>3</Service>
+    <Action>1</Action>
+    <StartIP>0.0.0.0</StartIP>
+    <EndIP>255.255.255.255</EndIP>
+  </IPSecurity>
+  <IPSecurity>
+    <ID>e85c0d3d-0cb3-44ed-9d49-38d777e19556</ID>
+    <Enabled>false</Enabled>
+    <Description>Allow IPv4 Relay  to localhost</Description>
+    <Service>4</Service>
+    <Action>1</Action>
+    <StartIP>127.0.0.1</StartIP>
+    <EndIP>127.0.0.1</EndIP>
+  </IPSecurity>
+</NewDataSet>

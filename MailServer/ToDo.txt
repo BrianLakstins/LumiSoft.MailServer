@@ -1,0 +1,34 @@
+
+       	           
+*) Task scheduler. For example delete messages older than,send notification when quotta starts exceeding,
+   Backup server, ... .
+*) New: Allow to exclude mailing list members.
+   	For example if mailing list member is another mailing list, but you want to exclude 1
+	   email from it.
+	      Members:
+        	anotherMailingList
+	        !addressToExclude
+
+		! is exclude operator
+
+*) New fetch server, multi session fetch, + allow to start fetch manually. 
+
+*) Web Admin, Good web admin based on User API and no Windows.Forms UI ? 
+
+*) Create up to date Help.
+*) Create install (.NET Windows.Forms app)
+
+
+
+//--- End of Version 1.0 planned features ---------------------------------------------------------------------------
+
+
+                       
+             
+
+
+
+
+
+
+

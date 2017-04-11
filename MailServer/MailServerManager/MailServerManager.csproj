@@ -1,0 +1,437 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{073CB522-1881-412E-8359-0F31702E2CE3}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>MailServerManager</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>LumiSoft.MailServer.UI</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>LumiSoft.MailServer.UI.MainX</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\Application\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\Application\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.6.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942" />
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.0.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL" />
+    <Reference Include="LumiSoft.Net">
+      <Name>LumiSoft.Net</Name>
+      <HintPath>..\Application\Debug\LumiSoft.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <Reference Include="UserAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.ico" />
+    <EmbeddedResource Include="Resources\ssl.ico" />
+    <EmbeddedResource Include="Resources\warning.ico" />
+    <EmbeddedResource Include="Resources\server.ico" />
+    <EmbeddedResource Include="Resources\save.ico" />
+    <EmbeddedResource Include="Resources\write.ico" />
+    <EmbeddedResource Include="Resources\bold.ico" />
+    <EmbeddedResource Include="Resources\fontbackcolor.ico" />
+    <EmbeddedResource Include="Resources\fontcolor.ico" />
+    <EmbeddedResource Include="Resources\italic.ico" />
+    <EmbeddedResource Include="Resources\underline.ico" />
+    <EmbeddedResource Include="Resources\restore.ico" />
+    <EmbeddedResource Include="Resources\recyclebin16.ico" />
+    <EmbeddedResource Include="Resources\refresh.ico" />
+    <EmbeddedResource Include="Resources\message16.ico" />
+    <EmbeddedResource Include="Resources\message.ico" />
+    <EmbeddedResource Include="Resources\viewmessages.ico" />
+    <EmbeddedResource Include="Resources\filter32.ico" />
+    <EmbeddedResource Include="Resources\ruleaction.ico" />
+    <EmbeddedResource Include="Resources\checksyntax.ico" />
+    <EmbeddedResource Include="Resources\domain32.ico" />
+    <EmbeddedResource Include="Resources\userinfo.ico" />
+    <EmbeddedResource Include="Resources\addressing.ico" />
+    <EmbeddedResource Include="Resources\rule.ico" />
+    <EmbeddedResource Include="Resources\down.ico" />
+    <EmbeddedResource Include="Resources\up.ico" />
+    <EmbeddedResource Include="Resources\remoteserver32.ico" />
+    <EmbeddedResource Include="Resources\share32.ico" />
+    <EmbeddedResource Include="Resources\connect32.ico" />
+    <EmbeddedResource Include="Resources\security32.ico" />
+    <EmbeddedResource Include="Resources\folder32.ico" />
+    <EmbeddedResource Include="Resources\about.ico" />
+    <EmbeddedResource Include="Resources\forum.ico" />
+    <EmbeddedResource Include="Resources\help.ico" />
+    <EmbeddedResource Include="Resources\connect.ico" />
+    <EmbeddedResource Include="Resources\exit.ico" />
+    <EmbeddedResource Include="Resources\recyclebin.ico" />
+    <EmbeddedResource Include="Resources\server_running.ico" />
+    <EmbeddedResource Include="Resources\server_stopped.ico" />
+    <EmbeddedResource Include="Resources\backup.ico" />
+    <EmbeddedResource Include="Resources\error.jpg" />
+    <EmbeddedResource Include="Resources\security_disabled.ico" />
+    <EmbeddedResource Include="Resources\delete.ico" />
+    <EmbeddedResource Include="Resources\edit.ico" />
+    <EmbeddedResource Include="Resources\add.ico" />
+    <EmbeddedResource Include="Resources\authentication.ico" />
+    <EmbeddedResource Include="Resources\system.ico" />
+    <EmbeddedResource Include="Resources\services.ico" />
+    <EmbeddedResource Include="Resources\servers.ico" />
+    <EmbeddedResource Include="Resources\logging.ico" />
+    <EmbeddedResource Include="Resources\error.ico" />
+    <EmbeddedResource Include="Resources\properties.ico" />
+    <EmbeddedResource Include="Resources\queue.ico" />
+    <EmbeddedResource Include="Resources\acl.ico" />
+    <EmbeddedResource Include="Resources\folders.ico" />
+    <EmbeddedResource Include="Resources\security.ico" />
+    <EmbeddedResource Include="Resources\filter.ico" />
+    <EmbeddedResource Include="Resources\filter_disabled.ico" />
+    <EmbeddedResource Include="Resources\mailinglist.ico" />
+    <EmbeddedResource Include="Resources\mailinglist_disabled.ico" />
+    <EmbeddedResource Include="Resources\messagerule.ico" />
+    <EmbeddedResource Include="Resources\messagerule_disabled.ico" />
+    <EmbeddedResource Include="Resources\domain.ico" />
+    <EmbeddedResource Include="Resources\rootfolder.ico" />
+    <EmbeddedResource Include="Resources\rootfolder_disabled.ico" />
+    <EmbeddedResource Include="Resources\folder.ico" />
+    <EmbeddedResource Include="Resources\group_disabled.ico" />
+    <EmbeddedResource Include="Resources\user.ico" />
+    <EmbeddedResource Include="Resources\user_disabled.ico" />
+    <EmbeddedResource Include="Resources\group.ico" />
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\ToolBarRendererEx.cs" />
+    <Compile Include="Controls\UI_Utils.cs" />
+    <Compile Include="Controls\wctrl_Notification.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\WFrame.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\WLineGraph.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\WListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\WRichEditEx.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\WTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ConvertEx.cs" />
+    <None Include="Tmp\wfrm_EditText.cs">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="Forms\wfrm_Compose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_EventsAndLogs_Logs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Folders_RecycleBin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Folders_UsersDefaultFolders_Folder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_LogViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Monitoring_SipRegistrations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Monitoring_SipRegistration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Monitoring_SIP_Calls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Server_Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_se_FilterType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_se_VirtualServerAPI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_System_Backup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_System_General.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_System_ServerReturnMessages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_System_Services_SIP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_System_Services_SIP_Gateway.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_System_SmartHost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_sys_CreateCertificate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_sys_Error.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_UserMessageRule_Action.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_ConnectToServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_EventsAndLogs_Events.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Domains.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Domains_Domain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_EventsAndLogs_Event.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Filters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Filters_Filter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Monitoring_Sessions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_MailingList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Queues_IncomingSMTP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Queues_OutgoingSMTP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Routing_Route.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Routing_Routes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Security_IPSecurity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Security_IPSecurityEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_se_UserFolder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_se_UserOrGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_SharedFolders_RootFolder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_SharedFolders_RootFolders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <None Include="Tmp\wfrm_SharedFolders_UserFolders.cs">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="Forms\WComboBoxItem.cs" />
+    <Compile Include="Forms\wfrm_User_FolderMessages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_User_FolderProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_User_Recyclebin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <None Include="Tmp\wfrm_User_SaveMessage.cs">
+      <SubType>Form</SubType>
+    </None>
+    <Compile Include="Forms\wfrm_utils_BackupMessages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_utils_MessagesTransferer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_VirtualServers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_VirtualServers_VirtualServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_GlobalMessageRule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_GlobalMessageRules.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_GlobalMessageRule_Action.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_GlobalMessageRule_Action_Compose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_System_Authentication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_System_Logging.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_System_Services.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_System_Services_FetchPOP3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_System_Services_IMAP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_System_Services_POP3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_System_Services_Relay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_System_Services_SMTP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_sys_BindInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_sys_Folder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_UsersAndGroups_Group.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_UsersAndGroups_Groups.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_UsersAndGroups_User.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_UsersAndGroups_Users.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_User_MessageRule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\WRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GlobalMessageRuleProcessor.cs" />
+    <Compile Include="ISettingsUI.cs" />
+    <Compile Include="MainX.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_User_RemoteServers_Server.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Resources\ResManager.cs" />
+    <Compile Include="Forms\wfrm_MailingLists.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\wfrm_Folders_UsersDefaultFolders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SCore.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="_Junk\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

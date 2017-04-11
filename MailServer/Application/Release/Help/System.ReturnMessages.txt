@@ -1,0 +1,49 @@
+
+
+Html Help TODO:
+
+
+Possible variables in subject and bodytext.
+
+//--- System variables
+<#sys.datetime("format")> - Current date time with user specified format.
+                          - Example: dd.MM.yyyy HH:mm:ss
+
+                          - d/dd      -> The day of the month.
+                                    d  - Single-digit days will not have a leading zero. 
+                                   dd  - Single-digit days will have a leading zero.
+                          - M/MM      -> The numeric month.
+                                    M  - Single-digit months will not have a leading zero. 
+                                   MM  - Single-digit months will have a leading zero. 
+                          - yy/yyyy   -> current year.
+                                   yy -> The year without the century. If the year without the century is less than 10, 
+                                         the year is displayed with a leading zero. 
+                                 yyyy -  Normal four digit year.
+                          - h/hh/H/HH -> Current hour.
+                                    h -  The hour in a 12-hour clock. Single-digit hours will not have a leading zero.
+                                   hh -  The hour in a 12-hour clock. Single-digit hours will have a leading zero.
+                                    H -  The hour in a 24-hour clock. Single-digit hours will not have a leading zero.
+                                   HH -  The hour in a 24-hour clock. Single-digit hours will have a leading zero. 
+                          - tt        -  The AM/PM designator.
+                          - m/mm      -> current minute.
+                                    m -  Single-digit minutes will not have a leading zero. 
+                                   mm -  Single-digit minutes will have a leading zero.  
+                          - s/ss     -> Current second.
+                                    s -  Single-digit seconds will not have a leading zero. 
+                                   ss -  Single-digit seconds will have a leading zero.
+                          - zzz       -  The full time zone offset ("+" or "-" followed by the hour and minutes). 
+                                         Single-digit hours and minutes will have leading zeros. For example, Pacific Standard Time is "-08:00". 
+
+//--- Relay variables
+<#relay.hostname>          - Relay host name.
+<#relay.undelivered_after> - Specifies after how many hours server will try to deliver message.
+<#relay.error>             - Error why relay failed.
+<#relay.session_id>        - Relay session ID.
+<#relay.to>                - Relay message destination recipient email address.
+<#relay.from>              - Original sender email address.
+
+//--- Message variables
+<#message.bodytext>        - Message body text.
+<#message.header["Name:"]> - Specified header field. If there are multiple header fields with same name, only first is taken.
+
+

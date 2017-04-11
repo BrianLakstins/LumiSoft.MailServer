@@ -1,0 +1,94 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <Domains>
+    <DomainID>4c8715f3-3153-4e44-b1ce-d3fd6ef6196f</DomainID>
+    <DomainName>test.lumisoft.ee</DomainName>
+    <Description>test domain</Description>
+  </Domains>
+  <Users>
+    <UserID>bf3d52d1-ab1c-40ba-a008-14303e19a07b</UserID>
+    <FullName>Test</FullName>
+    <UserName>test</UserName>
+    <Password>test</Password>
+    <Description>a</Description>
+    <DomainName>test.lumisoft.ee</DomainName>
+    <Mailbox_Size>10</Mailbox_Size>
+    <Enabled>true</Enabled>
+    <AllowRelay>true</AllowRelay>
+  </Users>
+  <UserAddresses>
+    <AddressID>ada1</AddressID>
+    <UserID>bf3d52d1-ab1c-40ba-a008-14303e19a07b</UserID>
+    <Address>test@test.lumisoft.ee</Address>
+  </UserAddresses>
+  <UserRemoteServers>
+    <ServerID>fa616f7a-28e0-40c4-8deb-fd4e68f26a35</ServerID>
+    <UserID>bf3d52d1-ab1c-40ba-a008-14303e19a07b</UserID>
+    <RemoteServer>test</RemoteServer>
+    <RemotePort>110</RemotePort>
+    <RemoteUserName>test</RemoteUserName>
+    <RemotePassword>test</RemotePassword>
+  </UserRemoteServers>
+  <MailingLists>
+    <MailingListID>3b9ae654-6221-4ec5-a57c-2bc5d212b505</MailingListID>
+    <DomainName>test.lumisoft.ee</DomainName>
+    <MailingListName>testall@test.lumisoft.ee</MailingListName>
+    <Description>dhhd</Description>
+    <IsPublic>True</IsPublic>
+  </MailingLists>
+  <MailingListAddresses>
+    <AddressID>sdgd3553</AddressID>
+    <MailingListID>3b9ae654-6221-4ec5-a57c-2bc5d212b505</MailingListID>
+    <Address>test@test.lumisoft.ee</Address>
+  </MailingListAddresses>
+  <Security_List>
+    <SecurityID>6136e6a1-2069-4264-8bcf-bfa721b4c83e</SecurityID>
+    <Description>Allow SMTP access to everyone</Description>
+    <Protocol>SMTP</Protocol>
+    <Type>IP Range</Type>
+    <Action>Allow</Action>
+    <Content>0.0.0.0-255.255.255.255</Content>
+    <StartIP>0</StartIP>
+    <EndIP>255255255255</EndIP>
+  </Security_List>
+  <Security_List>
+    <SecurityID>6136e6a1-2069-4264-8bcf-bfa721b4c83a</SecurityID>
+    <Description>Allow POP3 access to everyone</Description>
+    <Protocol>POP3</Protocol>
+    <Type>IP Range</Type>
+    <Action>Allow</Action>
+    <Content>0.0.0.0-255.255.255.255</Content>
+    <StartIP>0</StartIP>
+    <EndIP>255255255255</EndIP>
+  </Security_List>
+  <Security_List>
+    <SecurityID>6136e6a1-2069-4264-8bcf-bfa721b4c832</SecurityID>
+    <Description>Allow IMAP access to everyone</Description>
+    <Protocol>IMAP</Protocol>
+    <Type>IP Range</Type>
+    <Action>Allow</Action>
+    <Content>0.0.0.0-255.255.255.255</Content>
+    <StartIP>0</StartIP>
+    <EndIP>255255255255</EndIP>
+  </Security_List>
+  <Security_List>
+    <SecurityID>6136e6a1-2069-4264-8bcf-bfa721b4c83b</SecurityID>
+    <Description>Allow relay to lan</Description>
+    <Protocol>SMTP</Protocol>
+    <Type>IP Range</Type>
+    <Action>Allow Relay</Action>
+    <Content>192.168.1.1-192.168.1.100</Content>
+    <StartIP>192168001001</StartIP>
+    <EndIP>192168001100</EndIP>
+  </Security_List>
+  <Security_List>
+    <SecurityID>6d4ec76a-80d4-433f-b41f-ad2e04e2bfa7</SecurityID>
+    <Description>Allow relay to localhost</Description>
+    <Protocol>SMTP</Protocol>
+    <Type>IP</Type>
+    <Action>Allow Relay</Action>
+    <Content>127.0.0.1</Content>
+    <StartIP>127000000001</StartIP>
+    <EndIP>127000000001</EndIP>
+  </Security_List>
+</NewDataSet>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="pgsql_API">
+</Property><Property Name="Solution File" Value="D:\LumiSoft\MailServer\ServerAPI\API_pgsql\pgsql_API.sln">
+</Property><Property Name="Date" Value="12. detsember 2007. a.">
+</Property><Property Name="Time" Value="17:28">
+</Property></Properties><Event ErrorLevel="0" Project="pgsql_API" Source="pgsql_API.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="pgsql_API" Source="pgsql_API.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="pgsql_API.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="pgsql_API.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="pgsql_API" Source="pgsql_API.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

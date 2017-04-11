@@ -1,0 +1,125 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DDCFD9E8-1F9D-4181-9122-4E4B77E3CAD7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>lsMailserver_Install</RootNamespace>
+    <AssemblyName>lsMailserver_Install</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frm_API_UI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IValidateInstallUI.cs" />
+    <Compile Include="_frm_Dummy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_frm_Dummy.Designer.cs">
+      <DependentUpon>_frm_Dummy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_InstallationLocation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_InstallUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_LicenseAgreement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainX.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="_frm_Dummy.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>_frm_Dummy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Files\Help\MailServer_ENG.chm" />
+    <EmbeddedResource Include="Files\Backup\default_data.bcp" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Files\lsMailServer.exe" />
+    <EmbeddedResource Include="Files\LumiSoft.MailServerAPI.dll" />
+    <EmbeddedResource Include="Files\LumiSoft.Net.dll" />
+    <EmbeddedResource Include="Files\LumiSoft.UI.dll" />
+    <EmbeddedResource Include="Files\mssql_API.dll" />
+    <EmbeddedResource Include="Files\version.txt" />
+    <EmbeddedResource Include="Files\WebServices_API.dll" />
+    <EmbeddedResource Include="Files\xml_API.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Files\Filters\lsDNSBL_Filter.exe" />
+    <EmbeddedResource Include="Files\Filters\lsDNSBL_Filter_db.xml" />
+    <EmbeddedResource Include="Files\Filters\lsInvalidMessageScanner.exe" />
+    <EmbeddedResource Include="Files\Filters\lsSpamFilter.exe" />
+    <EmbeddedResource Include="Files\Filters\lsSpam_db.xml" />
+    <EmbeddedResource Include="Files\Filters\lsVirusFilter.exe" />
+    <EmbeddedResource Include="Files\Filters\lsVirusFilter_db.xml" />
+    <EmbeddedResource Include="Files\Filters\lumisoft.ui.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Files\Settings\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

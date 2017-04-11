@@ -1,0 +1,31 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1257">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Remote Administration</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+
+<body>
+
+<p><b><font size="3">Remote Administration.</font></b></p>
+<hr>
+<p>&nbsp;</p>
+<p>Remotely administrating mailserver.</p>
+<p>&nbsp;</p>
+<ul>
+  <li>Make RemoteAdmin folder to www Application (suggestion: disable anonymous 
+  access).</li>
+  <li>Edit global.asax row this.Application[&quot;SettingsPath&quot;] = 
+  your_mailserver_settings_path + &quot;/&quot; at end.</li>
+  <li>To connect thorough webservices, just open manager and &quot;Connect to remote 
+  server&quot;. WebServices URL syntax = 
+  http://your_server/www_app_name/remoteadmin.asmx.</li>
+</ul>
+<p>&nbsp;</p>
+
+</body>
+
+</html>

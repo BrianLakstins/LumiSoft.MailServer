@@ -1,0 +1,250 @@
+
+------------------------------
+virtualserver
+  GUID        - Virtual server global unique ID.
+  Enabled     - Specifies if virtual server is enabled.
+  Name        - Virtual server name.
+  Description - Virtual server description.
+
+  DNS servers
+   Server
+     Enabled   - Specifies if DNS server is enabled.
+     Priority  - DNS server priority. Lower value means greater priority.
+     IPAddress - DNS server IP address.
+     ...
+  
+  Services
+    SMTP
+      Enabled                     - Specifies if smtp service is enabled.
+      PostmasterAddress           - Default postmaster address.
+      GreetingText                - SMTP greeting text.
+      SessionIdleTime             - Session idle timout seconds.
+      MaxConnection               - Maximum smtp connections.
+      MaxConnectionsPerIP         - Maximum connections per 1 IP.
+      MaxBadCommands              - Maximum bad commands per session.
+      MaxRecipientsPerTransaction - Maximum recipients per mail transaction.
+      MaxTransactionsPerSession   - Maximum mail transactions per session.
+
+      Bindings
+        Bind
+          Enabled      - Specifies if binding is enabled.
+          HostName     - DNS host name.
+          IPEndPoint   - IP end point.
+          SslMode      - SSL mode. None,SSL,TLS
+          Certificate  - SSL certificate
+
+      Return messages
+        Message
+          Type     - DSN-DELIVERED,DSN-FAILED,DSN-RELAYED,DSN-EXPANDED,SYS-MAILBOX-FULL
+          Subject  - Message subject text.
+          Text     - Message text.
+
+      Routing
+        Route
+          Enabled      - Specifies if route is enabled.
+          Priority     - Route priority. Lower values has greater priority.
+          Description  - Route descrtiption.
+          ?? Pattern   - Route pattern. Asteric or regex ?
+          ?? Target    - email, host ? or is email needed. Check how big servers do.
+          ?? HostPort
+          ?? Credentials
+          OR
+          ?? CS-Script - C# routing script.
+          
+          NOTE: Routing must be able to route based on source IPRange and sender email and recipeint email.
+                Check how relect this here.
+                
+                Should route be c# script ? (definatelty this will be most powerfull)
+                (Securty is the only issue, script may give unwanted access to system.
+                 Is answer for that there: http://msdn.microsoft.com/en-us/library/fskfdsy4.aspx
+                 http://msdn.microsoft.com/en-us/library/system.security.ipermission.aspx)
+    
+    SMTP-RELAY
+      Enabled
+      TODO:
+
+    POP3
+      Enabled
+      GreetingText                - POP3 greeting text.
+      SessionIdleTime             - Session idle timout seconds.
+      MaxConnection               - Maximum smtp connections.
+      MaxConnectionsPerIP         - Maximum connections per 1 IP.
+      MaxBadCommands              - Maximum bad commands per session.
+   
+      Bindings
+        Bind
+          Enabled      - Specifies if binding is enabled.
+          HostName     - DNS host name.
+          IPEndPoint   - IP end point.
+          SslMode      - SSL mode. None,SSL,TLS
+          Certificate  - SSL certificate
+
+    IMAP
+      Enabled
+      GreetingText                - IMAP greeting text.
+      SessionIdleTime             - Session idle timout seconds.
+      MaxConnection               - Maximum smtp connections.
+      MaxConnectionsPerIP         - Maximum connections per 1 IP.
+      MaxBadCommands              - Maximum bad commands per session.
+
+      Bindings
+        Bind
+          Enabled      - Specifies if binding is enabled.
+          HostName     - DNS host name.
+          IPEndPoint   - IP end point.
+          SslMode      - SSL mode. None,SSL,TLS
+          Certificate  - SSL certificate
+
+    FETCH
+      Enabled        - Specifies if fetch service enabled.
+      FetchInteval   - Specifies after many seconds fetch is exeecuted.
+      MaxConnections - Maximum conncurent fetch connections.
+
+    SIP
+      Enabled
+      TODO:
+
+  Quota
+   MaxStorage - Specifies total number of bytes that virtual can store.
+   MaxDomains - Maximum allowed domains in virtual server.  -1 not limited.
+   MaxUsers   - Maximum allowed users in virtual server.  -1 not limited.   
+
+-------------------------------
+domain
+  GUID                 - Domain global unique ID.
+  Enabled              - Specified if domain is enabled.
+  Name                 - Domain name.
+  Description          - Domain description.
+
+  Aliases
+    Alias              - Domain alias.
+    ...
+
+  Folders
+    Folder
+      GUID             - Folder global unique ID.
+      Name             - Folder name.
+      Description      - Folder description.
+      Permanent        - Specifies if user can delete folder.
+      AutoSubscribe    - If true folder will be automaticall subscribed when folder is created.
+    ...
+
+    Virtual Folder
+      GUID             - Folder global unique ID.
+      Name             - Folder Name.
+      Description      - Folder description.
+      User             - Maped user name.
+      Path             - Map path. For example: "inbox/public".
+    ...
+
+  Defaults
+    DefaultMailboxSize - Domain users default mailbox size.
+
+  Quota
+    MaxStorage         - Specifies total number of bytes that domain can store.
+    MaxUsers           - Maxium users for that domain.  -1 not limited.
+    SendMessagesPerDay - Total messages per day what domain can send. -1 not limited.
+
+-------------------------------
+
+-------------------------------
+User
+  GUID           - Domain global unique ID.
+  Enabled        - Specifies if user is enabled.
+  Domain         - Domain where user belongs.
+  Full Name      - User full name.
+  Description    - User Description.
+  LoginName      - User login name.  
+  LastLoginTime  - Date-time when user logged in last time.
+  LastLoginIP    - The ip address from where use logged in last time.
+  ??? BadLoginCount ? Do we need it ? Can we lock account if too many bad logins, to avoid hack in ? .... 
+
+  Groups
+   Group  -list where user belongs.
+   ...
+  
+  Addresses
+    Address
+      Enabled   - Specifies if this address ie enabled.
+      Type      - SMTP,SIP flags
+      Address   - user@domain.com.  
+    ...
+
+  Quota
+    MaxStorage         - Specifies total number of bytes that user can store.
+    SendMessagesPerDay - Messages per day user can send, -1 not limited.
+    MaxFileSize        - Maximum allowed mail message or normal file size what user may store to mailbox.
+
+  ACL
+   ??? Must able to control services allowed for user.   
+   SMTP
+   SMTP-RELAY
+   POP3
+   IMAP
+   SIP
+
+  FETCH-Mail
+   FETCH-Entry
+    Enabled      - Specifies if this fetch is enabled.
+    Description  - Fetch entry description. For example: Fetch all messages from user@domain.com.
+    Type         - currently POP3 only.
+    Host         - Host or host:port - host can be IP address.
+    UserName     - Remote host user name.
+    Password     - Remote host password.
+
+  RecycleBin
+    Enabled       - Specifies if messages are deleted to receycle bin.
+    FolderName    - Recycle bin folder name.
+    VisibleToUser - Specifies if user can see recycle bin folder.
+    StoreDays     - Number of days to keep deleted messages.
+   
+-------------------------------
+
+-------------------------------
+mailing-list
+  GUID        - List global unique ID.
+  Enabled     - Specifies if list is enabled.
+  Domain      - Domain where user belongs.
+  Description - List description.
+  Address     - list@domain.com.
+
+  Members
+    Member    - user@domain.com,user name,group name
+    ...
+
+  ACL
+    Entry- IP,emailaddress,user,group who can access list.
+    ...
+
+-------------------------------
+
+-------------------------------
+Firewall (Current Security tab)
+  Entries
+    Entry
+      GUID         - Firewall entry global unique ID.
+      Enabled      - Specifies if entry is enabled.
+      Priority     - Entry priority. Lower value means greater priority.
+      Description  - Entry description. For example: Allow SMTP access to anyone.
+      Action       - Allow,Deny
+      Service      - ANY,SMTP,SMTP-RELAY,POP3,IMAP,SIP,ADMIN
+      IPRange      - IP range.
+    ...
+      
+  
+
+General notes:
+ Virtual server is server instance, virtual servers has no access to each other, they are totally isolated.
+
+ User will be domain wide(currently server wide), this is because otherwise can't do domain level limits.
+ How this will affect current ?
+
+ Domain MaxStorage how to calculate domain storage usage fast ? FileSystemWatcher ?
+
+Missing from current:
+ Global message rules
+ User Message rules
+ Filters
+ Dynamic Distribution List
+ Domain administrator - ???
+
