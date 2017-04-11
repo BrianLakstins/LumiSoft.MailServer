@@ -93,10 +93,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.6.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942" />
-    <Reference Include="LumiSoft.Net">
-      <Name>LumiSoft.Net</Name>
-      <HintPath>..\Application\Debug\LumiSoft.Net.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -114,9 +113,6 @@
     </Reference>
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
-    </Reference>
-    <Reference Include="UserAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +211,7 @@
     </Compile>
     <Compile Include="ConvertEx.cs" />
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Tmp\wfrm_EditText.cs">
       <SubType>Form</SubType>
     </None>
@@ -460,6 +457,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\LumiSoft\Net\Net\Net.csproj">
+      <Project>{7ab36ccf-5ffd-4780-a54e-a102eca028b5}</Project>
+      <Name>Net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServerAPI\UserAPI\UserAPI\UserAPI.csproj">
+      <Project>{8be35b39-b217-472b-872a-b97724621ef4}</Project>
+      <Name>UserAPI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -12,6 +12,11 @@ version: 0.xx (xx.xx.2017)
                  Allow to specify folders pattern what are stored to recycle bin, like "inbox;some folder".
         // TODO: Domain name aliases.
 
+//----------------------------------------
+// Devel (BAL) Version: https://github.com/BrianLakstins/LumiSoft.MailServer
+version: 0.991 (xx.x.2017)
+	*) Fix: IMAP Fetch default contentTypeMainMediaType and contentTypeMainMediaType (11.04.2017)
+
 
 //----------------------------------------
 // Devel Version: http://www.lumisoft.ee/lswww/download/downloads/MailServer/Devel/
@@ -26,7 +31,6 @@ version: 0.99 (xx.x.2017)
                 times for same folder.
         *) Fix: IMAP commands other than SEARCH and APPEND dind't allow literal-string strings. (11.11.2016)
         *) Fix: IMAP block empty folder names in SUBSCRIBE command. (Fixes Outlook 2016 hanging) (11.01.2017)
-
                 
 
             

@@ -93,10 +93,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LumiSoft.Net">
-      <Name>LumiSoft.Net</Name>
-      <HintPath>..\..\Application\Debug\LumiSoft.Net.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -175,6 +171,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\LumiSoft\Net\Net\Net.csproj">
+      <Project>{7ab36ccf-5ffd-4780-a54e-a102eca028b5}</Project>
+      <Name>Net</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
