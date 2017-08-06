@@ -5774,7 +5774,7 @@ namespace LumiSoft.Net.IMAP.Server
 					retVal.Append("\"" + entity.ContentType.Type + "\"");
 				}
 				else{
-                    retVal.Append(" \"text\"");  //BAL 4/11/2017: NIL works for Thunderbird client, but other mail clients don't seem to like it.
+                    retVal.Append("\"text\"");  //BAL 4/11/2017: NIL works for Thunderbird client, but other mail clients don't seem to like it.
                 }
 
                 // Add contentTypeSubMediaType
