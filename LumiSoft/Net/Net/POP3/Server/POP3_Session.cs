@@ -165,7 +165,7 @@ namespace LumiSoft.Net.POP3.Server
             try{
                 SmartStream.ReadLineAsyncOP readLineOP = new SmartStream.ReadLineAsyncOP(new byte[32000],SizeExceededAction.JunkAndThrowException);
                 // This event is raised only when read next coomand completes asynchronously.
-                readLineOP.Completed += new EventHandler<EventArgs<SmartStream.ReadLineAsyncOP>>(delegate(object sender,EventArgs<SmartStream.ReadLineAsyncOP> e){                
+                readLineOP.CompletedAsync += new EventHandler<EventArgs<SmartStream.ReadLineAsyncOP>>(delegate(object sender,EventArgs<SmartStream.ReadLineAsyncOP> e){                
                     if(ProcessCmd(readLineOP)){
                         BeginReadCmd();
                     }
@@ -641,7 +641,7 @@ namespace LumiSoft.Net.POP3.Server
                 }
                 // Authentication continues.
                 else{
-                    // Send server challange.
+                    // Send server challenge.
                     if(serverResponse.Length == 0){
                         WriteLine("+ ");
                     }

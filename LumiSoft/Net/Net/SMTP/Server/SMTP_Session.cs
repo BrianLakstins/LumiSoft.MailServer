@@ -200,7 +200,7 @@ namespace LumiSoft.Net.SMTP.Server
             try{
                 SmartStream.ReadLineAsyncOP readLineOP = new SmartStream.ReadLineAsyncOP(new byte[32000],SizeExceededAction.JunkAndThrowException);
                 // This event is raised only if read period-terminated opeartion completes asynchronously.
-                readLineOP.Completed += new EventHandler<EventArgs<SmartStream.ReadLineAsyncOP>>(delegate(object sender,EventArgs<SmartStream.ReadLineAsyncOP> e){                
+                readLineOP.CompletedAsync += new EventHandler<EventArgs<SmartStream.ReadLineAsyncOP>>(delegate(object sender,EventArgs<SmartStream.ReadLineAsyncOP> e){                
                     if(ProcessCmd(readLineOP)){
                         BeginReadCmd();
                     }
@@ -274,19 +274,36 @@ namespace LumiSoft.Net.SMTP.Server
                 else if(cmd == "RCPT"){
                     RCPT(args);
                 }
-                else if(cmd == "DATA"){                    
-                    Cmd_DATA cmdData = new Cmd_DATA();
+                else if(cmd == "DATA"){    
+                    Cmd_DATA cmdData = new Cmd_DATA();                    
                     cmdData.CompletedAsync += delegate(object sender,EventArgs<SMTP_Session.Cmd_DATA> e){
-                        if(op.Error != null){
-                            OnError(op.Error);
+                        if(cmdData.Error != null){
+                            if(cmdData.Error is IncompleteDataException){
+                                LogAddText("Disposing SMTP session, remote endpoint closed socket.");
+                            }
+                            else{
+                                LogAddText("Disposing SMTP session, fatal error:" + cmdData.Error.Message);
+                                OnError(cmdData.Error);
+                            }
+                            Dispose();
+                        }
+                        else{
+                            BeginReadCmd();
                         }
 
                         cmdData.Dispose();
-                        BeginReadCmd();
                     };
                     if(!cmdData.Start(this,args)){
-                        if(op.Error != null){
-                            OnError(op.Error);
+                        if(cmdData.Error != null){
+                            if(cmdData.Error is IncompleteDataException){
+                                LogAddText("Disposing SMTP session, remote endpoint closed socket.");
+                            }
+                            else{
+                                LogAddText("Disposing SMTP session, fatal error:" + cmdData.Error.Message);
+                                OnError(cmdData.Error);
+                            }
+                            Dispose();
+                            readNextCommand = false;
                         }
 
                         cmdData.Dispose();
@@ -894,7 +911,7 @@ namespace LumiSoft.Net.SMTP.Server
                         SizeExceededAction.JunkAndThrowException
                     );
                     // This event is raised only if read period-terminated opeartion completes asynchronously.
-                    readPeriodTermOP.Completed += new EventHandler<EventArgs<SmartStream.ReadPeriodTerminatedAsyncOP>>(delegate(object sender,EventArgs<SmartStream.ReadPeriodTerminatedAsyncOP> e){                
+                    readPeriodTermOP.CompletedAsync += new EventHandler<EventArgs<SmartStream.ReadPeriodTerminatedAsyncOP>>(delegate(object sender,EventArgs<SmartStream.ReadPeriodTerminatedAsyncOP> e){                
                         MessageReadingCompleted(readPeriodTermOP);
                     });
                     // Read period-terminated completed synchronously.
@@ -1343,7 +1360,7 @@ namespace LumiSoft.Net.SMTP.Server
                 }
                 // Authentication continues.
                 else{
-                    // Send server challange.
+                    // Send server challenge.
                     if(serverResponse.Length == 0){
                         WriteLine("334 ");
                     }
@@ -1811,7 +1828,7 @@ namespace LumiSoft.Net.SMTP.Server
                 SizeExceededAction.JunkAndThrowException
             );
             // This event is raised only if read period-terminated opeartion completes asynchronously.
-            readPeriodTermOP.Completed += new EventHandler<EventArgs<SmartStream.ReadPeriodTerminatedAsyncOP>>(delegate(object sender,EventArgs<SmartStream.ReadPeriodTerminatedAsyncOP> e){                
+            readPeriodTermOP.CompletedAsync += new EventHandler<EventArgs<SmartStream.ReadPeriodTerminatedAsyncOP>>(delegate(object sender,EventArgs<SmartStream.ReadPeriodTerminatedAsyncOP> e){                
                 DATA_End(startTime,readPeriodTermOP);
             });
             // Read period-terminated completed synchronously.

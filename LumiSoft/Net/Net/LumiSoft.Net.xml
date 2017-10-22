@@ -4,31 +4,6 @@
         <name>LumiSoft.Net</name>
     </assembly>
     <members>
-        <member name="T:LumiSoft.Net.AsyncOP">
-            <summary>
-            This is base class for asynchronous operation.
-            </summary>
-        </member>
-        <member name="M:LumiSoft.Net.AsyncOP.#ctor">
-            <summary>
-            Default constructor.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.AsyncOP.IsDisposed">
-            <summary>
-            Gets if this object is disposed.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.AsyncOP.IsCompleted">
-            <summary>
-            Gets if asynchronous operation has completed.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.AsyncOP.IsCompletedSynchronously">
-            <summary>
-            Gets if operation completed synchronously.
-            </summary>
-        </member>
         <member name="T:LumiSoft.Net.AsyncOP_State">
             <summary>
             Specifies asynchronous operation state.
@@ -175,7 +150,7 @@
             Continues authentication process.
             </summary>
             <param name="serverResponse">Server sent SASL response.</param>
-            <returns>Returns challange request what must be sent to server or null if authentication has completed.</returns>
+            <returns>Returns challenge request what must be sent to server or null if authentication has completed.</returns>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>serverResponse</b> is null reference.</exception>
         </member>
         <member name="P:LumiSoft.Net.AUTH.AUTH_SASL_Client.IsCompleted">
@@ -218,7 +193,7 @@
             Continues authentication process.
             </summary>
             <param name="serverResponse">Server sent SASL response.</param>
-            <returns>Returns challange request what must be sent to server or null if authentication has completed.</returns>
+            <returns>Returns challenge request what must be sent to server or null if authentication has completed.</returns>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>serverResponse</b> is null reference.</exception>
             <exception cref="T:System.InvalidOperationException">Is raised when this method is called when authentication is completed.</exception>
         </member>
@@ -258,7 +233,7 @@
             Continues authentication process.
             </summary>
             <param name="serverResponse">Server sent SASL response.</param>
-            <returns>Returns challange request what must be sent to server or null if authentication has completed.</returns>
+            <returns>Returns challenge request what must be sent to server or null if authentication has completed.</returns>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>serverResponse</b> is null reference.</exception>
             <exception cref="T:System.InvalidOperationException">Is raised when this method is called when authentication is completed.</exception>
         </member>
@@ -296,7 +271,7 @@
             Continues authentication process.
             </summary>
             <param name="serverResponse">Server sent SASL response.</param>
-            <returns>Returns challange request what must be sent to server or null if authentication has completed.</returns>
+            <returns>Returns challenge request what must be sent to server or null if authentication has completed.</returns>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>serverResponse</b> is null reference.</exception>
             <exception cref="T:System.InvalidOperationException">Is raised when this method is called when authentication is completed.</exception>
         </member>
@@ -424,7 +399,7 @@
             Continues authentication process.
             </summary>
             <param name="serverResponse">Server sent SASL response.</param>
-            <returns>Returns challange request what must be sent to server or null if authentication has completed.</returns>
+            <returns>Returns challenge request what must be sent to server or null if authentication has completed.</returns>
             <exception cref="T:System.InvalidOperationException">Is raised when this method is called when authentication is completed.</exception>
         </member>
         <member name="P:LumiSoft.Net.AUTH.AUTH_SASL_Client_Ntlm.IsCompleted">
@@ -466,7 +441,7 @@
             Continues authentication process.
             </summary>
             <param name="serverResponse">Server sent SASL response.</param>
-            <returns>Returns challange request what must be sent to server or null if authentication has completed.</returns>
+            <returns>Returns challenge request what must be sent to server or null if authentication has completed.</returns>
             <exception cref="T:System.InvalidOperationException">Is raised when this method is called when authentication is completed.</exception>
         </member>
         <member name="P:LumiSoft.Net.AUTH.AUTH_SASL_Client_Plain.IsCompleted">
@@ -508,7 +483,7 @@
             Continues authentication process.
             </summary>
             <param name="serverResponse">Server sent SASL response.</param>
-            <returns>Returns challange request what must be sent to server or null if authentication has completed.</returns>
+            <returns>Returns challenge request what must be sent to server or null if authentication has completed.</returns>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>serverResponse</b> is null reference.</exception>
             <exception cref="T:System.InvalidOperationException">Is raised when this method is called when authentication is completed.</exception>
         </member>
@@ -551,7 +526,7 @@
             Continues authentication process.
             </summary>
             <param name="serverResponse">Server sent SASL response.</param>
-            <returns>Returns challange request what must be sent to server or null if authentication has completed.</returns>
+            <returns>Returns challenge request what must be sent to server or null if authentication has completed.</returns>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>serverResponse</b> is null reference.</exception>
             <exception cref="T:System.InvalidOperationException">Is raised when this method is called when authentication is completed.</exception>
         </member>
@@ -925,18 +900,18 @@
             </summary>
             <returns>Returns digest string.</returns>
         </member>
-        <member name="M:LumiSoft.Net.AUTH.Auth_HttpDigest.ToChallange">
+        <member name="M:LumiSoft.Net.AUTH.Auth_HttpDigest.ToChallenge">
             <summary>
-            Creates 'Challange' data using this class info. 
+            Creates 'Challenge' data using this class info. 
             </summary>
-            <returns>Returns Challange data.</returns>
+            <returns>Returns Challenge data.</returns>
         </member>
-        <member name="M:LumiSoft.Net.AUTH.Auth_HttpDigest.ToChallange(System.Boolean)">
+        <member name="M:LumiSoft.Net.AUTH.Auth_HttpDigest.ToChallenge(System.Boolean)">
             <summary>
-            Creates 'Challange' data using this class info. 
+            Creates 'Challenge' data using this class info. 
             </summary>
-            <param name="addAuthMethod">Specifies if 'digest ' authe method string constant is added.</param>
-            <returns>Returns Challange data.</returns>
+            <param name="addAuthMethod">Specifies if 'digest ' auth method string constant is added.</param>
+            <returns>Returns Challenge data.</returns>
         </member>
         <member name="M:LumiSoft.Net.AUTH.Auth_HttpDigest.ToAuthorization">
             <summary>
@@ -1039,6 +1014,19 @@
             header field.  The nc-value is the hexadecimal count of the number of requests.
             </summary>
         </member>
+        <member name="M:LumiSoft.Net.AUTH.Auth_HttpDigest.ToChallange">
+            <summary>
+            Creates 'Challange' data using this class info. 
+            </summary>
+            <returns>Returns Challange data.</returns>
+        </member>
+        <member name="M:LumiSoft.Net.AUTH.Auth_HttpDigest.ToChallange(System.Boolean)">
+            <summary>
+            Creates 'Challange' data using this class info. 
+            </summary>
+            <param name="addAuthMethod">Specifies if 'digest ' auth method string constant is added.</param>
+            <returns>Returns Challange data.</returns>
+        </member>
         <member name="T:LumiSoft.Net.AUTH.Auth_HttpDigest_NonceManager">
             <summary>
             HTTP digest authentication nonce manager.
@@ -1124,7 +1112,7 @@
             Continues authentication process.
             </summary>
             <param name="clientResponse">Client sent SASL response.</param>
-            <returns>Retunrns challange response what must be sent to client or null if authentication has completed.</returns>
+            <returns>Retunrns challenge response what must be sent to client or null if authentication has completed.</returns>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>clientRespone</b> is null reference.</exception>
         </member>
         <member name="P:LumiSoft.Net.AUTH.AUTH_SASL_ServerMechanism.IsCompleted">
@@ -1180,7 +1168,7 @@
             Continues authentication process.
             </summary>
             <param name="clientResponse">Client sent SASL response.</param>
-            <returns>Retunrns challange response what must be sent to client or null if authentication has completed.</returns>
+            <returns>Retunrns challenge response what must be sent to client or null if authentication has completed.</returns>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>clientResponse</b> is null reference.</exception>
         </member>
         <member name="M:LumiSoft.Net.AUTH.AUTH_SASL_ServerMechanism_CramMd5.HmacMd5(System.String,System.String)">
@@ -1249,7 +1237,7 @@
             Continues authentication process.
             </summary>
             <param name="clientResponse">Client sent SASL response.</param>
-            <returns>Retunrns challange response what must be sent to client or null if authentication has completed.</returns>
+            <returns>Retunrns challenge response what must be sent to client or null if authentication has completed.</returns>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>clientResponse</b> is null reference.</exception>
         </member>
         <member name="P:LumiSoft.Net.AUTH.AUTH_SASL_ServerMechanism_DigestMd5.IsCompleted">
@@ -1316,7 +1304,7 @@
             Continues authentication process.
             </summary>
             <param name="clientResponse">Client sent SASL response.</param>
-            <returns>Retunrns challange response what must be sent to client or null if authentication has completed.</returns>
+            <returns>Retunrns challenge response what must be sent to client or null if authentication has completed.</returns>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>clientResponse</b> is null reference.</exception>
         </member>
         <member name="P:LumiSoft.Net.AUTH.AUTH_SASL_ServerMechanism_Login.IsCompleted">
@@ -1379,7 +1367,7 @@
             Continues authentication process.
             </summary>
             <param name="clientResponse">Client sent SASL response.</param>
-            <returns>Retunrns challange response what must be sent to client or null if authentication has completed.</returns>
+            <returns>Retunrns challenge response what must be sent to client or null if authentication has completed.</returns>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>clientResponse</b> is null reference.</exception>
         </member>
         <member name="P:LumiSoft.Net.AUTH.AUTH_SASL_ServerMechanism_Plain.IsCompleted">
@@ -1594,11 +1582,12 @@
             This class represents DNS client transaction.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.DNS.Client.DNS_ClientTransaction.#ctor(LumiSoft.Net.DNS.Client.Dns_Client,System.Int32,LumiSoft.Net.DNS.DNS_QType,System.String,System.Int32)">
+        <member name="M:LumiSoft.Net.DNS.Client.DNS_ClientTransaction.#ctor(LumiSoft.Net.DNS.Client.Dns_Client,System.Net.IPAddress[],System.Int32,LumiSoft.Net.DNS.DNS_QType,System.String,System.Int32)">
             <summary>
             Default constructor.
             </summary>
             <param name="owner">Owner DNS client.</param>
+            <param name="dnsServers">DNS servers.</param>
             <param name="id">Transaction ID.</param>
             <param name="qtype">QTYPE value.</param>
             <param name="qname">QNAME value.</param>
@@ -2019,13 +2008,28 @@
             <remarks>Creates asynchronous(non-blocking) DNS transaction. Call <see cref="M:LumiSoft.Net.DNS.Client.DNS_ClientTransaction.Start"/> to start transaction.
             It is allowd to create multiple conccurent transactions.</remarks>
         </member>
+        <member name="M:LumiSoft.Net.DNS.Client.Dns_Client.CreateTransaction(System.Net.IPAddress[],LumiSoft.Net.DNS.DNS_QType,System.String,System.Int32)">
+            <summary>
+            Creates new DNS client transaction.
+            </summary>
+            <param name="dnsServers">DNS servers.</param>
+            <param name="queryType">Query type.</param>
+            <param name="queryText">Query text. It depends on queryType.</param>
+            <param name="timeout">Transaction timeout in milliseconds. DNS default value is 2000, value 0 means no timeout - this is not suggested.</param>
+            <returns>Returns DNS client transaction.</returns>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and and this method is accessed.</exception>
+            <exception cref="T:System.ArgumentNullException">Is raised when <b>dnsServers</b> or <b>queryText</b> is null reference.</exception>
+            <exception cref="T:System.ArgumentException">Is raised when any of the arguments has invalid value.</exception>
+            <remarks>Creates asynchronous(non-blocking) DNS transaction. Call <see cref="M:LumiSoft.Net.DNS.Client.DNS_ClientTransaction.Start"/> to start transaction.
+            It is allowd to create multiple conccurent transactions.</remarks>
+        </member>
         <member name="M:LumiSoft.Net.DNS.Client.Dns_Client.Query(System.String,LumiSoft.Net.DNS.DNS_QType)">
             <summary>
             Queries server with specified query.
             </summary>
             <param name="queryText">Query text. It depends on queryType.</param>
             <param name="queryType">Query type.</param>
-            <returns>Returns DSN server response.</returns>
+            <returns>Returns DNS server response.</returns>
             <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and and this method is accessed.</exception>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>queryText</b> is null.</exception>
         </member>
@@ -2036,9 +2040,21 @@
             <param name="queryText">Query text. It depends on queryType.</param>
             <param name="queryType">Query type.</param>
             <param name="timeout">Query timeout in milli seconds.</param>
-            <returns>Returns DSN server response.</returns>
+            <returns>Returns DNS server response.</returns>
             <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and and this method is accessed.</exception>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>queryText</b> is null.</exception>
+        </member>
+        <member name="M:LumiSoft.Net.DNS.Client.Dns_Client.Query(System.Net.IPAddress[],System.String,LumiSoft.Net.DNS.DNS_QType,System.Int32)">
+            <summary>
+            Queries DNS server with specified query.
+            </summary>
+            <param name="dnsServers">DNS servers.</param>
+            <param name="queryText">Query text. It depends on queryType.</param>
+            <param name="queryType">Query type.</param>
+            <param name="timeout">Query timeout in milli seconds.</param>
+            <returns>Returns DNS server response.</returns>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and and this method is accessed.</exception>
+            <exception cref="T:System.ArgumentNullException">Is raised when <b>dnsServers</b> or <b>queryText</b> is null.</exception>
         </member>
         <member name="M:LumiSoft.Net.DNS.Client.Dns_Client.GetHostAddresses(System.String)">
             <summary>
@@ -24318,6 +24334,73 @@
             This class is wrapper to normal stream, provides most needed stream methods which are missing from normal stream.
             </summary>
         </member>
+        <member name="T:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation">
+            <summary>
+            This class implements asynchronous data reader.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.#ctor(LumiSoft.Net.IO.SmartStream,System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="owner">Owner stream.</param>
+            <param name="buffer">Buffer where to store data.</param>
+            <param name="offset">The location in <b>buffer</b> to begin storing the data.</param>
+            <param name="maxSize">Maximum number of bytes to read.</param>
+            <param name="callback">The AsyncCallback delegate that is executed when asynchronous operation completes.</param>
+            <param name="asyncState">User-defined object that qualifies or contains information about an asynchronous operation.</param>
+        </member>
+        <member name="M:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.Buffering_Completed(System.Exception)">
+            <summary>
+            Is called when asynchronous read buffer buffering has completed.
+            </summary>
+            <param name="x">Exception that occured during async operation.</param>
+        </member>
+        <member name="M:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.DoRead">
+            <summary>
+            Does asynchronous data reading.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.Completed">
+            <summary>
+            This method must be called when asynchronous operation has completed.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.AsyncState">
+            <summary>
+            Gets a user-defined object that qualifies or contains information about an asynchronous operation.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.AsyncWaitHandle">
+            <summary>
+            Gets a WaitHandle that is used to wait for an asynchronous operation to complete.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.CompletedSynchronously">
+            <summary>
+            Gets an indication of whether the asynchronous operation completed synchronously.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.IsCompleted">
+            <summary>
+            Gets an indication whether the asynchronous operation has completed.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.IsEndCalled">
+            <summary>
+            Gets or sets if <b>EndReadLine</b> method is called for this asynchronous operation.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.Buffer">
+            <summary>
+            Gets store buffer.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.BytesStored">
+            <summary>
+            Gets number of bytes stored in to <b>Buffer</b>.
+            </summary>
+        </member>
         <member name="T:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP">
             <summary>
             This class implements read line operation.
@@ -24344,105 +24427,107 @@
         </member>
         <member name="M:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.Start(System.Boolean,LumiSoft.Net.IO.SmartStream)">
             <summary>
-            Starts reading line.
+            Starts asynchronous operation.
             </summary>
-            <param name="async">If true then this method can complete asynchronously. If false, this method completed always syncronously.</param>
+            <param name="async">If true then this method can complete asynchronously. If false, this method always completes syncronously.</param>
             <param name="stream">Owner SmartStream.</param>
-            <returns>Returns true if read line completed synchronously, false if asynchronous operation pending.</returns>
+            <returns>Returns true if asynchronous operation in progress or false if operation completed synchronously.</returns>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this method is accessed.</exception>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>stream</b> is null reference.</exception>
         </member>
         <member name="M:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.Buffering_Completed(System.Exception)">
             <summary>
             Is called when asynchronous read buffer buffering has completed.
             </summary>
-            <param name="x">Exception that occured during async operation.</param>
+            <param name="x">Exception that occured during async operation. Value null means no errors.</param>
         </member>
         <member name="M:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.DoLineReading(System.Boolean)">
             <summary>
             Starts/continues line reading.
             </summary>
-            <param name="async">If true then this method can complete asynchronously. If false, this method completed always syncronously.</param>
-            <returns>Returns true if line reading completed.</returns>
+            <param name="async">If true then this method can complete asynchronously. If false, this method completes always syncronously.</param>
+            <returns>Returns true if line reading has completed.</returns>
         </member>
-        <member name="M:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.SetInfo(System.Int32,System.Exception)">
+        <member name="M:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.SetState(LumiSoft.Net.AsyncOP_State)">
             <summary>
-            Sets specified field values.
+            Sets operation state.
             </summary>
-            <param name="bytesInBuffer">Number of bytes in buffer.</param>
-            <param name="exception">Exception.</param>
+            <param name="state">New state.</param>
         </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.IsDisposed">
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.State">
             <summary>
-            Gets if this object is disposed.
+            Gets asynchronous operation state.
             </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.IsCompleted">
-            <summary>
-            Gets if asynchronous operation has completed.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.IsCompletedSynchronously">
-            <summary>
-            Gets if operation completed synchronously.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.SizeExceededAction">
-            <summary>
-            Gets line size exceeded action.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.Buffer">
-            <summary>
-            Gets line buffer.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.BytesInBuffer">
-            <summary>
-            Gets number of bytes stored in the buffer. Ending line-feed characters included.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.LineBytesInBuffer">
-            <summary>
-            Gets number of line data bytes stored in the buffer. Ending line-feed characters not included.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.LineAscii">
-            <summary>
-            Gets line as ASCII string. Returns null if EOS(end of stream) reached. Ending line-feed characters not included.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.LineUtf8">
-            <summary>
-            Gets line as UTF-8 string. Returns null if EOS(end of stream) reached. Ending line-feed characters not included.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.LineUtf32">
-            <summary>
-            Gets line as UTF-32 string. Returns null if EOS(end of stream) reached. Ending line-feed characters not included.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
         </member>
         <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.Error">
             <summary>
             Gets error occured during asynchronous operation. Value null means no error.
             </summary>
             <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+            <exception cref="T:System.InvalidOperationException">Is raised when this property is accessed in ivalid state.</exception>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.SizeExceededAction">
+            <summary>
+            Gets line size exceeded action.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+            <exception cref="T:System.InvalidOperationException">Is raised when this property is accessed in ivalid state.</exception>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.Buffer">
+            <summary>
+            Gets line buffer.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+            <exception cref="T:System.InvalidOperationException">Is raised when this property is accessed in ivalid state.</exception>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.BytesInBuffer">
+            <summary>
+            Gets number of bytes stored in the buffer. Ending line-feed characters included.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+            <exception cref="T:System.InvalidOperationException">Is raised when this property is accessed in ivalid state.</exception>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.LineBytesInBuffer">
+            <summary>
+            Gets number of line data bytes stored in the buffer. Ending line-feed characters not included.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+            <exception cref="T:System.InvalidOperationException">Is raised when this property is accessed in ivalid state.</exception>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.LineAscii">
+            <summary>
+            Gets line as ASCII string. Returns null if EOS(end of stream) reached. Ending line-feed characters not included.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+            <exception cref="T:System.InvalidOperationException">Is raised when this property is accessed in ivalid state.</exception>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.LineUtf8">
+            <summary>
+            Gets line as UTF-8 string. Returns null if EOS(end of stream) reached. Ending line-feed characters not included.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+            <exception cref="T:System.InvalidOperationException">Is raised when this property is accessed in ivalid state.</exception>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.LineUtf32">
+            <summary>
+            Gets line as UTF-32 string. Returns null if EOS(end of stream) reached. Ending line-feed characters not included.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+            <exception cref="T:System.InvalidOperationException">Is raised when this property is accessed in ivalid state.</exception>
+        </member>
+        <member name="E:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.CompletedAsync">
+            <summary>
+            Is called when asynchronous operation has completed.
+            </summary>
+        </member>
+        <member name="M:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.OnCompletedAsync">
+            <summary>
+            Raises <b>CompletedAsync</b> event.
+            </summary>
         </member>
         <member name="E:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.Completed">
             <summary>
-            Is raised when asynchronous operation has completed.
-            </summary>
-        </member>
-        <member name="M:LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP.OnCompleted">
-            <summary>
-            Raises <b>Completed</b> event.
+            Is called when asynchronous operation has completed.
             </summary>
         </member>
         <member name="T:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP">
@@ -24469,26 +24554,30 @@
             Cleans up any resources being used.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.Start(LumiSoft.Net.IO.SmartStream)">
+        <member name="M:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.Start(System.Boolean,LumiSoft.Net.IO.SmartStream)">
             <summary>
-            Starts period-terminated data reading.
+            Starts asynchronous operation.
             </summary>
+            <param name="async">If true then this method can complete asynchronously. If false, this method always completes syncronously.</param>
             <param name="stream">Owner SmartStream.</param>
-            <returns>Returns true if read line completed synchronously, false if asynchronous operation pending.</returns>
+            <returns>Returns true if asynchronous operation in progress or false if operation completed synchronously.</returns>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this method is accessed.</exception>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>stream</b> is null reference.</exception>
+            <exception cref="T:System.ArgumentException">Is raised when any of the arguments has invalid value.</exception>
         </member>
-        <member name="M:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.m_pReadLineOP_Completed(System.Object,LumiSoft.Net.EventArgs{LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP})">
+        <member name="M:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.m_pReadLineOP_CompletedAsync(System.Object,LumiSoft.Net.EventArgs{LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP})">
             <summary>
             Is called when asynchronous line reading has completed.
             </summary>
             <param name="sender">Sender.</param>
             <param name="e">Event data.</param>
         </member>
-        <member name="M:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.DoRead">
+        <member name="M:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.DoRead(System.Boolean)">
             <summary>
             Continues period-terminated reading.
             </summary>
-            <returns>Returns true if read line completed synchronously, false if asynchronous operation pending.</returns>
+            <param name="async">If true then this method can complete asynchronously. If false, this method completes always syncronously.</param>
+            <returns>Returns true if operation has completed synchronously, false if asynchronous operation pending.</returns>
         </member>
         <member name="M:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.ProcessReadedLine">
             <summary>
@@ -24496,54 +24585,58 @@
             </summary>
             <returns>Returns true if read period-terminated operation has completed.</returns>
         </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.IsDisposed">
+        <member name="M:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.SetState(LumiSoft.Net.AsyncOP_State)">
             <summary>
-            Gets if this object is disposed.
+            Sets operation state.
             </summary>
+            <param name="state">New state.</param>
         </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.IsCompleted">
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.State">
             <summary>
-            Gets if asynchronous operation has completed.
+            Gets asynchronous operation state.
             </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.IsCompletedSynchronously">
-            <summary>
-            Gets if operation completed synchronously.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.Stream">
-            <summary>
-            Gets stream where period terminated data has stored.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.BytesStored">
-            <summary>
-            Gets number of bytes stored to <see cref="P:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.Stream">Stream</see> stream.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.LinesStored">
-            <summary>
-            Gets number of lines stored to <see cref="P:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.Stream">Stream</see> stream.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
         </member>
         <member name="P:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.Error">
             <summary>
             Gets error occured during asynchronous operation. Value null means no error.
             </summary>
             <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+            <exception cref="T:System.InvalidOperationException">Is raised when this property is accessed in ivalid state.</exception>
         </member>
-        <member name="E:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.Completed">
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.Stream">
+            <summary>
+            Gets stream where period terminated data has stored.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+            <exception cref="T:System.InvalidOperationException">Is raised when this property is accessed in ivalid state.</exception>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.BytesStored">
+            <summary>
+            Gets number of bytes stored to <see cref="P:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.Stream">Stream</see> stream.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+            <exception cref="T:System.InvalidOperationException">Is raised when this property is accessed in ivalid state.</exception>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.LinesStored">
+            <summary>
+            Gets number of lines stored to <see cref="P:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.Stream">Stream</see> stream.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+            <exception cref="T:System.InvalidOperationException">Is raised when this property is accessed in ivalid state.</exception>
+        </member>
+        <member name="E:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.CompletedAsync">
             <summary>
             Is raised when asynchronous operation has completed.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.OnCompleted">
+        <member name="M:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.OnCompletedAsync">
             <summary>
-            Raises <b>Completed</b> event.
+            Raises <b>CompletedAsync</b> event.
+            </summary>
+        </member>
+        <member name="E:LumiSoft.Net.IO.SmartStream.ReadPeriodTerminatedAsyncOP.Completed">
+            <summary>
+            Is called when asynchronous operation has completed.
             </summary>
         </member>
         <member name="T:LumiSoft.Net.IO.SmartStream.BufferReadAsyncOP">
@@ -24572,62 +24665,59 @@
             <summary>
             Starts asynchronous operation.
             </summary>
-            <param name="async">If true then this method can complete asynchronously. If false, this method completed always syncronously.</param>
+            <param name="async">If true then this method can complete asynchronously. If false, this method always completes syncronously.</param>
             <param name="buffer">Buffer where to store readed data.</param>
             <param name="count">Maximum number of bytes to read.</param>
+            <returns>Returns true if asynchronous operation in progress or false if operation completed synchronously.</returns>
             <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this method is accessed.</exception>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>buffer</b> is null reference.</exception>
             <exception cref="T:System.ArgumentException">Is raised when any of the arguments has invalid value.</exception>
-            <returns>Returns true if operation completed synchronously, false if asynchronous operation pending.</returns>
         </member>
         <member name="M:LumiSoft.Net.IO.SmartStream.BufferReadAsyncOP.ReleaseEvents">
             <summary>
             Releases all events attached to this class.
             </summary>
         </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.BufferReadAsyncOP.IsDisposed">
+        <member name="M:LumiSoft.Net.IO.SmartStream.BufferReadAsyncOP.SetState(LumiSoft.Net.AsyncOP_State)">
             <summary>
-            Gets if this object is disposed.
+            Sets operation state.
             </summary>
+            <param name="state">New state.</param>
         </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.BufferReadAsyncOP.IsCompleted">
+        <member name="P:LumiSoft.Net.IO.SmartStream.BufferReadAsyncOP.State">
             <summary>
-            Gets if asynchronous operation has completed.
+            Gets asynchronous operation state.
             </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.BufferReadAsyncOP.IsCompletedSynchronously">
-            <summary>
-            Gets if operation completed synchronously.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.BufferReadAsyncOP.Buffer">
-            <summary>
-            Gets read buffer.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.BufferReadAsyncOP.BytesInBuffer">
-            <summary>
-            Gets number of bytes stored in read buffer.
-            </summary>
-            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
         </member>
         <member name="P:LumiSoft.Net.IO.SmartStream.BufferReadAsyncOP.Error">
             <summary>
             Gets error occured during asynchronous operation. Value null means no error.
             </summary>
             <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+            <exception cref="T:System.InvalidOperationException">Is raised when this property is accessed in ivalid state.</exception>
         </member>
-        <member name="E:LumiSoft.Net.IO.SmartStream.BufferReadAsyncOP.Completed">
+        <member name="P:LumiSoft.Net.IO.SmartStream.BufferReadAsyncOP.Buffer">
             <summary>
-            Is raised when asynchronous operation has completed.
+            Gets read buffer.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+            <exception cref="T:System.InvalidOperationException">Is raised when this property is accessed in ivalid state.</exception>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.BufferReadAsyncOP.BytesInBuffer">
+            <summary>
+            Gets number of bytes stored in read buffer.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
+            <exception cref="T:System.InvalidOperationException">Is raised when this property is accessed in ivalid state.</exception>
+        </member>
+        <member name="E:LumiSoft.Net.IO.SmartStream.BufferReadAsyncOP.CompletedAsync">
+            <summary>
+            Is called when asynchronous operation has completed.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.IO.SmartStream.BufferReadAsyncOP.OnCompleted">
+        <member name="M:LumiSoft.Net.IO.SmartStream.BufferReadAsyncOP.OnCompletedAsync">
             <summary>
-            Raises <b>Completed</b> event.
+            Raises <b>CompletedAsync</b> event.
             </summary>
         </member>
         <member name="M:LumiSoft.Net.IO.SmartStream.#ctor(System.IO.Stream,System.Boolean)">
@@ -24645,11 +24735,12 @@
         </member>
         <member name="M:LumiSoft.Net.IO.SmartStream.ReadLine(LumiSoft.Net.IO.SmartStream.ReadLineAsyncOP,System.Boolean)">
             <summary>
-            Begins line reading.
+            Starts line reading.
             </summary>
             <param name="op">Read line opeartion.</param>
-            <param name="async">If true then this method can complete asynchronously. If false, this method completed always syncronously.</param>
+            <param name="async">If true then this method can complete asynchronously. If false, this method completes always syncronously.</param>
             <returns>Returns true if read line completed synchronously, false if asynchronous operation pending.</returns>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this method is accessed.</exception>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>op</b> is null reference.</exception>
         </member>
         <member name="M:LumiSoft.Net.IO.SmartStream.BeginReadHeader(System.IO.Stream,System.Int32,LumiSoft.Net.IO.SizeExceededAction,System.AsyncCallback,System.Object)">
@@ -24701,6 +24792,7 @@
             <param name="op">Read period terminated opeartion.</param>
             <param name="async">If true then this method can complete asynchronously. If false, this method completed always syncronously.</param>
             <returns>Returns true if read line completed synchronously, false if asynchronous operation pending.</returns>
+            <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this method is accessed.</exception>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>op</b> is null reference.</exception>
         </member>
         <member name="M:LumiSoft.Net.IO.SmartStream.BeginReadFixedCount(System.IO.Stream,System.Int64,System.AsyncCallback,System.Object)">
@@ -25074,12 +25166,11 @@
             <summary>
             Begins buffering read-buffer.
             </summary>
-            <param name="async">If true then this method can complete asynchronously. If false, this method completed always syncronously.</param>
+            <param name="async">If true then this method can complete asynchronously. If false, this method completes always syncronously.</param>
             <param name="asyncCallback">The callback that is executed when asynchronous operation completes. 
             If operation completes synchronously, no callback called.</param>
             <returns>
-            Returns true if the I/O operation is pending. The BufferReadAsyncEventArgs.Completed event on the context parameter will be raised upon completion of the operation. 
-            Returns false if the I/O operation completed synchronously. The BufferReadAsyncEventArgs.Completed event on the context parameter will not be raised and the context object passed as a parameter may be examined immediately after the method call returns to retrieve the result of the operation. 
+            Returns true if asynchronous operation in progress or false if operation completed synchronously. 
             </returns>
             <exception cref="T:System.InvalidOperationException">Is raised when there is data in read buffer and this method is called.</exception>
         </member>
@@ -25136,6 +25227,11 @@
             </summary>
             <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
             <exception cref="T:System.ArgumentNullException">Is raised when null value is passed.</exception>
+        </member>
+        <member name="P:LumiSoft.Net.IO.SmartStream.CRLFLines">
+            <summary>
+            Gets or sets if only CRLF lines accepted. If false LF lines accepted. 
+            </summary>
         </member>
         <member name="P:LumiSoft.Net.IO.SmartStream.CanRead">
             <summary>
@@ -25377,73 +25473,6 @@
         <member name="P:LumiSoft.Net.IO.SmartStream.ReadToStreamAsyncOperation.Exception">
             <summary>
             Gets exception happened on asynchronous operation. Returns null if operation was successfull.
-            </summary>
-        </member>
-        <member name="T:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation">
-            <summary>
-            This class implements asynchronous data reader.
-            </summary>
-        </member>
-        <member name="M:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.#ctor(LumiSoft.Net.IO.SmartStream,System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)">
-            <summary>
-            Default constructor.
-            </summary>
-            <param name="owner">Owner stream.</param>
-            <param name="buffer">Buffer where to store data.</param>
-            <param name="offset">The location in <b>buffer</b> to begin storing the data.</param>
-            <param name="maxSize">Maximum number of bytes to read.</param>
-            <param name="callback">The AsyncCallback delegate that is executed when asynchronous operation completes.</param>
-            <param name="asyncState">User-defined object that qualifies or contains information about an asynchronous operation.</param>
-        </member>
-        <member name="M:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.Buffering_Completed(System.Exception)">
-            <summary>
-            Is called when asynchronous read buffer buffering has completed.
-            </summary>
-            <param name="x">Exception that occured during async operation.</param>
-        </member>
-        <member name="M:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.DoRead">
-            <summary>
-            Does asynchronous data reading.
-            </summary>
-        </member>
-        <member name="M:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.Completed">
-            <summary>
-            This method must be called when asynchronous operation has completed.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.AsyncState">
-            <summary>
-            Gets a user-defined object that qualifies or contains information about an asynchronous operation.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.AsyncWaitHandle">
-            <summary>
-            Gets a WaitHandle that is used to wait for an asynchronous operation to complete.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.CompletedSynchronously">
-            <summary>
-            Gets an indication of whether the asynchronous operation completed synchronously.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.IsCompleted">
-            <summary>
-            Gets an indication whether the asynchronous operation has completed.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.IsEndCalled">
-            <summary>
-            Gets or sets if <b>EndReadLine</b> method is called for this asynchronous operation.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.Buffer">
-            <summary>
-            Gets store buffer.
-            </summary>
-        </member>
-        <member name="P:LumiSoft.Net.IO.SmartStream.ReadAsyncOperation.BytesStored">
-            <summary>
-            Gets number of bytes stored in to <b>Buffer</b>.
             </summary>
         </member>
         <member name="M:LumiSoft.Net.IO.SmartStream.BeginReadLine(System.Byte[],System.Int32,System.Int32,LumiSoft.Net.IO.SizeExceededAction,System.AsyncCallback,System.Object)">
@@ -36463,12 +36492,12 @@
         </member>
         <member name="M:LumiSoft.Net.SIP.Stack.SIP_RequestSender.Authorize(LumiSoft.Net.SIP.Stack.SIP_Request,LumiSoft.Net.SIP.Stack.SIP_Response,System.Net.NetworkCredential[])">
             <summary>
-            Creates authorization for each challange in <b>response</b>.
+            Creates authorization for each challenge in <b>response</b>.
             </summary>
             <param name="request">SIP request where to add authorization values.</param>
-            <param name="response">SIP response which challanges to authorize.</param>
+            <param name="response">SIP response which challenges to authorize.</param>
             <param name="credentials">Credentials for authorization.</param>
-            <returns>Returns true if all challanges were authorized. If any of the challanges was not authorized, returns false.</returns>
+            <returns>Returns true if all challenges were authorized. If any of the challanges was not authorized, returns false.</returns>
         </member>
         <member name="M:LumiSoft.Net.SIP.Stack.SIP_RequestSender.SendToNextHop">
             <summary>
@@ -45281,7 +45310,7 @@
             </summary>
             <param name="text">Text to hash.</param>
             <param name="hex">Specifies if md5 value is returned as hex string.</param>
-            <returns>Resturns md5 value or md5 hex value.</returns>              
+            <returns>Returns md5 value or md5 hex value.</returns>              
         </member>
         <member name="T:LumiSoft.Net.NNTP.Client.NNTP_Client">
             <summary>
@@ -45408,7 +45437,7 @@
             socket.Bind(new IPEndPoint(IPAddress.Any,0));
             
             // Query STUN server
-            STUN_Result result = STUN_Client.Query("stunserver.org",3478,socket);
+            STUN_Result result = STUN_Client.Query("stun.ekiga.net",3478,socket);
             if(result.NetType != STUN_NetType.UdpBlocked){
                 // UDP blocked or !!!! bad STUN server
             }

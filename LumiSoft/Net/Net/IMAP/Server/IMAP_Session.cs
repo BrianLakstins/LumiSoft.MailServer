@@ -841,7 +841,7 @@ namespace LumiSoft.Net.IMAP.Server
             try{
                 SmartStream.ReadLineAsyncOP readLineOP = new SmartStream.ReadLineAsyncOP(new byte[32000],SizeExceededAction.JunkAndThrowException);
                 // This event is raised only when read next coomand completes asynchronously.
-                readLineOP.Completed += new EventHandler<EventArgs<SmartStream.ReadLineAsyncOP>>(delegate(object sender,EventArgs<SmartStream.ReadLineAsyncOP> e){                
+                readLineOP.CompletedAsync += new EventHandler<EventArgs<SmartStream.ReadLineAsyncOP>>(delegate(object sender,EventArgs<SmartStream.ReadLineAsyncOP> e){                
                     if(ProcessCmd(readLineOP)){
                         BeginReadCmd();
                     }
@@ -1441,7 +1441,7 @@ namespace LumiSoft.Net.IMAP.Server
                 }
                 // Authentication continues.
                 else{
-                    // Send server challange.
+                    // Send server challenge.
                     if(serverResponse.Length == 0){
                         m_pResponseSender.SendResponseAsync(new IMAP_r_ServerStatus("+",""));
                     }
@@ -4435,7 +4435,7 @@ namespace LumiSoft.Net.IMAP.Server
                         // Search sequence-number for that message.
                         int seqNo = m_pSelectedFolder.GetSeqNo(e.Value);
                         if(seqNo != -1){
-                            matchedValues.Add((int)e.Value);
+                            matchedValues.Add(seqNo);
                         }
                     }                    
                 });
@@ -4980,7 +4980,7 @@ namespace LumiSoft.Net.IMAP.Server
 
             // Read client response. 
             SmartStream.ReadLineAsyncOP readLineOP = new SmartStream.ReadLineAsyncOP(new byte[32000],SizeExceededAction.JunkAndThrowException);
-            readLineOP.Completed += new EventHandler<EventArgs<SmartStream.ReadLineAsyncOP>>(delegate(object sender,EventArgs<SmartStream.ReadLineAsyncOP> e){
+            readLineOP.CompletedAsync += new EventHandler<EventArgs<SmartStream.ReadLineAsyncOP>>(delegate(object sender,EventArgs<SmartStream.ReadLineAsyncOP> e){
                 try{
                     if(readLineOP.Error != null){
                         LogAddText("Error: " + readLineOP.Error.Message);
@@ -5758,10 +5758,10 @@ namespace LumiSoft.Net.IMAP.Server
                     retVal.Append(" \"" + entity.ContentType.SubType + "\"");
                 }
                 else{
-                    retVal.Append(" \"plain\"");  //BAL 4/11/2017: NIL works for Thunderbird client, but other mail clients don't seem to like it.
+                    retVal.Append(" \"plain\"");
                 }
 
-                retVal.Append(")");
+				retVal.Append(")");
 			}
 			// Single part message
 			else{
@@ -5774,19 +5774,19 @@ namespace LumiSoft.Net.IMAP.Server
 					retVal.Append("\"" + entity.ContentType.Type + "\"");
 				}
 				else{
-                    retVal.Append("\"text\"");  //BAL 4/11/2017: NIL works for Thunderbird client, but other mail clients don't seem to like it.
-                }
+					retVal.Append("\"text\"");
+				}
 
                 // Add contentTypeSubMediaType
-                if (entity.ContentType != null && entity.ContentType.SubType != null){
+                if(entity.ContentType != null && entity.ContentType.SubType != null){
                     retVal.Append(" \"" + entity.ContentType.SubType + "\"");
                 }
                 else{
-                    retVal.Append(" \"plain\"");  //BAL 4/11/2017: NIL works for Thunderbird client, but other mail clients don't seem to like it.
+                    retVal.Append(" \"plain\"");
                 }
 
-                // conentTypeParameters - Syntax: {("name" SP "value" *(SP "name" SP "value"))}
-                if (entity.ContentType != null){
+				// conentTypeParameters - Syntax: {("name" SP "value" *(SP "name" SP "value"))}
+				if(entity.ContentType != null){
                     if(entity.ContentType.Parameters.Count > 0){
                         retVal.Append(" (");
                         bool first = true;
@@ -5880,7 +5880,7 @@ namespace LumiSoft.Net.IMAP.Server
 
                     // body disposition  Syntax: {(disposition-type [ SP ("name" SP "value" *(SP "name" SP "value"))])}
 				    if(entity.ContentDisposition != null && entity.ContentDisposition.Parameters.Count > 0){
-                        retVal.Append(" (\"" + entity.ContentDisposition.DispositionType + "\"");
+                        retVal.Append(" (" + entity.ContentDisposition.DispositionType);
 
                         if(entity.ContentDisposition.Parameters.Count > 0){
                             retVal.Append(" (");
